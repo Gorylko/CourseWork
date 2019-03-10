@@ -9,6 +9,11 @@ namespace Shop.Business.Services
     {
         private ProductRepository _productRepository = new ProductRepository(new ProductContext()); //Тут указывается, какую бд использовать в передаваемых конструктору хернях (пока реализованно онли MsSql)
 
+        public IReadOnlyCollection<Product> GetAll()
+        {
+            return _productRepository.GetAll();
+        }
+
         public IReadOnlyCollection<Product> GetSearchList(string searchParameter, string searchQuery)
         {
             return _productRepository.GetAllByName(searchParameter, searchQuery);

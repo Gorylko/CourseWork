@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Shop.Business.Services;
 using Shop.Shared.Entities;
+using Shop.WebApplication.Models;
 
 namespace Shop.WebApplication.Controllers
 {
@@ -26,15 +27,15 @@ namespace Shop.WebApplication.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public string Buy(Purchase purchase)
-        //{
-        //    purchase.Date = DateTime.Now;
-        //    // добавляем информацию о покупке в базу данных
-        //    db.Purchases.Add(purchase);
-        //    // сохраняем в бд все изменения
-        //    db.SaveChanges();
-        //    return "Спасибо," + purchase.Person + ", за покупку!";
-        //}
+        [HttpPost]
+        public string Buy(Purchase purchase)
+        {
+            purchase.Date = DateTime.Now;
+            //// добавляем информацию о покупке в базу данных
+            //db.Purchases.Add(purchase);
+            //// сохраняем в бд все изменения
+            //db.SaveChanges();
+            return "Спасибо," + purchase.Person + ", за покупку!";
+        }
     }
 }

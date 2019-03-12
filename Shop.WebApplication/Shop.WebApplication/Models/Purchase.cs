@@ -12,7 +12,7 @@ namespace Shop.WebApplication.Models
 
         public int ProductId { get; set; }
 
-        public User Person { get; set; }
+        public string Person { get; set; }
 
         public string Address { get; set; }
 

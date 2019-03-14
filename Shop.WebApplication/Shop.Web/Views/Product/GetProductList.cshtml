@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "GetProductList";
+}
+
+<h2>GetProductList</h2>
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Магазин</title>
+</head>
+<body>
+    <div>
+        <h3>Распродажа товара</h3>
+        <table>
+            <tr>
+                <td><p>Название товара</p></td>
+                <td><p>Категория</p></td>
+                <td><p>Цена</p></td>
+                <td></td>
+            </tr>
+            @foreach (var b in ViewBag.Products)
+            {
+                <tr>
+                    <td><p>@b.Name</p></td>
+                    <td><p>@b.Category</p></td>
+                    <td><p>@b.Price</p></td>
+                    <td><p><a href="/Product/ShowInfoAboutProduct?id=@b.Id">Открыть меню товара</a></p></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

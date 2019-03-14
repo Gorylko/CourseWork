@@ -13,6 +13,7 @@ namespace Shop.Data.Constants
         "JOIN [User] ON [Product].[UserId] = [User].[Id]" + Typography.NewLine +
         "JOIN [Role] ON [User].[RoleId] = [Role].[Id]";
 
+
         public const string ConnectionToConsoleShopString = "Data Source=LAPTOP-P3338OQH;Initial Catalog=ConsoleShop;Integrated Security=True";
 
         public const string ConnectionToUsersString = "";

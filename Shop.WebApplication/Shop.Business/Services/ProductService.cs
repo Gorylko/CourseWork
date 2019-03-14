@@ -24,5 +24,10 @@ namespace Shop.Business.Services
             return _productRepository.GetAllByCategoryId(categoryId);
         }
 
+        public Product GetProductById(int productId)
+        {
+            return _productRepository.GetById(productId);
+        }
+
     }
 }

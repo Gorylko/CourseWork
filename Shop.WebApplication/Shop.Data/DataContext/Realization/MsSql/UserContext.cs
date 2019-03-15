@@ -120,6 +120,19 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
+        public int GetIdByUser(User user)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Login] = {user.Login}";
+                var command = new SqlCommand(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                return (int)reader["Id"];
+            }
+        }
+
         public void Save(User user)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))

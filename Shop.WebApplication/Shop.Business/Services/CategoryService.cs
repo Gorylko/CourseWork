@@ -11,5 +11,11 @@ namespace Shop.Business.Services
         {
             return _categoryRepository.GetAllString() + "Чтобы вернуться назад - пиши /r"; 
         }
+
+        public string GetById(int id)
+        {
+            return _categoryRepository.GetById(id);
+        }
+        //еще можно реализовать методы, но они пока не нужны
     }
 }

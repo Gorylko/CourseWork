@@ -33,5 +33,10 @@ namespace Shop.Web.Controllers.Product
             ViewBag.Product = _productService.GetProductById(id);
             return View();
         }
+
+        public ActionResult BuyProduct(int id)
+        {
+
+        }
     }
 }

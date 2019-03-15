@@ -4,8 +4,14 @@
 }
 
 <h2>Информация о продукте</h2>
-<h4>@ViewBag.Product.Id</h4>
-<h4>@ViewBag.Product.Name</h4>
-<h4>@ViewBag.Product.Description</h4>
-<h4>@ViewBag.Product.Author.Login</h4>
-<h2>@Session["Product"]</h2>
+<div>
+    <p>@ViewBag.Product.Id</p>
+    <p>@ViewBag.Product.Name</p>
+    <p>@ViewBag.Product.Description</p>
+    <p>@ViewBag.Product.Author.Login</p>
+    <p>@Session["Product"]</p>
+</div>
+<form action="~/Product/BuyProduct">
+    <button></button>
+    <input type="hidden" value="@ViewBag.Product.Id"/>
+</form>

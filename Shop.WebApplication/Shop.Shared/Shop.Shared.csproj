@@ -45,6 +45,7 @@
     <Compile Include="Constants\TypographyConstants.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -38,7 +38,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
                 while (reader.Read())
                 {
-                    allCategories.Add(reader["CategoryName"].ToString());
+                    allCategories.Add(reader["Name"].ToString());
                 }
                 return allCategories;
             }
@@ -46,13 +46,13 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public string GetById(int id)
         {
-            using (var connection = new SqlConnection("Data Source=LAPTOP-P3338OQH;Initial Catalog=ConsoleShop;Integrated Security=True"))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Category] WHERE [CategoryId] = {id}", connection);
+                SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Category] WHERE [Id] = {id}", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return reader["CategoryName"].ToString();
+                return reader["Name"].ToString();
             }
         }
 
@@ -61,7 +61,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"DELETE [Category] WHERE [CategoryId] = {id}", connection);
+                var command = new SqlCommand($"DELETE [Category] WHERE [Id] = {id}", connection);
                 command.ExecuteNonQuery();
             }
         }
@@ -71,7 +71,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [Category] (CategoryName) VALUES ('{category}')", connection);
+                var command = new SqlCommand($"INSERT INTO [Category] (Name) VALUES ('{category}')", connection);
                 command.ExecuteNonQuery();
             }
         }

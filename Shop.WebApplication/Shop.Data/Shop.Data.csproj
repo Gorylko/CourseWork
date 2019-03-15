@@ -48,7 +48,8 @@
     <Compile Include="DataContext\Interfaces\IProductDetailsContext.cs" />
     <Compile Include="DataContext\Interfaces\IUserContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\CategoryContext.cs" />
-    <Compile Include="DataContext\Realization\MsSql\IRepository.cs" />
+    <Compile Include="DataContext\Realization\MsSql\PurchaseContext.cs" />
+    <Compile Include="Repositories\Interfaces\IRepository.cs" />
     <Compile Include="DataContext\Realization\MsSql\LocationContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\ProductContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\StateContext.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\PurchaseRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

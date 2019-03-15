@@ -1,15 +1,14 @@
-﻿using Shop.Shared.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace Shop.Web.Models
+namespace Shop.Shared.Entities
 {
     public class Purchase
     {
-        public int PurchaseId { get; set; }
+        public int Id { get; set; }
 
         public User Seller { get; set; }
 
@@ -17,7 +16,7 @@ namespace Shop.Web.Models
 
         public string Address { get; set; }
 
-        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
         public DateTime Date { get; set; }
     }

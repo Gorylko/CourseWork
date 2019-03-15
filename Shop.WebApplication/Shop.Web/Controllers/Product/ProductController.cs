@@ -29,6 +29,7 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult ShowInfoAboutProduct(int id)
         {
+            //HttpContext.Session.Set
             ViewBag.Product = _productService.GetProductById(id);
             return View();
         }

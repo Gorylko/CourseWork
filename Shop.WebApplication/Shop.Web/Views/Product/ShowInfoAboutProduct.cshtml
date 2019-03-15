@@ -1,10 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "ShowInfoAboutProduct";
+    ViewBag.Title = "Информация о продукте";
 }
 
-<h2>ShowInfoAboutProduct</h2>
+<h2>Информация о продукте</h2>
 <h4>@ViewBag.Product.Id</h4>
 <h4>@ViewBag.Product.Name</h4>
 <h4>@ViewBag.Product.Description</h4>
 <h4>@ViewBag.Product.Author.Login</h4>
+<h2>@Session["Product"]</h2>

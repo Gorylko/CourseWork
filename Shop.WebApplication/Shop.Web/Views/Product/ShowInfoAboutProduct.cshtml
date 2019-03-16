@@ -11,7 +11,17 @@
     <p>@ViewBag.Product.Author.Login</p>
     <p>@Session["Product"]</p>
 </div>
-<form action="~/Product/BuyProduct">
-    <button></button>
-    <input type="hidden" value="@ViewBag.Product.Id"/>
-</form>
+
+
+
+<div style="width:400px;">
+    <div style="float: left; width: 130px">
+        <form action="~/Product/BuyProduct">
+            <button>Купить</button>
+            <input type="hidden" value="@ViewBag.Product.Id" />
+        </form>
+    </div>
+    <div style="float: right; width: 225px">
+        <input type="button" onclick="history.back();" value="Назад" />
+    </div>
+</div>

@@ -5,7 +5,7 @@ using Shop.Data.DataContext.Realization.MsSql;
 
 namespace Shop.Business.Services
 {
-    class PurchaseService
+    public class PurchaseService
     {
         PurchaseRepository _purchaseRepository = new PurchaseRepository(new PurchaseContext());
 

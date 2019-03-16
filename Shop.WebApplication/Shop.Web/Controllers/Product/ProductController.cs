@@ -5,12 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models.ProductViewModels;
+using Shop.Shared.Entities;
 
 namespace Shop.Web.Controllers.Product
 {
     public class ProductController : Controller
     {
         ProductService _productService = new ProductService();
+
+        PurchaseService _purchaseService = new PurchaseService();
 
         public ActionResult GetProductList()
         {
@@ -29,14 +32,22 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult ShowInfoAboutProduct(int id)
         {
-            //HttpContext.Session.Set
             ViewBag.Product = _productService.GetProductById(id);
             return View();
         }
 
+        [HttpGet]
         public ActionResult BuyProduct(int id)
         {
+            return View();
+        }
 
+        [HttpPost]
+        public string BuyProduct(Purchase purchase)
+        {
+            purchase.Date = DateTime.Now;
+            _purchaseService.Save(purchase);
+            return "Спасибо," + purchase.Customer + ", за покупку!";
         }
     }
 }

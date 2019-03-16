@@ -1,8 +1,10 @@
-﻿@{
-    ViewBag.Title = "Выполнить вход";
+﻿
+@{
+    ViewBag.Title = "BuyProduct";
+    Layout = null;
 }
 
-
+<h2>BuyProduct</h2>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +13,13 @@
 </head>
 <body>
     <div>
-        <form method="post">
-            <input type="hidden" value="@ViewBag.ProductId" name="ProductId" />
+        <h3>Форма оформления покупки</h3>
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.ProductId" name="Id" />
             <table>
                 <tr>
-                    <td><p>Введите свой логин </p></td>
-                    <td><input type="text" name="Person" /> </td>
+                    <td><p>Введите свое имя </p></td>
+                    <td><input type="hidden" name="Person" value="" /> </td>
                 </tr>
                 <tr>
                     <td><p>Введите адрес :</p></td>

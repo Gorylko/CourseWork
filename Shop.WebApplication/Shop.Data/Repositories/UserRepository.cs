@@ -19,9 +19,9 @@ namespace Shop.Data.Repositories
             return _userContext.GetAuthorizedUser(login, password);
         }
 
-        public User GetRegistratedUser(string login, string password, string email, string phonenumber)
+        public void Save(User user)
         {
-            return _userContext.GetRegistratedUser(login, password, email, phonenumber);
+            _userContext.Save(user);
         }
 
         public IReadOnlyCollection<User> GetAll()
@@ -37,11 +37,6 @@ namespace Shop.Data.Repositories
         public void DeleteById(int id)
         {
             _userContext.DeleteById(id);
-        }
-
-        public void Save(User user)
-        {
-            _userContext.Save(user);
         }
     }
 }

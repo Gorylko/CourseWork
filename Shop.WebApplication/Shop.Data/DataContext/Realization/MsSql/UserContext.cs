@@ -47,32 +47,17 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public User GetRegistratedUser(string login, string password, string email, string phonenumber)
+        public void Save(User user)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                try
-                {
                     var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (3, @login, @password, @email, @phonenumber)", connection);
-                    command.Parameters.AddWithValue("@login", login);
-                    command.Parameters.AddWithValue("@password", password);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@phonenumber", phonenumber);
+                    command.Parameters.AddWithValue("@login", user.Login);
+                    command.Parameters.AddWithValue("@password", user.Password);
+                    command.Parameters.AddWithValue("@email", user.Email);
+                    command.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
                     command.ExecuteNonQuery();
-                    return new User
-                    {
-                        Login = login,
-                        Password = password,
-                        Email = email,
-                        PhoneNumber = phonenumber,
-                        Role = RoleType.User
-                    };
-                }
-                catch (SqlException)
-                {
-                    throw new Exception("Логин или почта уже заняты, попробуйте что-нибудь поменять :)");
-                }
             }
         }
 
@@ -130,16 +115,6 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 return (int)reader["Id"];
-            }
-        }
-
-        public void Save(User user)
-        {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand($"INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('{user.Login}',{(int)user.Role},'{user.Password}','{user.Email}','{user.PhoneNumber}')", connection);
-                command.ExecuteNonQuery();
             }
         }
     }

@@ -10,13 +10,15 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Shop.Web.Models;
 using Shop.Shared.Entities;
+using Shop.Shared.Entities.Enums;
+using Shop.Business.Services;
 
 namespace Shop.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private UserService _userService = new UserService();
+
 
         [HttpGet]
         public ActionResult Login()
@@ -37,10 +39,11 @@ namespace Shop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User user)
+        public void Register(User user)
         {
-            //сделать сборку юзера и добавление его в сессию
-            return View();
+            user.Role = RoleType.User;
+            Session["User"] = user;
+            _userService.Save(user);
         }
     }
 }

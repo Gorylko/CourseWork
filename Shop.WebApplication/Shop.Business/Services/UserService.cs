@@ -18,9 +18,9 @@ namespace Shop.Business.Services
             return _userRepository.GetAuthorizedUser(login, password);
         }
 
-        public User GetRegistratedUser(string login, string password, string email, string phonenumber)
+        public void Save(User user)
         {
-            return _userRepository.GetRegistratedUser(login, password, email, phonenumber);
+            _userRepository.Save(user);
         }
 
     }

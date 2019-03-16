@@ -6,6 +6,6 @@ namespace Shop.Data.DataContext.Interfaces
     {
         User GetAuthorizedUser(string login, string password);
 
-        User GetRegistratedUser(string login, string password, string email, string phonenumber);
+        void Save(User user);
     }
 }

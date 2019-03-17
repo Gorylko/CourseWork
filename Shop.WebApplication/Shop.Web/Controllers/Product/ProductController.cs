@@ -43,11 +43,10 @@ namespace Shop.Web.Controllers.Product
         }
 
         [HttpPost]
-        public string BuyProduct(Purchase purchase)
+        public void BuyProduct(Purchase purchase)
         {
             purchase.Date = DateTime.Now;
             _purchaseService.Save(purchase);
-            return "Спасибо," + purchase.Customer + ", за покупку!";
         }
     }
 }

@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "ShowAccountInfo";
+    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+}
+
+<h2>ShowAccountInfo</h2>
+<table>
+    <tr>Логин: @user.Login</tr>
+</table>
+

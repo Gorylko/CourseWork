@@ -32,18 +32,23 @@ namespace Shop.Web.Controllers
 
         }
 
-        [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
-        public void Register(User user)
+        public ActionResult FinishRegistration(User user)
         {
             user.Role = RoleType.User;
             Session["User"] = user;
             _userService.Save(user);
+            ViewBag.User = user;
+            return View();
+        }
+
+        public ActionResult ShowAccountInfo()
+        {
+            return View();
         }
     }
 }

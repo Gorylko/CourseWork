@@ -233,7 +233,8 @@
     <Content Include="Views\Product\ShowInfoAboutProduct.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
     <Content Include="Views\Account\FinishRegistration.cshtml" />
-    <Content Include="Views\Account\ShowAccountInfo.cshtml" />
+    <Content Include="Views\Account\OpenAccountMenu.cshtml" />
+    <Content Include="Views\Account\FinishLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

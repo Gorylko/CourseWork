@@ -1,30 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Выполнить вход";
-}
 
+    ViewBag.Title = "Регистрация";
+}
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Покупка</title>
+
 </head>
 <body>
     <div>
-        <form method="post">
-            <input type="hidden" value="@ViewBag.ProductId" name="ProductId" />
+        <h3>Форма авторизации пользователя</h3>
+        <form action="~/Account/FinishLogin">
             <table>
                 <tr>
-                    <td><p>Введите свой логин </p></td>
-                    <td><input type="text" name="Person" /> </td>
+                    <td><p>Введите логин </p></td>
+                    <td><input type="text" name="Login" /> </td>
                 </tr>
                 <tr>
-                    <td><p>Введите адрес :</p></td>
-                    <td>
-                        <input type="text" name="Address" />
-                    </td>
-                </tr>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
+                    <td><p>Введите пароль </p></td>
+                    <td><input type="text" name="Password" /> </td>
+                <tr>
+                @if (ViewBag.Warning != null)
+                {
+                <p>@ViewBag.Warning</p>
+                }
+                <td><input type="submit" value="Отправить" /> </td><td></td></tr>
             </table>
         </form>
     </div>

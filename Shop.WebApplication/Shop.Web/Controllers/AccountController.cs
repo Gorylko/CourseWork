@@ -20,16 +20,23 @@ namespace Shop.Web.Controllers
         private UserService _userService = new UserService();
 
 
-        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
-        public void Login(LoginViewModel model, string returnUrl)
+        public ActionResult FinishLogin(string login, string password)
         {
 
+            User user = _userService.GetAuthorizedUser(login, password);
+            if (user == null)
+            {
+                ViewBag.Warning = "Неверный логин или пароль";
+                return View("~/Views/Account/Login.cshtml");
+            }
+            Session["User"] = user;
+            ViewBag.User = user;
+            return View();
         }
 
         public ActionResult Register()
@@ -46,9 +53,15 @@ namespace Shop.Web.Controllers
             return View();
         }
 
-        public ActionResult ShowAccountInfo()
+        public ActionResult OpenAccountMenu()
         {
             return View();
+        }
+
+        public ActionResult Exit()
+        {
+            Session["User"] = null;
+            return View("~/Views/Home/Index.cshtml");
         }
     }
 }

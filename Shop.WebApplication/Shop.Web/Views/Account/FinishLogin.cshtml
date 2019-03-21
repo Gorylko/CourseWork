@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "Авторизация";
+    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+}
+
+<h2>Вы успешно авторизовались и вошли в систему как @user.Login</h2>
+

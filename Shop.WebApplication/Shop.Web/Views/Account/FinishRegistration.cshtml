@@ -1,6 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "Регистрация завершена";
+    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+
 }
 
 <!DOCTYPE html>
@@ -13,7 +15,7 @@
         <h1></h1>
         <table>
             <tr></tr>
-            <tr>Вы успешно зарегистрировались и вошли в систему как @ViewBag.User</tr>
+            <tr>Вы успешно зарегистрировались и вошли в систему как @ViewBag.User.Login</tr>
         </table>
     </div>
 </body>

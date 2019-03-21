@@ -32,17 +32,18 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login AND [Password] = @password", connection); //соединить с roles
+                var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login AND [Password] = @password", connection);
                 command.Parameters.AddWithValue("@login", login);
                 command.Parameters.AddWithValue("@password", password);
                 SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                reader.Read();
+                try
                 {
                     return GetUser(reader);
                 }
-                else
+                catch
                 {
-                    throw new Exception("Неверный логин или пароль");
+                    return null;
                 }
             }
         }
@@ -52,12 +53,12 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                    var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (3, @login, @password, @email, @phonenumber)", connection);
-                    command.Parameters.AddWithValue("@login", user.Login);
-                    command.Parameters.AddWithValue("@password", user.Password);
-                    command.Parameters.AddWithValue("@email", user.Email);
-                    command.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
-                    command.ExecuteNonQuery();
+                var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (3, @login, @password, @email, @phonenumber)", connection);
+                command.Parameters.AddWithValue("@login", user.Login);
+                command.Parameters.AddWithValue("@password", user.Password);
+                command.Parameters.AddWithValue("@email", user.Email);
+                command.Parameters.AddWithValue("@phonenumber", user.PhoneNumber);
+                command.ExecuteNonQuery();
             }
         }
 
@@ -75,7 +76,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                     {
                         returnList.Add(GetUser(reader));
                     }
-                    catch(SqlException) { }
+                    catch (SqlException) { }
                 }
                 return returnList;
             }

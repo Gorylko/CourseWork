@@ -27,18 +27,5 @@ namespace Shop.Web.Controllers
 
             return View();
         }
-
-        [HttpGet]
-        public ActionResult Buy(int productId)
-        {
-            ViewBag.ProductId = productId;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Buy(Purchase purchase)
-        {
-            return View();
-        }
     }
 }

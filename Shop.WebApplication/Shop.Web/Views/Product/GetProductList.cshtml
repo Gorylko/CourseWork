@@ -1,53 +1,51 @@
 ﻿
 @{
-                /**/
-
-                ViewBag.Title = "GetProductList";
+    ViewBag.Title = "GetProductList";
 }
 
 
 
-    <h2>GetProductList</h2>
+<h2>GetProductList</h2>
 
 
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
 
 
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Магазин</title>
-    </head>
-    <body>
-        <div>
-            <h3>Распродажа товара</h3>
-            <table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Магазин</title>
+</head>
+<body>
+    <div>
+        <h3>Распродажа товара</h3>
+        <table>
+            <tr>
+                <td><p>Название товара</p></td>
+                <td><p>Категория</p></td>
+                <td><p>Цена</p></td>
+                <td></td>
+            </tr>
+            @foreach (var product in ViewBag.Products)
+            {
                 <tr>
-                    <td><p>Название товара</p></td>
-                    <td><p>Категория</p></td>
-                    <td><p>Цена</p></td>
-                    <td></td>
+                    <td><p>@product.Name</p></td>
+                    <td><p>@product.Category</p></td>
+                    <td><p>@product.Price</p></td>
+                    <td>
+                        <form action="~/Product/ShowInfoAboutProduct">
+                            <div>
+                                <button type="submit">Открыть</button>
+                                <input type="hidden" value="@product.Id" name="id" />
+                            </div>
+                        </form>
+                    </td>
                 </tr>
-                @foreach (var product in ViewBag.Products)
-                {
-                    <tr>
-                        <td><p>@product.Name</p></td>
-                        <td><p>@product.Category</p></td>
-                        <td><p>@product.Price</p></td>
-                        <td>
-                            <form action="~/Product/ShowInfoAboutProduct">
-                                <div>
-                                    <button type="submit">Открыть</button>
-                                    <input type="hidden" value="@product.Id" name="id" />
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-    </body>
+            }
+        </table>
+    </div>
+</body>
 </html>

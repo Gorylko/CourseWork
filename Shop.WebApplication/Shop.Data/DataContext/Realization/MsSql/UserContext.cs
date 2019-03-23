@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Shop.Shared.Entities;
 using System.Data.SqlClient;
 using Typography = Shop.Shared.Constants.TypographyConstants;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Helpers;
-using Shop.Shared.Entities.Enums;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
@@ -16,6 +14,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         {
             return new User
             {
+                Id = (int)reader["Id"],
                 Login = (string)reader["Login"],
                 Email = (string)reader["Email"],
                 PhoneNumber = (string)reader["PhoneNumber"],
@@ -111,7 +110,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Login] = {user.Login}";
+                string query = "SELECT * FROM [User]" + Typography.NewLine + $"WHERE [Login] = '{user.Login}'";
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();

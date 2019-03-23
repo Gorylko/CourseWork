@@ -1,4 +1,5 @@
 CREATE DATABASE [ConsoleShop]
+Set DateFormat MDY
 GO
 USE [ConsoleShop];
 CREATE TABLE [dbo].[Category]

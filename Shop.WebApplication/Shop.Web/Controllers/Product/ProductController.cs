@@ -39,14 +39,24 @@ namespace Shop.Web.Controllers.Product
         [HttpGet]
         public ActionResult BuyProduct(int id)
         {
+            ViewBag.Product = _productService.GetProductById(id);
             return View();
         }
 
         [HttpPost]
-        public void BuyProduct(Purchase purchase)
+        public void BuyProduct(string address, int productId)
         {
-            purchase.Date = DateTime.Now;
+            Shared.Entities.Product product = _productService.GetProductById(productId);
+            Purchase purchase = new Purchase
+            {
+                Seller = product.Author,
+                Customer = (User)Session["User"],
+                Product = product,
+                Address = address,
+                Date = DateTime.Now
+            };
             _purchaseService.Save(purchase);
+            _productService.DeleteById(purchase.Product.Id);
         }
     }
 }

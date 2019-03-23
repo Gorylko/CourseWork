@@ -29,5 +29,10 @@ namespace Shop.Business.Services
             return _productRepository.GetById(productId);
         }
 
+        public void DeleteById(int id)
+        {
+            _productRepository.DeleteById(id);
+        }
+
     }
 }

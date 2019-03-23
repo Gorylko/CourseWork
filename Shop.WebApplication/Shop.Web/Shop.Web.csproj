@@ -228,13 +228,13 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Product\GetProductList.cshtml" />
     <Content Include="Views\Product\ShowInfoAboutProduct.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
     <Content Include="Views\Account\FinishRegistration.cshtml" />
     <Content Include="Views\Account\OpenAccountMenu.cshtml" />
     <Content Include="Views\Account\FinishLogin.cshtml" />
+    <Content Include="Views\Shared\UserError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

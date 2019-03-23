@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "BuyProduct";
-    Layout = null;
 }
 
 <h2>BuyProduct</h2>
@@ -15,16 +14,13 @@
     <div>
         <h3>Форма оформления покупки</h3>
         <form method="post" action="">
-            <input type="hidden" value="@ViewBag.ProductId" name="Id" />
+            <input type="hidden" value="@ViewBag.Product.Id" name="productId" />
             <table>
-                <tr>
-                    <td><p>Введите свое имя </p></td>
-                    <td><input type="hidden" name="Person" value="" /> </td>
-                </tr>
+
                 <tr>
                     <td><p>Введите адрес :</p></td>
                     <td>
-                        <input type="text" name="Address" />
+                        <input type="text" name="address" />
                     </td>
                 </tr>
                 <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>

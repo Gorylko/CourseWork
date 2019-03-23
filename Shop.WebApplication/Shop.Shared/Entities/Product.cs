@@ -18,7 +18,7 @@ namespace Shop.Shared.Entities
         public string State { get; set; }
 
 
-        public string GetInfoAboutProduct() // Через StringBuilder
+        public string GetInfoAboutProduct()
         {
             StringBuilder returnString = new StringBuilder();
             returnString.AppendLine($"Название : {this.Name}");

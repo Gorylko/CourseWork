@@ -3,25 +3,37 @@
     ViewBag.Title = "Информация о продукте";
 }
 
-<h2>Информация о продукте</h2>
-<div>
-    <p>@ViewBag.Product.Id</p>
-    <p>@ViewBag.Product.Name</p>
-    <p>@ViewBag.Product.Description</p>
-    <p>@ViewBag.Product.Author.Login</p>
-    <p>@Session["Product"]</p>
-</div>
+
+<!DOCTYPE html>
 
 
 
-<div style="width:400px;">
-    <div style="float: left; width: 130px">
-        <form action="~/Product/BuyProduct">
-            <button>Купить</button>
-            <input type="hidden" value="@ViewBag.Product.Id" />
-        </form>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Магазин</title>
+</head>
+<body>
+    <h2>Информация о продукте</h2>
+    <table>
+        <tr><td><p>@ViewBag.Product.Name</p></td></tr>
+        <tr><td><p>@ViewBag.Product.Description</p></td></tr>
+        <tr><td><p>@ViewBag.Product.Author.Login</p></td></tr>
+    </table>
+
+
+
+
+    <div style="width:400px;">
+        <div style="float: left; width: 130px">
+            <form action="~/Product/BuyProduct">
+                <button>Купить</button>
+                <input type="hidden" value="@ViewBag.Product.Id" name="id"/>
+            </form>
+        </div>
+        <div style="float: right; width: 225px">
+            <input type="button" onclick="history.back();" value="Назад" />
+        </div>
     </div>
-    <div style="float: right; width: 225px">
-        <input type="button" onclick="history.back();" value="Назад" />
-    </div>
-</div>
+</body>
+</html>

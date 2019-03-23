@@ -58,7 +58,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [Purchase] (Id, ProductId, SellerId, CustomerId, Address, Date) VALUES ({purchase.Id}, {purchase.Product.Id}, {_userContext.GetIdByUser(purchase.Seller)}, {_userContext.GetIdByUser(purchase.Customer)}, '{purchase.Address}', {purchase.Date} )", connection);
+                string date = string.Format("G: {0:G}", purchase.Date);
+                var command = new SqlCommand($"INSERT INTO [Purchase] (ProductId, SellerId, CustomerId, Address, Date) VALUES ({purchase.Product.Id}, {_userContext.GetIdByUser(purchase.Seller)}, {_userContext.GetIdByUser(purchase.Customer)}, '{purchase.Address}', '{date}' )", connection);
                 command.ExecuteNonQuery();
             }
         }

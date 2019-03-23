@@ -30,7 +30,7 @@ namespace Shop.Web.Controllers.Product
             return View();
         }
 
-        public ActionResult ShowInfoAboutProduct(int id)
+        public ActionResult ShowProductInfo(int id)
         {
             ViewBag.Product = _productService.GetProductById(id);
             return View();
@@ -44,7 +44,7 @@ namespace Shop.Web.Controllers.Product
         }
 
         [HttpPost]
-        public void BuyProduct(string address, int productId)
+        public ActionResult BuyProduct(string address, int productId)
         {
             Shared.Entities.Product product = _productService.GetProductById(productId);
             Purchase purchase = new Purchase
@@ -57,6 +57,8 @@ namespace Shop.Web.Controllers.Product
             };
             _purchaseService.Save(purchase);
             _productService.DeleteById(purchase.Product.Id);
+            ViewBag.Purchase = purchase;
+            return View("~/Views/Product/ShowPurchaseInfo.cshtml");
         }
     }
 }

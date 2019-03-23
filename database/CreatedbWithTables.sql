@@ -1,5 +1,4 @@
 CREATE DATABASE [ConsoleShop]
-Set DateFormat MDY
 GO
 USE [ConsoleShop];
 CREATE TABLE [dbo].[Category]
@@ -71,7 +70,6 @@ CREATE TABLE [dbo].[Purchase]
 	[Address]NVARCHAR(100)NOT NULL,
 	[Date]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED ([Id]ASC),
-	FOREIGN KEY([ProductId])REFERENCES [dbo].[Product](Id),
 	FOREIGN KEY([SellerId])REFERENCES [dbo].[User](Id),
 	FOREIGN KEY([CustomerId])REFERENCES [dbo].[User](Id),
 

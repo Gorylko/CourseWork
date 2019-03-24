@@ -12,6 +12,7 @@ using Shop.Web.Models;
 using Shop.Shared.Entities;
 using Shop.Shared.Entities.Enums;
 using Shop.Business.Services;
+using System.Data.SqlClient;
 
 namespace Shop.Web.Controllers
 {
@@ -46,11 +47,19 @@ namespace Shop.Web.Controllers
 
         public ActionResult FinishRegistration(User user)
         {
-            user.Role = RoleType.User;
-            Session["User"] = user;
-            _userService.Save(user);
-            ViewBag.User = user;
-            return View();
+            try
+            {
+                _userService.Save(user); //В этом блоке эксепшн ловится именно отсюда, т.к. повторение логина и пароля запрещены еще при создании таблицы
+                user.Role = RoleType.User;
+                Session["User"] = user;
+                ViewBag.User = user;
+                return View();
+            }
+            catch (SqlException)
+            {
+                ViewBag.Warning = "Логин или почта уже заняты!";
+                return View("~/Views/Account/Register.cshtml");
+            }
         }
 
         public ActionResult OpenAccountMenu()

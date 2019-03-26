@@ -15,7 +15,10 @@ namespace Shop.Web.Controllers.Product
 
         PurchaseService _purchaseService = new PurchaseService();
 
-        public ActionResult GetProductList()
+        CategoryService _categoryService = new CategoryService();
+
+
+        public ActionResult ShowProductList()
         {
             ViewBag.Products = _productService.GetAll();
             return View();
@@ -59,6 +62,19 @@ namespace Shop.Web.Controllers.Product
             _productService.DeleteById(purchase.Product.Id);
             ViewBag.Purchase = purchase;
             return View("~/Views/Product/ShowPurchaseInfo.cshtml");
+        }
+
+        
+        public ActionResult OpenCategoryMenu()
+        {
+            ViewBag.Сategories = _categoryService.GetAll();
+            return View();
+        }
+
+        public ActionResult ShowProductsByCategory(int categoryId)
+        {
+            ViewBag.Products = _productService.GetProductsByCategoryId(categoryId);
+            return View("~/Views/Product/ShowProductList.cshtml");
         }
     }
 }

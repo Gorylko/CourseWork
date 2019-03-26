@@ -5,7 +5,7 @@ namespace Shop.Data.DataContext.Interfaces
 {
     public interface IProductContext : IDataContext<Product>
     {
-        IReadOnlyCollection<Product> GetByCategoryId(int id);
+        IReadOnlyCollection<Product> GetByCategoryId(int categoryId);
 
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
     }

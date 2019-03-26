@@ -1,5 +1,7 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "MainMenu";
+    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
 }
 
 <!DOCTYPE html>
@@ -14,10 +16,13 @@
     <p>Вы находитесь на супир-пупир крутом сайте по продаже всякого (колеса, кристаллы, мука), ниже вы можете заметить доступные вам функции. </p>
     <table>
         <tr>
-            <form action="~/Product/GetProductList">
-                <div>
-                    <button type="submit">Посмотреть список всех товаров</button>
-                </div>
+            <form action="~/Product/ShowProductList">
+                <button type="submit">Посмотреть список всех товаров</button>
+            </form>
+        </tr>
+        <tr>
+            <form action="~/Product/OpenCategoryMenu">
+                <button type="submit">Выбрать категорию</button>
             </form>
         </tr>
     </table>

@@ -18,7 +18,7 @@ namespace Shop.Shared.Entities
 
         public DateTime LastModifiedDate { get; set; }
 
-        public string Category { get; set; }
+        public Category Category { get; set; }
 
         public User Author { get; set; }
 

@@ -229,7 +229,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Product\GetProductList.cshtml" />
+    <Content Include="Views\Product\ShowProductList.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
     <Content Include="Views\Account\FinishRegistration.cshtml" />
     <Content Include="Views\Account\OpenAccountMenu.cshtml" />
@@ -238,6 +238,7 @@
     <Content Include="Views\Product\ShowProductInfo.cshtml" />
     <Content Include="Views\Product\ShowPurchaseInfo.cshtml" />
     <Content Include="Views\Admin\ShowAdminPanel.cshtml" />
+    <Content Include="Views\Product\OpenCategoryMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

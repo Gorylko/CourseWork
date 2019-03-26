@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using Shop.Shared.Entities;
 using Typography = Shop.Shared.Constants.TypographyConstants;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 using Shop.Data.DataContext.Interfaces;
@@ -27,24 +28,28 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public IReadOnlyCollection<string> GetAll()
+        public IReadOnlyCollection<Category> GetAll()
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                List<string> allCategories = new List<string>();
+                List<Category> allCategories = new List<Category>();
                 var command = new SqlCommand("SELECT * FROM Category", connection);
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    allCategories.Add(reader["Name"].ToString());
+                    allCategories.Add(new Category
+                    {
+                        Id = (int)reader["Id"],
+                        Name = (string)reader["Name"]
+                    });
                 }
                 return allCategories;
             }
         }
 
-        public string GetById(int id)
+        public Category GetById(int id)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
@@ -52,7 +57,11 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Category] WHERE [Id] = {id}", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return reader["Name"].ToString();
+                return new Category
+                {
+                    Id = id,
+                    Name = (string)reader["Name"]
+                };
             }
         }
 
@@ -66,12 +75,12 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void Save(string category)
+        public void Save(Category category)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [Category] (Name) VALUES ('{category}')", connection);
+                var command = new SqlCommand($"INSERT INTO [Category] (Name) VALUES ('{category.Name}')", connection);
                 command.ExecuteNonQuery();
             }
         }

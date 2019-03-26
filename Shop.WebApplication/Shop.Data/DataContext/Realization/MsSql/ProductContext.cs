@@ -88,7 +88,11 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 Price = (decimal)reader["Price"],
                 CreationDate = (DateTime)reader["CreationDate"],
                 LastModifiedDate = (DateTime)reader["LastModifiedDate"],
-                Category = (string)reader["Category"],
+                Category = new Category
+                {
+                    Id = (int)reader["CategoryId"],
+                    Name = (string)reader["Category"]
+                },
                 Author = _userContext.GetUser(reader),
                 LocationOfProduct = (string)reader["Location"],
                 State = (string)reader["State"]
@@ -149,7 +153,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString)) 
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES({_categoryContext.GetIdByName(product.Category)}, {_stateContext.GetIdByName(product.State)}, 1, 1, 'СЯЛЕДКА', 'пожилая сельдь, с озер украины прямо к вам на стол', 123, 2019 - 02 - 04, 2019 - 02 - 04)");
+                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES({product.Category.Id}, {_stateContext.GetIdByName(product.State)}, 1, 1, 'СЯЛЕДКА', 'пожилая сельдь, с озер украины прямо к вам на стол', 123, 2019 - 02 - 04, 2019 - 02 - 04)");
             }
         }
 

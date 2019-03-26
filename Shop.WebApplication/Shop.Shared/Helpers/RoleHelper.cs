@@ -1,4 +1,5 @@
 ﻿using Shop.Shared.Entities.Enums;
+using Shop.Shared.Entities;
 using System;
 
 namespace Shop.Shared.Helpers
@@ -13,6 +14,16 @@ namespace Shop.Shared.Helpers
         public static RoleType ConvertToRoleType(int roleid)
         {
             return (RoleType)roleid;
+        }
+
+        public static bool CheckPermissions(User user, RoleType role)
+        {
+            return user.Role == role;
+        }
+
+        public static bool CheckPermissions(User user, RoleType role1, RoleType role2)
+        {
+            return user.Role == role1 || user.Role == role2;
         }
     }
 }

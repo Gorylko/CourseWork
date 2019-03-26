@@ -52,7 +52,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (3, @login, @password, @email, @phonenumber)", connection);
+                var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
                 command.Parameters.AddWithValue("@login", user.Login);
                 command.Parameters.AddWithValue("@password", user.Password);
                 command.Parameters.AddWithValue("@email", user.Email);

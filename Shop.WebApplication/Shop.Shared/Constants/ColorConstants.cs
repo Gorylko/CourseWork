@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Shared.Constants
 {
-    public class ColorConstants
+    public class ColorConstants //нужно в случае подключения к консоли
     {
         public const ConsoleColor GreenColor = ConsoleColor.Green;
 

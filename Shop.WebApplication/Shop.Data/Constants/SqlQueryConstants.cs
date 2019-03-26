@@ -14,7 +14,7 @@ namespace Shop.Data.Constants
         "JOIN [Role] ON [User].[RoleId] = [Role].[Id]";
 
 
-        public const string ConnectionToConsoleShopString = "Data Source=LAPTOP-P3338OQH;Initial Catalog=ConsoleShop;Integrated Security=True";
+        public const string ConnectionToConsoleShopString = "Data Source=LAPTOP-P3338OQH;Initial Catalog=ConsoleShop;Integrated Security=True"; //менять при необходимости
 
         public const string ConnectionToUsersString = "";
     }

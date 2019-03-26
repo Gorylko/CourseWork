@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Shared.Constants
 {
-    public class TypographyConstants
+    public class TypographyConstants //чисто для души
     {
         public const string NewLine = "\n";
 

@@ -18,6 +18,16 @@ namespace Shop.Business.Services
             return _userRepository.GetAuthorizedUser(login, password);
         }
 
+        public IReadOnlyCollection<User> GetAll()
+        {
+            return _userRepository.GetAll();
+        }
+
+        public IReadOnlyCollection<User> GetAllByName(string searchQuery)
+        {
+            return _userRepository.GetAllByName(searchQuery);
+        }
+
         public void Save(User user)
         {
             _userRepository.Save(user);

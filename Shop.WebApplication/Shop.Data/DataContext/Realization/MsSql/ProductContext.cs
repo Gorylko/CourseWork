@@ -26,17 +26,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     if (reader[searchParameter].ToString().Contains(searchQuery))
                     {
-                        try
-                        {
-                            products.Add(GetProduct(reader));
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Что-то произошло... Инфо об ошибке : ");
-                            Console.WriteLine(ex.Message);
-                            Console.WriteLine("Нажмите любую клавишу, чтобы пройти дальше");
-                            Console.ReadKey(true);
-                        }
+                        products.Add(GetProduct(reader));
                     }
                 }
                 return products;
@@ -150,7 +140,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(Product product) //пока не пашет, т.к. нужны методы для получения айдих по именам, ибо в бд хранятся онли айдишники полей товара, а не сами поля
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString)) 
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES({product.Category.Id}, {_stateContext.GetIdByName(product.State)}, 1, 1, 'СЯЛЕДКА', 'пожилая сельдь, с озер украины прямо к вам на стол', 123, 2019 - 02 - 04, 2019 - 02 - 04)");

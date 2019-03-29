@@ -117,5 +117,24 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 return (int)reader["Id"];
             }
         }
+
+        public IReadOnlyCollection<User> GetAllByName(string searchQuery)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                List<User> users = new List<User>();
+                var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader["Login"].ToString().Contains(searchQuery))
+                    {
+                        users.Add(GetUser(reader));
+                    }
+                }
+                return users;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.DataContext.Interfaces
 {
@@ -6,6 +7,6 @@ namespace Shop.Data.DataContext.Interfaces
     {
         User GetAuthorizedUser(string login, string password);
 
-        void Save(User user);
+        IReadOnlyCollection<User> GetAllByName(string searchQuery);
     }
 }

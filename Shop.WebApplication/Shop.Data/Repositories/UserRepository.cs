@@ -38,5 +38,10 @@ namespace Shop.Data.Repositories
         {
             _userContext.DeleteById(id);
         }
+
+        public IReadOnlyCollection<User> GetAllByName(string searchQuery)
+        {
+            return _userContext.GetAllByName(searchQuery);
+        }
     }
 }

@@ -170,9 +170,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,12 +179,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductViewModels\ProductListViewModel.cs" />
     <Compile Include="Models\ProductViewModels\ProductViewModels.cs" />
     <Compile Include="Models\PurchaseModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -232,7 +230,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\ShowProductList.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
-    <Content Include="Views\Account\FinishRegistration.cshtml" />
     <Content Include="Views\Account\OpenAccountMenu.cshtml" />
     <Content Include="Views\Account\FinishLogin.cshtml" />
     <Content Include="Views\Shared\UserError.cshtml" />

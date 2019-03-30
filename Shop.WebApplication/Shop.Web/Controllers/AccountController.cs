@@ -18,43 +18,35 @@ namespace Shop.Web.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
 
-        public ActionResult FinishLogin(string login, string password)
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
         {
-
-            User user = _userService.GetAuthorizedUser(login, password);
-            if (user == null)
+            if(!ModelState.IsValid)
             {
-                ViewBag.Warning = "Неверный логин или пароль";
-                return View("~/Views/Account/Login.cshtml");
+                return View(model);
             }
-            Session["User"] = user;
-            ViewBag.User = user;
-            return View();
+            Session["User"] = _userService.GetAuthorizedUser(model.Login, model.Password);
+            if(Session["USer"] == null)
+            {
+                ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
+                return View(model);
+            }
+
+            return Redirect("/Home/Index");
         }
 
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
-        public ActionResult FinishRegistration(User user)
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
         {
-            try
-            {
-                _userService.Save(user); //В этом блоке эксепшн ловится именно отсюда, т.к. повторение логина и пароля запрещены еще при создании таблицы
-                user.Role = RoleType.User;
-                Session["User"] = user;
-                ViewBag.User = user;
-                return View();
-            }
-            catch (SqlException)
-            {
-                ViewBag.Warning = "Логин или почта уже заняты!";
-                return View("~/Views/Account/Register.cshtml");
-            }
+            return View(model);
         }
 
         public ActionResult OpenAccountMenu()

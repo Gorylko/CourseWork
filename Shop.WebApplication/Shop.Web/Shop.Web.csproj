@@ -231,7 +231,6 @@
     <Content Include="Views\Product\ShowProductList.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
     <Content Include="Views\Account\OpenAccountMenu.cshtml" />
-    <Content Include="Views\Account\FinishLogin.cshtml" />
     <Content Include="Views\Shared\UserError.cshtml" />
     <Content Include="Views\Product\ShowProductInfo.cshtml" />
     <Content Include="Views\Product\ShowPurchaseInfo.cshtml" />

@@ -19,6 +19,11 @@ namespace Shop.Data.Repositories
             return _userContext.GetAuthorizedUser(login, password);
         }
 
+        public User RegisterUser(string login, string password, string email, string phone)
+        {
+            return _userContext.RegisterUser(login, password, email, phone);
+        }
+
         public void Save(User user)
         {
             _userContext.Save(user);

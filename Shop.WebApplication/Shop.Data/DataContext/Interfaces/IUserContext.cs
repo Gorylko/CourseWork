@@ -7,6 +7,8 @@ namespace Shop.Data.DataContext.Interfaces
     {
         User GetAuthorizedUser(string login, string password);
 
+        User RegisterUser(string login, string password, string email, string phone);
+
         IReadOnlyCollection<User> GetAllByName(string searchQuery);
     }
 }

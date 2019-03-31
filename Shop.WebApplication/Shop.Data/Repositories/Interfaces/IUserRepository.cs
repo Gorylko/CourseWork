@@ -6,6 +6,8 @@ namespace Shop.Data.Repositories.Interfaces
     {
         User GetAuthorizedUser(string login, string password);
 
+        User RegisterUser(string login, string password, string email, string phone);
+
         void Save(User user);
     }
 }

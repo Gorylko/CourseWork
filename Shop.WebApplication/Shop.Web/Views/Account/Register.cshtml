@@ -1,8 +1,9 @@
-﻿@{
+﻿@using Shop.Web.Models;
+@model RegisterViewModel
+@{
 
-                ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Регистрация";
 }
-
 
 
 <!DOCTYPE html>
@@ -13,28 +14,31 @@
 <body>
     <div>
         <h3>Форма регистрации пользователя</h3>
-        <form action="~/Account/FinishRegistration">
-            <p>@ViewBag.Warning</p>
-            <table>
-                <tr>
-                    <td><p>Введите логин </p></td>
-                    <td><input type="text" name="Login" /> </td>
-                </tr>
-                <tr>
-                    <td><p>Введите пароль </p></td>
-                    <td><input type="text" name="Password" /> </td>
-                </tr>
-                <tr>
-                    <td><p>Введите почту </p></td>
-                    <td><input type="text" name="Email" /> </td>
-                </tr>
-                <tr>
-                    <td><p>Введите свой номер телефона </p></td>
-                    <td><input type="text" name="PhoneNumber" /> </td>
-                </tr>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
-            </table>
-        </form>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            <label for="Login">@Html.DisplayNameFor(model => model.Login)</label><br />
+            @Html.EditorFor(model => model.Login);<br />
+            @Html.ValidationMessageFor(model => model.Login);<br />
+
+            <label for="Email">@Html.DisplayNameFor(model => model.Email)</label><br />
+            @Html.EditorFor(model => model.Email);<br />
+            @Html.ValidationMessageFor(model => model.Email);<br />
+
+            <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
+            @Html.EditorFor(model => model.Password);<br />
+            @Html.ValidationMessageFor(model => model.Password);<br />
+
+            <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PasswordConfirm)</label><br />
+            @Html.EditorFor(model => model.PasswordConfirm);<br />
+            @Html.ValidationMessageFor(model => model.PasswordConfirm);<br />
+
+            <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PhoneNumber)</label><br />
+            @Html.EditorFor(model => model.PhoneNumber);<br />
+            @Html.ValidationMessageFor(model => model.PhoneNumber);<br />
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">Войти</button>
+        }
+
     </div>
 </body>
 </html>

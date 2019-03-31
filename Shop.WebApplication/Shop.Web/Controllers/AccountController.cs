@@ -29,7 +29,7 @@ namespace Shop.Web.Controllers
                 return View(model);
             }
             Session["User"] = _userService.GetAuthorizedUser(model.Login, model.Password);
-            if(Session["USer"] == null)
+            if(Session["User"] == null)
             {
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
                 return View(model);
@@ -46,7 +46,18 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
-            return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            Session["User"] = _userService.RegisterUser(model.Login, model.Password, model.Email, model.PhoneNumber);
+            if (Session["User"] == null)
+            {
+                ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
+                return View(model);
+            }
+
+            return Redirect("/Home/Index");
         }
 
         public ActionResult OpenAccountMenu()

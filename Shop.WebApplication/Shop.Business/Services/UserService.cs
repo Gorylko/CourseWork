@@ -18,6 +18,11 @@ namespace Shop.Business.Services
             return _userRepository.GetAuthorizedUser(login, password);
         }
 
+        public User RegisterUser(string login, string password, string email, string phone)
+        {
+            return _userRepository.RegisterUser(login, password, email, phone);
+        }
+
         public IReadOnlyCollection<User> GetAll()
         {
             return _userRepository.GetAll();

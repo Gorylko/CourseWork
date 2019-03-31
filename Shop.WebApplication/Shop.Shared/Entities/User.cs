@@ -23,7 +23,7 @@ namespace Shop.Shared.Entities
 
         public bool HasRole(RoleType role)
         {
-            return Role == role;
+            return this.Role == role;
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Shop.Web.Models
         public string Login { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
     }

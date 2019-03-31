@@ -50,10 +50,13 @@ namespace Shop.Web.Controllers
             {
                 return View(model);
             }
-            Session["User"] = _userService.RegisterUser(model.Login, model.Password, model.Email, model.PhoneNumber);
-            if (Session["User"] == null)
+            try
             {
-                ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
+                Session["User"] = _userService.RegisterUser(model.Login, model.Password, model.Email, model.PhoneNumber);
+            }
+            catch(SqlException)
+            {
+                ViewBag.ErrorMessage = "логин или почта уже заняты";
                 return View(model);
             }
 

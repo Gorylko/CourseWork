@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div>
@@ -17,23 +17,23 @@
         @using (Html.BeginForm("Register", "Account", FormMethod.Post))
         {
             <label for="Login">@Html.DisplayNameFor(model => model.Login)</label><br />
-            @Html.EditorFor(model => model.Login);<br />
+            @Html.EditorFor(model => model.Login);
             @Html.ValidationMessageFor(model => model.Login);<br />
 
             <label for="Email">@Html.DisplayNameFor(model => model.Email)</label><br />
-            @Html.EditorFor(model => model.Email);<br />
+            @Html.EditorFor(model => model.Email);
             @Html.ValidationMessageFor(model => model.Email);<br />
 
             <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
-            @Html.EditorFor(model => model.Password);<br />
+            @Html.EditorFor(model => model.Password);
             @Html.ValidationMessageFor(model => model.Password);<br />
 
             <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PasswordConfirm)</label><br />
-            @Html.EditorFor(model => model.PasswordConfirm);<br />
+            @Html.EditorFor(model => model.PasswordConfirm);
             @Html.ValidationMessageFor(model => model.PasswordConfirm);<br />
 
             <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PhoneNumber)</label><br />
-            @Html.EditorFor(model => model.PhoneNumber);<br />
+            @Html.EditorFor(model => model.PhoneNumber);
             @Html.ValidationMessageFor(model => model.PhoneNumber);<br />
 
             <button class="btn waves-effect waves-light" type="submit" name="action">Войти</button>

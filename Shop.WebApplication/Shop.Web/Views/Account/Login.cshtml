@@ -7,18 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
 </head>
 <body>
     <h2>Меню входа в аккаунт</h2>
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         <label for="Login">@Html.DisplayNameFor(model => model.Login)</label><br />
-        @Html.EditorFor(model => model.Login)<br />
+        @Html.EditorFor(model => model.Login)
         @Html.ValidationMessageFor(model => model.Login)<br />
 
         <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
-        @Html.EditorFor(model => model.Password)<br />
+        @Html.EditorFor(model => model.Password)
         @Html.ValidationMessageFor(model => model.Password)<br />
         @ViewBag.ErrorMessage<br />
         <button class="btn waves-effect waves-light" type="submit" name="action">Войти</button>

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models;
-using Shop.Shared.Entities;
-using Shop.Shared.Entities.Enums;
 using Shop.Business.Services;
 using System.Data.SqlClient;
 
@@ -29,6 +25,7 @@ namespace Shop.Web.Controllers
                 return View(model);
             }
             Session["User"] = _userService.GetAuthorizedUser(model.Login, model.Password);
+            System.Web.HttpContext.Current.User = Session["User"];
             if(Session["User"] == null)
             {
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";

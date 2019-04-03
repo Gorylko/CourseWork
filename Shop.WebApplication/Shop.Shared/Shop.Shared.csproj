@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Constants\ColorConstants.cs" />
     <Compile Include="Constants\TypographyConstants.cs" />
+    <Compile Include="Entities\Authorize\UserPrinciple.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
     <Compile Include="Entities\Product.cs" />

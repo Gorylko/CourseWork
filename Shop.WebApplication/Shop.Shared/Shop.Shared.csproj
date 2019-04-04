@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Constants\ColorConstants.cs" />
     <Compile Include="Constants\TypographyConstants.cs" />
+    <Compile Include="Entities\Authorize\MembershipUser.cs" />
     <Compile Include="Entities\Authorize\UserPrinciple.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserPrincipal.cs" />
+    <Compile Include="Helpers\ConvertHelper.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

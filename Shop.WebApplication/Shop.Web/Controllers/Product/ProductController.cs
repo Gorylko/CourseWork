@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models.ProductViewModels;
 using Shop.Shared.Entities;
+using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers.Product
 {
@@ -17,7 +18,7 @@ namespace Shop.Web.Controllers.Product
 
         CategoryService _categoryService = new CategoryService();
 
-
+        [Admin]
         public ActionResult ShowProductList()
         {
             ViewBag.Products = _productService.GetAll();

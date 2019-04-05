@@ -14,7 +14,7 @@ namespace Shop.Web.Attributes
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var user = HttpContext.Current.User;
-            if(user is User)
+            if(user is UserPrinciple)
             {
                 return user.IsInRole(RoleType.Administrator.ToString());
             }

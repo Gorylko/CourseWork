@@ -37,13 +37,12 @@ namespace Shop.Web.Controllers
             {
                 return View(model);
             }
-            SendCookies(_loginService.Login(model.Login, model.Password));
-            if(Session["User"] == null)
+            var user = _loginService.Login(model.Login, model.Password);
+            if(user == null)
             {
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
                 return View(model);
             }
-
             return Redirect("/Home/Index");
         }
 
@@ -75,14 +74,7 @@ namespace Shop.Web.Controllers
             return Redirect("/Home/Index");
         }
 
-        private void SendCookies(Shared.Entities.Authorize.MembershipUser user)
-        {
-            var userData = JsonConvert.SerializeObject(user);
-            var ticket = new FormsAuthenticationTicket(VERSION, user.Name, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData);
-            var encryptTicket = FormsAuthentication.Encrypt(ticket);
-            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket);
-            System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
-        }
+
 
         public ActionResult OpenAccountMenu()
         {

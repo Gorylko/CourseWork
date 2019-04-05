@@ -20,7 +20,7 @@ namespace Shop.Shared.Entities.Authorize
 
         public bool IsInRole(string role)
         {
-            return this.Role == (RoleType)Enum.Parse(typeof(RoleType), role, true); ;
+            return this.Role.ToString() == role;
         }
     }
 }

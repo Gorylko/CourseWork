@@ -1,0 +1,44 @@
+﻿@using Shop.Web.Models;
+@model SearchViewModel
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div>
+        <h3>Поиск пользователя</h3>
+
+
+        @using (Html.BeginForm("ShowUsersList", "User", FormMethod.Post))
+        {
+            @Html.EditorFor(model => model.Name)
+            <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
+            @Html.ValidationMessageFor(model => model.Name)
+        }
+
+        <br />
+        <table>
+            @foreach (var user in ViewBag.Users)
+            {
+                <tr>
+                    <td width="150px"><p>@user.Login</p></td>
+                    <td width="150px"><p>@user.Role</p></td>
+                    <td>
+                        <form action="~/User/ShowUser">
+                            <div>
+                                <button type="submit">Открыть</button>
+                                <input type="hidden" value="@user.Login" name="login" />
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

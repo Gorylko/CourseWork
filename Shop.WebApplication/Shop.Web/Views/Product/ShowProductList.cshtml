@@ -22,9 +22,9 @@
             @foreach (var product in ViewBag.Products)
             {
                 <tr>
-                    <td><p>@product.Name</p></td>
-                    <td><p>@product.Category.ToString()</p></td>
-                    <td><p>@product.Price</p></td>
+                    <td width="150px"><p>@product.Name</p></td>
+                    <td width="150px"><p>@product.Category.Name</p></td>
+                    <td width="50px"><p>@product.Price</p></td>
                     <td>
                         <form action="~/Product/ShowProductInfo">
                             <div>

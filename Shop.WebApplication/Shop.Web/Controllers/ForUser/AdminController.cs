@@ -8,7 +8,7 @@ using Shop.Shared.Entities.Enums;
 using Helper = Shop.Shared.Helpers.RoleHelper;
 using Shop.Web.Attributes;
 
-namespace Shop.Web.Controllers
+namespace Shop.Web.Controllers.ForUser
 {
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller

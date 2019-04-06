@@ -1,0 +1,42 @@
+﻿@{
+    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h2>Информация о пользователе</h2>
+    <table>
+        <tr><td><p>Логин : @ViewBag.User.Login</p></td></tr>
+        <tr><td><p>Почта : @ViewBag.User.Email</p></td></tr>
+        <tr><td><p>Роль : @ViewBag.User.Role</p></td></tr>
+        <tr><td><p>Телефон : @ViewBag.User.PhoneNumber</p></td></tr>
+    </table>
+
+
+
+
+    <div style="width:400px;">
+        @if (user != null)
+        {
+            <div style="float: left; width: 130px">
+                <form action="~/User/ShowUserProducts">
+                    <button>Товары</button>
+                    <input type="hidden" value="@ViewBag.User.Id" name="id" />
+                </form>
+                <form action="~/User/SendMessage">
+                    <button>Отправить сообщение</button>
+                    <input type="hidden" value="@ViewBag.User.Id" name="id" />
+                </form>
+            </div>
+        }
+        <div style="float: right; width: 225px">
+            <input type="button" onclick="history.back();" value="Назад" />
+        </div>
+    </div>
+</body>
+</html>

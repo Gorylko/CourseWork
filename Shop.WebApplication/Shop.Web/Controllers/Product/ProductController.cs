@@ -18,7 +18,6 @@ namespace Shop.Web.Controllers.Product
 
         CategoryService _categoryService = new CategoryService();
 
-        [Admin]
         public ActionResult ShowProductList()
         {
             ViewBag.Products = _productService.GetAll();

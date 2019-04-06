@@ -10,6 +10,7 @@ using Shop.Shared.Entities.Authorize;
 using Shop.Business.Services;
 using System.Data.SqlClient;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Shop.Shared.Entities;
 
 namespace Shop.Web.Controllers
 {
@@ -40,11 +41,12 @@ namespace Shop.Web.Controllers
                 return View(model);
             }
             var user = _loginService.Login(model.Login, model.Password);
-            if(user == null)
+            if (user == null)
             {
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
                 return View(model);
             }
+            Session["User"] = user;
             return Redirect("/Home/Index");
         }
 
@@ -65,8 +67,13 @@ namespace Shop.Web.Controllers
             {
                 var user = _loginService.Register(model.Login, model.Password, model.Email, model.PhoneNumber);
                 var identityClaim = new IdentityUserClaim { ClaimType = "Role", ClaimValue = user.Role.ToString() };
-                // добавляем claim пользователю
-                user.Claims.Add(identityClaim);
+                //user.Claims = identityClaim;
+                HttpContext.User = new UserPrinciple(model.Login)
+                {
+                    UserId = user.Id,
+                    Name = user.Login,
+                    Role = user.Role
+                };
             }
             catch(SqlException)
             {

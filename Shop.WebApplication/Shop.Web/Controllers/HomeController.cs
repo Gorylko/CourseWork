@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models;
+using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers
 {
@@ -20,6 +21,7 @@ namespace Shop.Web.Controllers
             return View();
         }
 
+        //[SuperPuperAuthorize(UserRole = "Administrator", CurrentUserRole = CurrentUserRole)]
         public ActionResult About()
         {
             ViewBag.Message = "Информация";

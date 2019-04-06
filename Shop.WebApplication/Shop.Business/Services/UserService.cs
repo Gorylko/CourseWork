@@ -29,5 +29,15 @@ namespace Shop.Business.Services
             _userRepository.Save(user);
         }
 
+        public User GetById(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
+        public User GetByName(string name)
+        {
+            return _userRepository.Login(name);
+        }
+
     }
 }

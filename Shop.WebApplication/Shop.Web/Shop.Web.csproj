@@ -182,11 +182,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\AdminAttribute.cs" />
+    <Compile Include="Attributes\SuperPuperAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ForUser\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ForUser\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,8 @@
     <Compile Include="Models\ProductViewModels\ProductViewModels.cs" />
     <Compile Include="Models\PurchaseModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -247,7 +250,8 @@
     <Content Include="Views\Product\ShowPurchaseInfo.cshtml" />
     <Content Include="Views\Admin\ShowAdminPanel.cshtml" />
     <Content Include="Views\Product\OpenCategoryMenu.cshtml" />
-    <Content Include="Views\User\ShowUsersMenu.cshtml" />
+    <Content Include="Views\User\ShowUsersList.cshtml" />
+    <Content Include="Views\User\ShowUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

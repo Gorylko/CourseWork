@@ -20,7 +20,6 @@ namespace Shop.Shared.Entities
         public string PhoneNumber { get; set; }
 
         public RoleType Role { get; set; }
-        public object Claims { get; set; }
 
         public bool InRoles(string role)
         {

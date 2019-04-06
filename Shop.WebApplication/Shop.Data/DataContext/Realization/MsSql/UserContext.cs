@@ -5,6 +5,7 @@ using Typography = Shop.Shared.Constants.TypographyConstants;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Helpers;
+using System;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
@@ -49,25 +50,14 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public User Login(string login)
         {
-            if (string.IsNullOrEmpty(login))
-            {
-                return null;
-            }
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login", connection);
+                var command = new SqlCommand("SELECT * FROM [User] WHERE [Login] = @login", connection);
                 command.Parameters.AddWithValue("@login", login);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                try
-                {
-                    return GetUser(reader);
-                }
-                catch
-                {
-                    return null;
-                }
+                return GetUser(reader);
             }
         }
 
@@ -126,7 +116,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<User> products = new List<User>();
-                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Id] = {id}";
+                string query = $"SELECT * FROM [User] WHERE [Id] = {id}";
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
@@ -167,7 +157,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader["Login"].ToString().Contains(searchQuery))
+                    if (reader["Login"].ToString().IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         users.Add(GetUser(reader));
                     }

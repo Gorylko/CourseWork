@@ -2,12 +2,14 @@
 using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models;
-using Shop.Business.Services;
+using Shop.Business.Services.Auth;
 using Microsoft.Owin.Security;
 using System.Web.Security;
 using Newtonsoft.Json;
 using Shop.Shared.Entities.Authorize;
+using Shop.Business.Services;
 using System.Data.SqlClient;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Shop.Web.Controllers
 {
@@ -53,7 +55,6 @@ namespace Shop.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -62,8 +63,10 @@ namespace Shop.Web.Controllers
             }
             try
             {
-                Session["User"] = _loginService.Register(model.Login, model.Password, model.Email, model.PhoneNumber);
-                
+                var user = _loginService.Register(model.Login, model.Password, model.Email, model.PhoneNumber);
+                var identityClaim = new IdentityUserClaim { ClaimType = "Role", ClaimValue = user.Role.ToString() };
+                // добавляем claim пользователю
+                user.Claims.Add(identityClaim);
             }
             catch(SqlException)
             {

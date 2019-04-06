@@ -22,7 +22,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             };
         }
 
-        public User GetAuthorizedUser(string login, string password)
+        public User Login(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -47,7 +47,31 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public User RegisterUser(string login, string password, string email, string phone)
+        public User Login(string login)
+        {
+            if (string.IsNullOrEmpty(login))
+            {
+                return null;
+            }
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login", connection);
+                command.Parameters.AddWithValue("@login", login);
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                try
+                {
+                    return GetUser(reader);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        public User Register(string login, string password, string email, string phone)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
@@ -58,7 +82,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@phonenumber", phone);
                 command.ExecuteNonQuery();
-                return GetAuthorizedUser(login, password);
+                return Login(login, password);
             }
         }
 

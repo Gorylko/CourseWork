@@ -14,14 +14,19 @@ namespace Shop.Data.Repositories
             this._userContext = userContext;
         }
 
-        public User GetAuthorizedUser(string login, string password)
+        public User Login(string login, string password)
         {
-            return _userContext.GetAuthorizedUser(login, password);
+            return _userContext.Login(login, password);
         }
 
-        public User RegisterUser(string login, string password, string email, string phone)
+        public User Login(string login)
         {
-            return _userContext.RegisterUser(login, password, email, phone);
+            return _userContext.Login(login);
+        }
+
+        public User Register(string login, string password, string email, string phone)
+        {
+            return _userContext.Register(login, password, email, phone);
         }
 
         public void Save(User user)

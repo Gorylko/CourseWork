@@ -5,11 +5,11 @@ namespace Shop.Data.DataContext.Interfaces
 {
     public interface IUserContext : IDataContext<User>
     {
-        User Login(string login, string password);
+        User GetUserByLoginAndPassword(string login, string password);
 
-        User Login(string login);
+        User GetUserByLogin(string login);
 
-        User Register(string login, string password, string email, string phone);
+        //User Register(string login, string password, string email, string phone);
 
         IReadOnlyCollection<User> GetAllByName(string searchQuery);
     }

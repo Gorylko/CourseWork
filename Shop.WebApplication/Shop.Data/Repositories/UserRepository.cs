@@ -7,27 +7,28 @@ namespace Shop.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        IUserContext _userContext;
+        private readonly IUserContext _userContext;
 
         public UserRepository(IUserContext userContext)
         {
-            this._userContext = userContext;
+            _userContext = userContext;
         }
 
-        public User Login(string login, string password)
+        public User GetUserByLoginAndPassword(string login, string password)
         {
-            return _userContext.Login(login, password);
+            return _userContext.GetUserByLoginAndPassword(login, password);
         }
 
-        public User Login(string login)
+        public User GetUserByLogin(string login)
         {
-            return _userContext.Login(login);
+            return _userContext.GetUserByLogin(login);
         }
 
-        public User Register(string login, string password, string email, string phone)
-        {
-            return _userContext.Register(login, password, email, phone);
-        }
+        // низя так делать
+        //public User Register(string login, string password, string email, string phone)
+        //{
+        //    return _userContext.Register(login, password, email, phone);
+        //}
 
         public void Save(User user)
         {

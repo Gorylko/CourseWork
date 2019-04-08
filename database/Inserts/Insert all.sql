@@ -21,15 +21,15 @@ INSERT INTO [dbo].[Location]([Name]) VALUES('Азербайджан')
 INSERT INTO [dbo].[State]([Name]) VALUES('New')
 INSERT INTO [dbo].[State]([Name]) VALUES('Old')
 
-INSERT INTO [dbo].[Role]([Name]) VALUES ('Administrator')
-INSERT INTO [dbo].[Role]([Name]) VALUES ('Moderator')
 INSERT INTO [dbo].[Role]([Name]) VALUES ('User')
+INSERT INTO [dbo].[Role]([Name]) VALUES ('Moderator')
+INSERT INTO [dbo].[Role]([Name]) VALUES ('Administrator')
 
-INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('VlastelinValentin',3,'павук','pavyk@gmail.com','+365291725099')
+INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('VlastelinValentin',1,'павук','pavyk@gmail.com','+365291725099')
 INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Anatolya',2,'123','anatolik@gmail.com','+365441365099')
-INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Vadimka12',1,'343221','vadimka@gmail.com','+3653317253467')
-INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Valentinka48',1,'345','valik@gmail.com','+365565625045')
-INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Genka15',1,'1234','genka@gmail.com','+365171479090')
+INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Vadimka12',3,'343221','vadimka@gmail.com','+3653317253467')
+INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Valentinka48',3,'345','valik@gmail.com','+365565625045')
+INSERT INTO [dbo].[User]([Login],[RoleId],[Password],[Email],[PhoneNumber]) VALUES('Genka15',3,'1234','genka@gmail.com','+365171479090')
 
 
 INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate])

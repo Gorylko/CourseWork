@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Shop.Shared.Entities.Enums;
+using Shop.Web.Attributes;
+using System;
 using System.Web;
 using System.Web.Mvc;
-using Shop.Web.Models;
-using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers
 {
@@ -21,7 +19,7 @@ namespace Shop.Web.Controllers
             return View();
         }
 
-        //[SuperPuperAuthorize(UserRole = "Administrator", CurrentUserRole = CurrentUserRole)]
+        [SuperPuperAuthorize(roles: RoleType.Administrator)]
         public ActionResult About()
         {
             ViewBag.Message = "Информация";

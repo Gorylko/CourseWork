@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using Shop.Shared.Entities;
+using Shop.Shared.Entities.Authorize;
+using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace Shop.Web
 {
@@ -15,6 +17,22 @@ namespace Shop.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_PostAuthenticateRequest(object sender, EventArgs arg)
+        {
+            var cookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (cookie != null)
+            {
+                var ticket = FormsAuthentication.Decrypt(cookie.Value);
+                var user = JsonConvert.DeserializeObject<User>(ticket.UserData);
+                var userPrinciple = new UserPrinciple(user.Login)
+                {
+                    Role = user.Role
+                };
+
+                HttpContext.Current.User = userPrinciple;
+            }
         }
     }
 }

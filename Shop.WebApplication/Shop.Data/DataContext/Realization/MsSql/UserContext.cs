@@ -23,7 +23,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             };
         }
 
-        public User Login(string login, string password)
+        public User GetUserByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
@@ -48,7 +48,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public User Login(string login)
+        public User GetUserByLogin(string login)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
@@ -61,20 +61,20 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public User Register(string login, string password, string email, string phone)
-        {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
-            {
-                connection.Open();
-                var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
-                command.Parameters.AddWithValue("@login", login);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@phonenumber", phone);
-                command.ExecuteNonQuery();
-                return Login(login, password);
-            }
-        }
+        //public User Register(string login, string password, string email, string phone)
+        //{
+        //    using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+        //    {
+        //        connection.Open();
+        //        var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
+        //        command.Parameters.AddWithValue("@login", login);
+        //        command.Parameters.AddWithValue("@password", password);
+        //        command.Parameters.AddWithValue("@email", email);
+        //        command.Parameters.AddWithValue("@phonenumber", phone);
+        //        command.ExecuteNonQuery();
+        //        return GetUserByLoginAndPassword(login, password);
+        //    }
+        //}
 
         public void Save(User user)
         {

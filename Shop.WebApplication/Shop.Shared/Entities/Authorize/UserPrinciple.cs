@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Shop.Shared.Entities.Enums;
 using System.Security.Principal;
-using Shop.Shared.Entities.Enums;
 
 namespace Shop.Shared.Entities.Authorize
 {
@@ -10,9 +9,10 @@ namespace Shop.Shared.Entities.Authorize
         {
             this.Identity = new GenericIdentity(username);
         }
+
         public int UserId { get; set; }
 
-        public string Name { get; set; }
+        public string Name => this.Identity.Name;
 
         public RoleType Role { get; set; }
 

@@ -7,5 +7,6 @@ namespace Shop.Web.Models
 {
     public class UserViewModel
     {
+        public string Login { get; set; }
     }
 }

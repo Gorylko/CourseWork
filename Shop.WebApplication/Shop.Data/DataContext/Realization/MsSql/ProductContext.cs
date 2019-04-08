@@ -46,19 +46,32 @@ namespace Shop.Data.DataContext.Realization.MsSql
                         while (reader.Read())
                         {
                             if ((int)reader["CategoryId"] == categoryId)
-
                             {
-                                try
-                                {
+                                products.Add(GetProduct(reader));
+                            }
+                        }
+                    }
+                }
+
+                return products;
+            }
+        }
+
+        public IReadOnlyCollection<Product> GetByUserId(int userId)
+        {
+            List<Product> products = new List<Product>();
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if ((int)reader["UserId"] == userId)
+                            {
                                     products.Add(GetProduct(reader));
-                                }
-                                catch (SqlException ex)
-                                {
-                                    Console.WriteLine("Что-то произошло... Инфо об ошибке : ");
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine("Нажмите любую клавишу, чтобы пройти дальше");
-                                    Console.ReadKey(true);
-                                }
                             }
                         }
                     }

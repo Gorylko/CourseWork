@@ -24,6 +24,11 @@ namespace Shop.Business.Services
             return _productRepository.GetAllByCategoryId(categoryId);
         }
 
+        public IReadOnlyCollection<Product> GetByUserId(int userId)
+        {
+            return _productRepository.GetByUserId(userId);
+        }
+
         public Product GetProductById(int productId)
         {
             return _productRepository.GetById(productId);

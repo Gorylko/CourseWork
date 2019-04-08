@@ -21,6 +21,11 @@ namespace Shop.Data.Repositories
             return _productContext.GetAll();
         }
 
+        public IReadOnlyCollection<Product> GetByUserId(int userId)
+        {
+            return _productContext.GetByUserId(userId);
+        }
+
         public void DeleteById(int id)
         {
             _productContext.DeleteById(id);

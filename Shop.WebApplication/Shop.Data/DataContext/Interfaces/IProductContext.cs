@@ -7,6 +7,8 @@ namespace Shop.Data.DataContext.Interfaces
     {
         IReadOnlyCollection<Product> GetByCategoryId(int categoryId);
 
+        IReadOnlyCollection<Product> GetByUserId(int userId);
+
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
     }
 }

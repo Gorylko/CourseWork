@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Все товары";
+    ViewBag.Title = "Товары";
 }
 
 <!DOCTYPE html>
@@ -11,20 +11,20 @@
 </head>
 <body>
     <div>
-        <h3>Распродажа товара</h3>
+        <h3>Список товаров</h3>
         <table>
             <tr>
-                <td><p>Название товара</p></td>
-                <td><p>Категория</p></td>
-                <td><p>Цена</p></td>
+                <td width="150px"><p>Название товара</p></td>
+                <td width="150px"><p>Категория</p></td>
+                <td width="50px"><p>Цена</p></td>
                 <td></td>
             </tr>
             @foreach (var product in ViewBag.Products)
             {
                 <tr>
-                    <td width="150px"><p>@product.Name</p></td>
-                    <td width="150px"><p>@product.Category.Name</p></td>
-                    <td width="50px"><p>@product.Price</p></td>
+                    <td><p>@product.Name</p></td>
+                    <td><p>@product.Category.Name</p></td>
+                    <td><p>@product.Price</p></td>
                     <td>
                         <form action="~/Product/ShowProductInfo">
                             <div>

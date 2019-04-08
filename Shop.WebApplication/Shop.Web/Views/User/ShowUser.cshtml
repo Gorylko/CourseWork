@@ -23,20 +23,16 @@
     <div style="width:400px;">
         @if (user != null)
         {
-            <div style="float: left; width: 130px">
-                <form action="~/User/ShowUserProducts">
-                    <button>Товары</button>
-                    <input type="hidden" value="@ViewBag.User.Id" name="id" />
-                </form>
-                <form action="~/User/SendMessage">
-                    <button>Отправить сообщение</button>
-                    <input type="hidden" value="@ViewBag.User.Id" name="id" />
-                </form>
-            </div>
+            <form action="~/User/SendMessage">
+                <button>Отправить сообщение</button>
+                <input type="hidden" value="@ViewBag.User.Id" name="id" />
+            </form>
         }
-        <div style="float: right; width: 225px">
-            <input type="button" onclick="history.back();" value="Назад" />
-        </div>
+        <input type="button" onclick="history.back();" value="Назад" />
+        <form action="~/Product/ShowByUserId">
+            <button>Товары</button>
+            <input type="hidden" value="@ViewBag.User.Id" name="userId" />
+        </form>
     </div>
 </body>
 </html>

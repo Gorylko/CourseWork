@@ -10,7 +10,6 @@ using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers.ForUser
 {
-    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         public ActionResult ShowAdminPanel()

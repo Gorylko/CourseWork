@@ -4,22 +4,15 @@
 }
 
 <table>
-    <tr>
-        <td><p>Название товара</p></td>
-        <td><p>Категория</p></td>
-        <td><p>Цена</p></td>
-        <td></td>
-    </tr>
+    <tr></tr>
     @foreach (var category in ViewBag.Сategories)
     {
         <tr>
             <td><p>@category.Name</p></td>
             <td>
                 <form action="~/Product/ShowProductsByCategory">
-                    <div>
                         <button type="submit">Открыть</button>
                         <input type="hidden" value="@category.Id" name="categoryId" />
-                    </div>
                 </form>
             </td>
         </tr>

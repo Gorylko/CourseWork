@@ -7,6 +7,8 @@ namespace Shop.Data.Repositories.Interfaces
     {
         IReadOnlyCollection<Product> GetAllByCategoryId(int categoryId);
 
+        IReadOnlyCollection<Product> GetByUserId(int userId);
+
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
     }
 }

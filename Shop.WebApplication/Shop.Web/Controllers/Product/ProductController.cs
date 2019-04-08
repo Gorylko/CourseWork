@@ -24,13 +24,10 @@ namespace Shop.Web.Controllers.Product
             return View();
         }
 
-        public ActionResult GetProductByCategoryId(int categoryId)
+        public ActionResult ShowByUserId(int userId)
         {
-            ProductListViewModel model = new ProductListViewModel
-            {
-                Products = _productService.GetProductsByCategoryId(categoryId)
-            };
-            return View();
+            ViewBag.Products = _productService.GetByUserId(userId);
+            return View("~/Views/Product/ShowProductList.cshtml");
         }
 
         public ActionResult ShowProductInfo(int id)

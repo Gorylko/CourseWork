@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using Shop.Business.Services;
 using Shop.Web.Models;
+using Shop.Shared.Entities.Authorize;
+
 namespace Shop.Web.Controllers.ForUser
 {
     public class UserController : Controller
@@ -33,6 +35,19 @@ namespace Shop.Web.Controllers.ForUser
             ViewBag.User = user;
             ViewBag.Title = user.Login;
             return View();
+        }
+
+        public ActionResult ShowCurrentUser()
+        {
+            var currentUser = User as UserPrinciple;
+            var user = _userService.GetByName(currentUser.Name);
+            return View(new UserViewModel
+            {
+                Login = user.Login,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Role = user.Role.ToString()
+            });
         }
     }
 }

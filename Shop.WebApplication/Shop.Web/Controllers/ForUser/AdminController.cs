@@ -12,13 +12,9 @@ namespace Shop.Web.Controllers.ForUser
 {
     public class AdminController : Controller
     {
+        [Admin]
         public ActionResult ShowAdminPanel()
         {
-            if (!Helper.CheckPermissions((User)Session["User"], RoleType.Administrator, RoleType.Moderator))
-            {                                                       //проверяет принадлежность к этим ролям
-                ViewBag.Warning = "Ахтунг! Недостаточно прав для доступа к этой панели!";
-                return View("~/Views/Shared/UserError.cshtml");
-            }
             return View();
         }
     }

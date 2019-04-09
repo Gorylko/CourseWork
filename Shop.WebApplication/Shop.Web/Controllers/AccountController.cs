@@ -15,14 +15,6 @@ namespace Shop.Web.Controllers
         private UserService _userService = new UserService();
         private LoginService _loginService = new LoginService();
 
-        //private IAuthenticationManager AuthenticationManager
-        //{
-        //    get
-        //    {
-        //        return HttpContext.GetOwinContext().Authentication;
-        //    }
-        //}
-
         public ActionResult Login()
         {
             return View(new LoginViewModel());
@@ -41,8 +33,6 @@ namespace Shop.Web.Controllers
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
                 return View(model);
             }
-
-            //Session["User"] = user;
             return Redirect("/Home/Index");
         }
 
@@ -66,14 +56,6 @@ namespace Shop.Web.Controllers
                 {
                     return RedirectToAction("Login");
                 }
-                //var identityClaim = new IdentityUserClaim { ClaimType = "Role", ClaimValue = user.Role.ToString() };
-                //user.Claims = identityClaim;
-                //HttpContext.User = new UserPrinciple(model.Login)
-                //{
-                //    UserId = user.Id,
-                //    Name = user.Login,
-                //    Role = user.Role
-                //};
             }
             catch (SqlException)
             {
@@ -83,8 +65,6 @@ namespace Shop.Web.Controllers
 
             return Redirect("/Home/Index");
         }
-
-
 
         public ActionResult OpenAccountMenu()
         {
@@ -97,5 +77,7 @@ namespace Shop.Web.Controllers
             //return View("~/Views/Home/Index.cshtml");
             return RedirectToAction("Index", "Home");
         }
+
+
     }
 }

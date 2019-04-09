@@ -1,0 +1,18 @@
+﻿@using Shop.Web.Models;
+@model UserViewModel
+@{
+    ViewBag.Title = "Личный кабинет";
+}
+<h2>Личный кабинет</h2>
+<table>
+    <tr><p>Логин: @Model.Login</p></tr>
+    <tr><p>Почта: @Model.Email</p></tr>
+    <tr><p>Номер телефона: @Model.PhoneNumber</p></tr>
+    <tr><p>Роль: @Model.Role</p></tr>
+</table>
+
+<form action="~/Account/Exit">
+    <div>
+        <button type="submit">Выйти</button>
+    </div>
+</form>

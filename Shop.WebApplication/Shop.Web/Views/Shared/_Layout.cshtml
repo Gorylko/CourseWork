@@ -1,7 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Shop.Shared.Entities.Enums;
+@using Shop.Shared.Entities.Authorize;
+
+@{
+    var user = User as UserPrinciple;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
@@ -25,6 +33,11 @@
                     <li>@Html.ActionLink("Люди", "ShowUsersList", "User")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    @if (user == null) { }
+                    else if (user.IsInRole(RoleType.Moderator.ToString()) || user.IsInRole(RoleType.Administrator.ToString()))
+                    {
+                        <li>@Html.ActionLink("Admin Panel :D", "ShowAdminPanel", "Admin", routeValues: null, htmlAttributes: new { id = "adminPanelLink" })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

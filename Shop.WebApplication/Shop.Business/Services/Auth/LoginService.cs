@@ -16,22 +16,8 @@ namespace Shop.Business.Services.Auth
 
         public User Login(string login, string password)
         {
-            //User user = _userRepository.Login(login, password);
-            //if(user == null)
-            //{
-            //    return null;
-            //}
-            //SendCookies(new MembershipUser
-            //{
-            //    UserId = user.Id,
-            //    Name = user.Login,
-            //    Role = user.Role
-            //});
-            //return user;
-
             if (this.GetUserByLoginAndPassword(login, password) is User user)
             {
-                //var user = GetUser(login);
                 this.SetCookies(user);
                 return user;
             }
@@ -51,16 +37,6 @@ namespace Shop.Business.Services.Auth
             _userRepository.Save(newUser);
 
             var user = _userRepository.GetUserByLogin(login);
-            //if (user == null)
-            //{
-            //    return null;
-            //}
-            //SetCookies(new MembershipUser
-            //{
-            //    UserId = user.Id,
-            //    Name = user.Login,
-            //    Role = user.Role
-            //});
             return user ?? null;
         }
 

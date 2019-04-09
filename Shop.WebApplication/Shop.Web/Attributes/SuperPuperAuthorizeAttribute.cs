@@ -7,17 +7,12 @@ namespace Shop.Web.Attributes
 {
     public class SuperPuperAuthorizeAttribute : AuthorizeAttribute
     {
-        //private string[] allowedUsers = new string[] { };
         private RoleType[] _roles = new RoleType[] { };
 
         public SuperPuperAuthorizeAttribute(params RoleType[] roles)
         {
             _roles = roles;
         }
-
-        //public string CurrentUserRole { get; set; }
-
-        //public string UserRole { get; set; }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {

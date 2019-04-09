@@ -1,7 +1,10 @@
 ﻿@using Shop.Web.Models;
+@using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
 @model SearchViewModel
 @{
     ViewBag.Title = "Пользователи";
+    var currentUser = User as UserPrinciple;
 }
 
 <!DOCTYPE html>
@@ -36,6 +39,8 @@
                         </div>
                     </form>
                 </td>
+                @if (currentUser.IsInRole(RoleType.Administrator.ToString()))
+                {
                 <td>
                     <form action="~/User/EditUser">
                         <div>
@@ -44,6 +49,7 @@
                         </div>
                     </form>
                 </td>
+                }
             </tr>
             }
         </table>

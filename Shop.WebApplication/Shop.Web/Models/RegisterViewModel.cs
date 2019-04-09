@@ -8,7 +8,7 @@ namespace Shop.Web.Models
         [Display(Name = "Логин*")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Логин может содержать от 5 до 20 символов")]
         public string Login { get; set; }
-
+    
         [Required]
         [Display(Name = "Пароль*")]
         [DataType(DataType.Password)]

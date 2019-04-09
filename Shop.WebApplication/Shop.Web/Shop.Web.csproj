@@ -178,7 +178,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\AdminAttribute.cs" />
+    <Compile Include="Attributes\ModerAttribute.cs" />
     <Compile Include="Attributes\SuperPuperAuthorizeAttribute.cs" />
+    <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ForUser\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -240,7 +242,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\ShowProductList.cshtml" />
     <Content Include="Views\Product\BuyProduct.cshtml" />
-    <Content Include="Views\Account\OpenAccountMenu.cshtml" />
+    <Content Include="Views\User\ShowCurrentUser.cshtml" />
     <Content Include="Views\Shared\UserError.cshtml" />
     <Content Include="Views\Product\ShowProductInfo.cshtml" />
     <Content Include="Views\Product\ShowPurchaseInfo.cshtml" />

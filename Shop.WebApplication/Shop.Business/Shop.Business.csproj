@@ -56,11 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Auth\CustomAuthentication.cs" />
     <Compile Include="Services\Auth\Interfaces\IAuthentication.cs" />
     <Compile Include="Services\Auth\Interfaces\IUserProvider.cs" />
-    <Compile Include="Services\Auth\UserIdentity.cs" />
-    <Compile Include="Services\Auth\UserProvider.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Auth\LoginService.cs" />
     <Compile Include="Services\ProductService.cs" />

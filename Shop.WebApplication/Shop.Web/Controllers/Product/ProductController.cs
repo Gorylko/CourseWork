@@ -18,6 +18,36 @@ namespace Shop.Web.Controllers.Product
         CategoryService _categoryService = new CategoryService();
         UserService _userService = new UserService();
 
+        public ActionResult AddNewProduct()
+        {
+            return View(new ProductListViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult AddNewProduct(ProductListViewModel model)
+        {
+            _productService.Save(new Shared.Entities.Product
+            {
+                Name = model.Name,
+                Category = new Category
+                {
+                    Id = model.Category.Id,
+                    Name = model.Category.Name
+                },
+                CreationDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now,
+                Description = model.Description,
+                LocationOfProduct = model.LocationOfProduct,
+                Price = model.Price,
+                State = model.State,
+                Author = new User
+                {
+                    Id = model.Author.Id
+                }
+            });
+            return View("~/Views/Shared/Notification.cshtml");
+        }
+
         public ActionResult ShowProductList()
         {
             ViewBag.Products = _productService.GetAll();

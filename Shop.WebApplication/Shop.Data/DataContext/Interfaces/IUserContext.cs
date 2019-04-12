@@ -9,8 +9,6 @@ namespace Shop.Data.DataContext.Interfaces
 
         User GetUserByLogin(string login);
 
-        //User Register(string login, string password, string email, string phone);
-
         IReadOnlyCollection<User> GetAllByName(string searchQuery);
     }
 }

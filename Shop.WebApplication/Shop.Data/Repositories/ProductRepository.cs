@@ -48,7 +48,7 @@ namespace Shop.Data.Repositories
 
         public void Save(Product product)
         {
-            //ы
+            _productContext.Save(product);
         }
     }
 }

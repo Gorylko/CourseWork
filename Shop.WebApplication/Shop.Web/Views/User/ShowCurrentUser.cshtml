@@ -10,9 +10,4 @@
     <tr><p>Номер телефона: @Model.PhoneNumber</p></tr>
     <tr><p>Роль: @Model.Role</p></tr>
 </table>
-
-<form action="~/Account/Exit">
-    <div>
-        <button type="submit">Выйти</button>
-    </div>
-</form>
+<input type="button" onclick="history.back();" value="Назад" />

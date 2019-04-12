@@ -3,7 +3,7 @@
 @using Shop.Shared.Entities.Authorize;
 
 @{
-    var user = User as UserPrinciple;
+    var user = User as UserPrinciple ?? new UserPrinciple("anon");
 }
 @if (Request.IsAuthenticated)
 {
@@ -17,7 +17,7 @@
             </li>
             <li>
                 @*<a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>*@
-                <input type="submit" value="Выйти" />
+                <input type="submit" value="Выйти"  style="background-color:transparent; color:darkorange; border-color:transparent; height:50px "/>
             </li>
         </ul>
     }

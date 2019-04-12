@@ -66,11 +66,6 @@ namespace Shop.Web.Controllers
             return Redirect("/Home/Index");
         }
 
-        public ActionResult OpenAccountMenu()
-        {
-            return View();
-        }
-
         public ActionResult Logout()
         {
             _loginService.Logout();

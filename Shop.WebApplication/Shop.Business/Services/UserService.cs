@@ -29,7 +29,7 @@ namespace Shop.Business.Services
             return _userRepository.GetById(id);
         }
 
-        public User GetByName(string name)
+        public User GetByLogin(string name)
         {
             return _userRepository.GetUserByLogin(name); // _userRepository.Login(name);
         }

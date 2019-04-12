@@ -13,7 +13,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 var command = new SqlCommand($"SELECT * FROM [Location] WHERE [Name] = '{name}'", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return (int)reader["State"];
+                return (int)reader["Id"];
             }
         }
 

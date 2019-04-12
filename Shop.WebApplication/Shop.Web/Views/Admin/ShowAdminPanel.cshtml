@@ -1,12 +1,14 @@
-﻿
+﻿@using Shop.Business.Services;
+@using Shop.Web.Models;
+@model SiteStatViewModel
 @{
-    ViewBag.Title = "ShowAdminPanel";
-    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+    ViewBag.Title = "AdminPanel";
 }
 
 <h2>Админ-панель</h2>
 
-<form action="~/Controllers/ForUser/">
-
-</form>
+<table>
+    <tr><td width="350px">Количество зарегистрированных пользователей : </td><td><div style="color:blueviolet">@Model.UserCount</div></td></tr>
+    <tr><td width="350px">Количество зарегистрированных продуктов : </td><td><div style="color:blueviolet">@Model.ProductCount</div></td></tr>
+</table>
 

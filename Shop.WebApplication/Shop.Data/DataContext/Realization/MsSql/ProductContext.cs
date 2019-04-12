@@ -13,6 +13,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         UserContext _userContext = new UserContext();
         CategoryContext _categoryContext = new CategoryContext();
         StateContext _stateContext = new StateContext();
+        LocationContext _locationContext = new LocationContext();
 
         public IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery)
         {
@@ -151,12 +152,21 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void Save(Product product) //пока не пашет, т.к. нужны методы для получения айдих по именам, ибо в бд хранятся онли айдишники полей товара, а не сами поля
+        public void Save(Product product)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES({product.Category.Id}, {_stateContext.GetIdByName(product.State)}, 1, 1, 'СЯЛЕДКА', 'пожилая сельдь, с озер украины прямо к вам на стол', 123, 2019 - 02 - 04, 2019 - 02 - 04)");
+                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate");
+                command.Parameters.AddWithValue("@categoryId", product.Category.Id);
+                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct));
+                command.Parameters.AddWithValue("@stateId", _stateContext.GetIdByName(product.State));
+                command.Parameters.AddWithValue("@authorId", product.Author.Id);
+                command.Parameters.AddWithValue("@productName", product.Name);
+                command.Parameters.AddWithValue("@description", product.Description);
+                command.Parameters.AddWithValue("@price", product.Price);
+                command.Parameters.AddWithValue("@creationDate", product.CreationDate);
+                command.Parameters.AddWithValue("@lastModifiedDate", product.LastModifiedDate);
             }
         }
 

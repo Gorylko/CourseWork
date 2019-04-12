@@ -7,7 +7,7 @@ namespace Shop.Business.Services
 {
     public class ProductService
     {
-        private ProductRepository _productRepository = new ProductRepository(new ProductContext()); //Тут указывается, какую бд использовать в передаваемых конструктору хернях (пока реализованно онли MsSql)
+        private ProductRepository _productRepository = new ProductRepository(new ProductContext());
 
         public IReadOnlyCollection<Product> GetAll()
         {
@@ -37,6 +37,11 @@ namespace Shop.Business.Services
         public void DeleteById(int id)
         {
             _productRepository.DeleteById(id);
+        }
+        
+        public void Save(Product product)
+        {
+            _productRepository.Save(product);
         }
 
     }

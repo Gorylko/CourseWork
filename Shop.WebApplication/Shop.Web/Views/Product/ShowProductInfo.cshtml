@@ -15,7 +15,15 @@
     <table>
         <tr><td><p>Название : @ViewBag.Product.Name</p></td></tr>
         <tr><td><p>Описание : @ViewBag.Product.Description</p></td></tr>
-        <tr><td><p>Продавец : @ViewBag.Product.Author.Login</p></td></tr>
+        <tr>
+            <td>
+                Продавец :
+                <form action="~/User/ShowUser">
+                    <input type="hidden" value="@ViewBag.Product.Author.Login" name="login" />
+                    <button style="border:none" type="submit">@ViewBag.Product.Author.Login</button>
+                </form>
+            </td>
+        </tr>
         <tr><td><p>Категория : @ViewBag.Product.Category.Name</p></td></tr>
     </table>
 
@@ -23,14 +31,14 @@
 
 
     <div style="width:400px;">
-        @if (Session["User"] != null)
+        @if (User != null)
         {
-        <div style="float: left; width: 130px">
-            <form action="~/Product/BuyProduct">
-                <button>Купить</button>
-                <input type="hidden" value="@ViewBag.Product.Id" name="id" />
-            </form>
-        </div>
+            <div style="float: left; width: 130px">
+                <form action="~/Product/BuyProduct">
+                    <button>Купить</button>
+                    <input type="hidden" value="@ViewBag.Product.Id" name="id" />
+                </form>
+            </div>
         }
         <div style="float: right; width: 225px">
             <input type="button" onclick="history.back();" value="Назад" />

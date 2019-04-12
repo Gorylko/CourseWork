@@ -2,6 +2,7 @@
 using Shop.Business.Services;
 using Shop.Web.Models;
 using Shop.Shared.Entities.Authorize;
+using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers.ForUser
 {
@@ -31,16 +32,17 @@ namespace Shop.Web.Controllers.ForUser
         
         public ActionResult ShowUser(string login)
         {
-            var user = _userService.GetByName(login);
+            var user = _userService.GetByLogin(login);
             ViewBag.User = user;
             ViewBag.Title = user.Login;
             return View();
         }
 
+        [User]
         public ActionResult ShowCurrentUser()
         {
             var currentUser = User as UserPrinciple;
-            var user = _userService.GetByName(currentUser.Name);
+            var user = _userService.GetByLogin(currentUser.Name);
             return View(new UserViewModel
             {
                 Login = user.Login,

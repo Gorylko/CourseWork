@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models.ProductViewModels;
 using Shop.Shared.Entities;
+using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
 
 namespace Shop.Web.Controllers.Product
@@ -13,10 +14,9 @@ namespace Shop.Web.Controllers.Product
     public class ProductController : Controller
     {
         ProductService _productService = new ProductService();
-
         PurchaseService _purchaseService = new PurchaseService();
-
         CategoryService _categoryService = new CategoryService();
+        UserService _userService = new UserService();
 
         public ActionResult ShowProductList()
         {
@@ -46,11 +46,12 @@ namespace Shop.Web.Controllers.Product
         [HttpPost]
         public ActionResult BuyProduct(string address, int productId)
         {
+            var user = User as UserPrinciple;
             Shared.Entities.Product product = _productService.GetProductById(productId);
             Purchase purchase = new Purchase
             {
                 Seller = product.Author,
-                Customer = (User)Session["User"],
+                Customer = _userService.GetByLogin(user.Name),
                 Product = product,
                 Address = address,
                 Date = DateTime.Now
@@ -71,7 +72,7 @@ namespace Shop.Web.Controllers.Product
         public ActionResult ShowProductsByCategory(int categoryId)
         {
             ViewBag.Products = _productService.GetProductsByCategoryId(categoryId);
-            return View("~/Views/Product/ShowProductList.cshtml");
+            return View("~/Views/Product/ShowProductList.cshtml"); //изменить 
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Shop.Web.Controllers
             return View();
         }
 
-        [SuperPuperAuthorize(roles: RoleType.Administrator)]
+        //[SuperPuperAuthorize(roles: RoleType.Administrator)]
         public ActionResult About()
         {
             ViewBag.Message = "Информация";

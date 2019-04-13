@@ -28,29 +28,32 @@
         <table>
             @foreach (var user in ViewBag.Users)
             {
-            <tr>
-                <td width="150px"><p>@user.Login</p></td>
-                <td width="150px"><p>@user.Role</p></td>
-                <td>
-                    <form action="~/User/ShowUser">
-                        <div>
-                            <button type="submit">Открыть</button>
-                            <input type="hidden" value="@user.Login" name="login" />
-                        </div>
-                    </form>
-                </td>
-                @if (currentUser.IsInRole(RoleType.Administrator.ToString()))
-                {
-                <td>
-                    <form action="~/User/EditUser">
-                        <div>
-                            <button type="submit">Редактировать*</button>
-                            <input type="hidden" value="@user.Login" name="login" />
-                        </div>
-                    </form>
-                </td>
-                }
-            </tr>
+                <tr>
+                    <td width="150px"><p>@user.Login</p></td>
+                    <td width="150px"><p>@user.Role</p></td>
+                    <td>
+                        <form action="~/User/ShowUser">
+                            <div>
+                                <button type="submit">Открыть</button>
+                                <input type="hidden" value="@user.Login" name="login" />
+                            </div>
+                        </form>
+                    </td>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (currentUser.IsInRole(RoleType.Administrator.ToString()))
+                        {
+                            <td>
+                                <form action="~/User/EditUser">
+                                    <div>
+                                        <button type="submit">Редактировать*</button>
+                                        <input type="hidden" value="@user.Login" name="login" />
+                                    </div>
+                                </form>
+                            </td>
+                        }
+                    }
+                </tr>
             }
         </table>
     </div>

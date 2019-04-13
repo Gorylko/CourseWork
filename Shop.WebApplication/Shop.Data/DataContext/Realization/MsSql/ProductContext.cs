@@ -167,6 +167,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.Parameters.AddWithValue("@price", product.Price);
                 command.Parameters.AddWithValue("@creationDate", product.CreationDate);
                 command.Parameters.AddWithValue("@lastModifiedDate", product.LastModifiedDate);
+                command.ExecuteNonQuery();
             }
         }
 

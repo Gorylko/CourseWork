@@ -7,7 +7,7 @@ using System.Web;
 namespace Shop.Web.Models.ProductViewModels
 {
     
-    public class ProductListViewModel
+    public class ProductViewModel
     {
         public int Id { get; set; }
 

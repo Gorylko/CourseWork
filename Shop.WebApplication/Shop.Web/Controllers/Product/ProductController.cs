@@ -20,11 +20,11 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult AddNewProduct()
         {
-            return View(new ProductListViewModel());
+            return View(new ProductViewModel());
         }
 
         [HttpPost]
-        public ActionResult AddNewProduct(ProductListViewModel model)
+        public ActionResult AddNewProduct(ProductViewModel model)
         {
             _productService.Save(new Shared.Entities.Product
             {
@@ -45,6 +45,7 @@ namespace Shop.Web.Controllers.Product
                     Id = model.Author.Id
                 }
             });
+            ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
             return View("~/Views/Shared/Notification.cshtml");
         }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Business.Services
 {
-    public class StateService
+    public class StateService //реализовать интерфейс
     {
         StateRepository _stateRepository = new StateRepository(); 
 

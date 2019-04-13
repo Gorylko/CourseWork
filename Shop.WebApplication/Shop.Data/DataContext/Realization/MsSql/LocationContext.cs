@@ -18,13 +18,26 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 var command = new SqlCommand($"SELECT * FROM [Location] WHERE [Name] = '{name}'", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return (int)reader["Id"];
+                try
+                {
+                    return (int)reader["Id"];
+                }
+                catch
+                {
+                    return 0;
+                }
             }
         }
 
-        public void Save(string obj)
+        public void Save(string location)
         {
-            throw new System.NotImplementedException();
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"INSERT INTO [Location] (Name) VALUES (@location)", connection);
+                command.Parameters.AddWithValue("@location", location);
+                command.ExecuteNonQuery();
+            }
         }
 
         public string GetById(int id)
@@ -36,6 +49,5 @@ namespace Shop.Data.DataContext.Realization.MsSql
         {
             throw new System.NotImplementedException();
         }
-
     }
 }

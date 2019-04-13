@@ -18,6 +18,7 @@ namespace Shop.Web.Controllers.Product
         CategoryService _categoryService = new CategoryService();
         UserService _userService = new UserService();
         StateService _stateService = new StateService();
+        LocationService _locationService = new LocationService();
 
         [User]
         public ActionResult AddNewProduct()
@@ -32,6 +33,10 @@ namespace Shop.Web.Controllers.Product
         public ActionResult AddNewProduct(ProductViewModel model)
         {
             var user = User as UserPrinciple;
+            if (!_locationService.IsExists(model.LocationOfProduct))
+            {
+                _locationService.Save(model.LocationOfProduct);
+            }
             _productService.Save(new Shared.Entities.Product
             {
                 Name = model.Name,
@@ -51,7 +56,7 @@ namespace Shop.Web.Controllers.Product
                 },
                 Author = new User
                 {
-                    Id = user.UserId
+                    Id = _userService.GetByLogin(user.Name).Id
                 }
             });
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
@@ -102,7 +107,7 @@ namespace Shop.Web.Controllers.Product
             return View("~/Views/Product/ShowPurchaseInfo.cshtml");
         }
 
-        
+
         public ActionResult OpenCategoryMenu()
         {
             ViewBag.Сategories = _categoryService.GetAll();

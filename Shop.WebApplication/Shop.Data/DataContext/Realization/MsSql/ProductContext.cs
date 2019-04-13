@@ -161,7 +161,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate");
+                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate)", connection);
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
                 command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct));
                 command.Parameters.AddWithValue("@stateId", product.State.Id);

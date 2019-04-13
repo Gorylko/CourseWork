@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Data.Repositories
 {
-    public class StateRepository
+    public class StateRepository //реализовать интерфейс
     {
         StateContext _stateContext = new StateContext();
         public IReadOnlyCollection<State> GetAll()

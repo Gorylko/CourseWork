@@ -99,7 +99,11 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 },
                 Author = _userContext.GetUser(reader),
                 LocationOfProduct = (string)reader["Location"],
-                State = (string)reader["State"]
+                State = new State
+                {
+                    Id = (int)reader["StateId"],
+                    Name = (string)reader["State"]
+                }
             };
         }
 
@@ -160,7 +164,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[ProductName],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate");
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
                 command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct));
-                command.Parameters.AddWithValue("@stateId", _stateContext.GetIdByName(product.State));
+                command.Parameters.AddWithValue("@stateId", product.State.Id);
                 command.Parameters.AddWithValue("@authorId", product.Author.Id);
                 command.Parameters.AddWithValue("@productName", product.Name);
                 command.Parameters.AddWithValue("@description", product.Description);

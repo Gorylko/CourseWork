@@ -1,10 +1,12 @@
 ﻿using System.Data.SqlClient;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 using Shop.Data.DataContext.Interfaces;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
-    public class StateContext : IProductDetailsContext
+    public class StateContext : IProductDetailsContext<State>
     {
         public int GetIdByName(string name)
         {
@@ -17,5 +19,27 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 return (int)reader["State"];
             }
         }
+
+        public IReadOnlyCollection<State> GetAll()
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                List<State> allCategories = new List<State>();
+                var command = new SqlCommand("SELECT * FROM State", connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    allCategories.Add(new State
+                    {
+                        Id = (int)reader["Id"],
+                        Name = (string)reader["Name"]
+                    });
+                }
+                return allCategories;
+            }
+        }
+
     }
 }

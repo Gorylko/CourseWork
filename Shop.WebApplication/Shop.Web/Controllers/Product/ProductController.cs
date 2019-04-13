@@ -17,9 +17,12 @@ namespace Shop.Web.Controllers.Product
         PurchaseService _purchaseService = new PurchaseService();
         CategoryService _categoryService = new CategoryService();
         UserService _userService = new UserService();
+        StateService _stateService = new StateService();
 
         public ActionResult AddNewProduct()
         {
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.States = _stateService.GetAll();
             return View(new ProductViewModel());
         }
 
@@ -39,7 +42,10 @@ namespace Shop.Web.Controllers.Product
                 Description = model.Description,
                 LocationOfProduct = model.LocationOfProduct,
                 Price = model.Price,
-                State = model.State,
+                State =  new State
+                {
+                    Id = model.State.Id,
+                },
                 Author = new User
                 {
                     Id = model.Author.Id

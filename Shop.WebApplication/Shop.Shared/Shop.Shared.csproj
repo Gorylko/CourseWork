@@ -49,6 +49,7 @@
     <Compile Include="Entities\Enums\RoleType.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Purchase.cs" />
+    <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\ConvertHelper.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />

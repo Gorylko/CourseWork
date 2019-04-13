@@ -24,7 +24,7 @@ namespace Shop.Shared.Entities
 
         public string LocationOfProduct { get; set; }
 
-        public string State { get; set; }
+        public State State { get; set; }
 
 
         public string GetInfoAboutProduct()

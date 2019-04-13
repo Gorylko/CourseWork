@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Shop.Web.Models.ProductViewModels
 {
-    public class CategoryViewModel
+    public class StateViewModel
     {
-        public int CategoryId { get; set; }
+        public int StateId { get; set; }
 
-        public string CategoryName { get; set; }
+        public string StateName { get; set; }
     }
 }

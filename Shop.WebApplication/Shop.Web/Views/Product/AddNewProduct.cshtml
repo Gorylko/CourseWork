@@ -1,7 +1,35 @@
-﻿
+﻿@using Shop.Web.Models.ProductViewModels;
+@model ProductViewModel
 @{
     ViewBag.Title = "AddNewProduct";
 }
 
-<h2>AddNewProduct</h2>
+<h2>Меню добавления товара</h2>
+@using (Html.BeginForm("AddNewProduct", "Product", FormMethod.Post))
+{
+    <label for="Name">@Html.DisplayNameFor(model => model.Name)</label><br />
+    @Html.EditorFor(model => model.Name);
+    @Html.ValidationMessageFor(model => model.Name);<br />
 
+    <label for="Description">@Html.DisplayNameFor(model => model.Description)</label><br />
+    @Html.EditorFor(model => model.Description);
+    @Html.ValidationMessageFor(model => model.Description);<br />
+
+    <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
+    @Html.EditorFor(model => model.Price);
+    @Html.ValidationMessageFor(model => model.Price);<br />
+
+    <select size="3" multiple name="hero[]">
+        <option disabled>Выберите категорию</option>
+        <option value="Чебурашка">Чебурашка</option>
+        <option selected value="Крокодил Гена">Крокодил Гена</option>
+        <option value="Шапокляк">Шапокляк</option>
+        <option value="Крыса Лариса">Крыса Лариса</option>
+    </select>
+
+    <label for="">@Html.DisplayNameFor(model => model.Category)</label><br />
+    @Html.EditorFor(model => model);
+    @Html.ValidationMessageFor(model => model);<br />
+
+    <input type="hidden" value="@ViewBag.Product.Id" name="productId" />
+}

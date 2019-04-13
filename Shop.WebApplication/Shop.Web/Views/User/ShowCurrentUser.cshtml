@@ -5,9 +5,12 @@
 }
 <h2>Личный кабинет</h2>
 <table>
-    <tr><p>Логин: @Model.Login</p></tr>
-    <tr><p>Почта: @Model.Email</p></tr>
-    <tr><p>Номер телефона: @Model.PhoneNumber</p></tr>
-    <tr><p>Роль: @Model.Role</p></tr>
+    <tr><td>Логин: @Model.Login</td></tr>
+    <tr><td>Почта: @Model.Email</td></tr>
+    <tr><td>Номер телефона: @Model.PhoneNumber</td></tr>
+    <tr><td>Роль: @Model.Role</td></tr>
 </table>
 <input type="button" onclick="history.back();" value="Назад" />
+    <form action="~/Product/AddNewProduct">
+        <button type="submit">Добавить товар</button>
+    </form>

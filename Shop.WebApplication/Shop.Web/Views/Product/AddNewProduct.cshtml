@@ -17,19 +17,25 @@
 
     <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
     @Html.EditorFor(model => model.Price);
-    @Html.ValidationMessageFor(model => model.Price);<br />
+    @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
-    <select size="3" multiple name="hero[]">
+    <select name="Category.Id">
         <option disabled>Выберите категорию</option>
-        <option value="Чебурашка">Чебурашка</option>
-        <option selected value="Крокодил Гена">Крокодил Гена</option>
-        <option value="Шапокляк">Шапокляк</option>
-        <option value="Крыса Лариса">Крыса Лариса</option>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
     </select>
+    <select name="State.Id">
+        <option disabled>Выберите состояние</option>
+        @foreach (var state in ViewBag.States)
+        {
+            <option value="@state.Id">@state.Name</option>
+        }
+    </select><br /><br />
+    <label for="">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
+    @Html.EditorFor(model => model.LocationOfProduct);
+    @Html.ValidationMessageFor(model => model.LocationOfProduct);<br />
 
-    <label for="">@Html.DisplayNameFor(model => model.Category)</label><br />
-    @Html.EditorFor(model => model);
-    @Html.ValidationMessageFor(model => model);<br />
-
-    <input type="hidden" value="@ViewBag.Product.Id" name="productId" />
+    <button class="btn waves-effect waves-light" type="submit" name="action">Добавить</button>
 }

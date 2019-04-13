@@ -41,5 +41,19 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
+        public State GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Save(State obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

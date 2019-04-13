@@ -19,6 +19,7 @@ namespace Shop.Web.Controllers.Product
         UserService _userService = new UserService();
         StateService _stateService = new StateService();
 
+        [User]
         public ActionResult AddNewProduct()
         {
             ViewBag.Categories = _categoryService.GetAll();
@@ -26,9 +27,11 @@ namespace Shop.Web.Controllers.Product
             return View(new ProductViewModel());
         }
 
+        [User]
         [HttpPost]
         public ActionResult AddNewProduct(ProductViewModel model)
         {
+            var user = User as UserPrinciple;
             _productService.Save(new Shared.Entities.Product
             {
                 Name = model.Name,
@@ -42,13 +45,13 @@ namespace Shop.Web.Controllers.Product
                 Description = model.Description,
                 LocationOfProduct = model.LocationOfProduct,
                 Price = model.Price,
-                State =  new State
+                State = new State
                 {
                     Id = model.State.Id,
                 },
                 Author = new User
                 {
-                    Id = model.Author.Id
+                    Id = user.UserId
                 }
             });
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";

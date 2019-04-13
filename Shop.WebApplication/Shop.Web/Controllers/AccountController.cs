@@ -2,6 +2,7 @@
 using Microsoft.Owin.Security;
 using Shop.Business.Services;
 using Shop.Business.Services.Auth;
+using Shop.Web.Attributes;
 using Shop.Web.Models;
 using System.Data.SqlClient;
 using System.Web;
@@ -66,6 +67,7 @@ namespace Shop.Web.Controllers
             return Redirect("/Home/Index");
         }
 
+        [User]
         public ActionResult Logout()
         {
             _loginService.Logout();

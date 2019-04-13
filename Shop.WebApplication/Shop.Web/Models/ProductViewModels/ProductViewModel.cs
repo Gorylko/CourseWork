@@ -21,7 +21,7 @@ namespace Shop.Web.Models.ProductViewModels
 
         [Required]
         [Display(Name = "Цена")]
-        [Range(typeof(decimal), "0.00", "999999.99", ErrorMessage ="Некорректная цена")]
+        [Range(0, 999999, ErrorMessage ="Некорректная цена")]
         public decimal Price { get; set; }
 
         public DateTime CreationDate { get; set; }

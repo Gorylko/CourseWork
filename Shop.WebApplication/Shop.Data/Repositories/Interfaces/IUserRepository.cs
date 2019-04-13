@@ -8,8 +8,5 @@ namespace Shop.Data.Repositories.Interfaces
 
         User GetUserByLoginAndPassword(string login, string password);
 
-        //User Register(string login, string password, string email, string phone);
-
-        void Save(User user);
     }
 }

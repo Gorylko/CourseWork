@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using Shop.Business.Services;
-using Shop.Web.Models;
+﻿using Shop.Business.Services;
 using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
+using Shop.Web.Models;
+using System.Web.Mvc;
 
 namespace Shop.Web.Controllers.ForUser
 {

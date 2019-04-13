@@ -47,6 +47,7 @@
     <Compile Include="Entities\Authorize\UserPrinciple.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\State.cs" />

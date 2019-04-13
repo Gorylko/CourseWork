@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Shop.Shared.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Web.Models
 {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Web.Models.ProductViewModels
 {
-    
+
     public class ProductViewModel
     {
         public int Id { get; set; }

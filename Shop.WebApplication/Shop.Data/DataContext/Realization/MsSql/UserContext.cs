@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Entities;
-using System.Data.SqlClient;
-using Typography = Shop.Shared.Constants.TypographyConstants;
-using SqlConst = Shop.Data.Constants.SqlQueryConstants;
-using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using SqlConst = Shop.Data.Constants.SqlQueryConstants;
+using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {

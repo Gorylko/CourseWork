@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
+﻿using Shop.Data.DataContext.Realization.MsSql;
 using Shop.Data.Repositories;
-using Shop.Data.DataContext.Realization.MsSql;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {

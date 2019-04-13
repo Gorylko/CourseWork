@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
+﻿using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.Repositories.Interfaces
 {

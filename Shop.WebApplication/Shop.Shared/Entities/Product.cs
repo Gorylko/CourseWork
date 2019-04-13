@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System;
+﻿using System;
+using System.Text;
 using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Shared.Entities

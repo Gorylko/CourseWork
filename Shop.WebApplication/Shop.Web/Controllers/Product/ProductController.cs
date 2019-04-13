@@ -1,13 +1,10 @@
 ﻿using Shop.Business.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Shop.Web.Models.ProductViewModels;
 using Shop.Shared.Entities;
 using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
+using Shop.Web.Models.ProductViewModels;
+using System;
+using System.Web.Mvc;
 
 namespace Shop.Web.Controllers.Product
 {

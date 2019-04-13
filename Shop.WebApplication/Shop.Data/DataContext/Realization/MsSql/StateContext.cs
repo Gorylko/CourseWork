@@ -1,8 +1,8 @@
-﻿using System.Data.SqlClient;
-using SqlConst = Shop.Data.Constants.SqlQueryConstants;
-using Shop.Data.DataContext.Interfaces;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Entities;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {

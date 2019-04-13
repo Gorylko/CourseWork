@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Shop.Business.Services;
+﻿using Shop.Business.Services;
 using Shop.Business.Services.Auth;
 using Shop.Web.Attributes;
 using Shop.Web.Models;
 using System.Data.SqlClient;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Shop.Web.Controllers

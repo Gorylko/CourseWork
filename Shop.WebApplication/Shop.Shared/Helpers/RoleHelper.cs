@@ -1,5 +1,5 @@
-﻿using Shop.Shared.Entities.Enums;
-using Shop.Shared.Entities;
+﻿using Shop.Shared.Entities;
+using Shop.Shared.Entities.Enums;
 using System;
 
 namespace Shop.Shared.Helpers

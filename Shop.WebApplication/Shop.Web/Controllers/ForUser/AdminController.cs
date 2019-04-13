@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Shop.Shared.Entities;
-using Shop.Shared.Entities.Enums;
-using Helper = Shop.Shared.Helpers.RoleHelper;
+﻿using Shop.Business.Services;
 using Shop.Web.Attributes;
 using Shop.Web.Models;
-using Shop.Business.Services;
+using System.Web.Mvc;
 
 namespace Shop.Web.Controllers.ForUser
 {

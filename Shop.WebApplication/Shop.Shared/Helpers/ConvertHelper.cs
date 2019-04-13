@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Shared.Entities.Authorize;
-using Shop.Shared.Entities;
-
-namespace Shop.Shared.Helpers
+﻿namespace Shop.Shared.Helpers
 {
     //public class ConvertHelper
     //{

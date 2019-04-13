@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
-using Shop.Data.DataContext.Interfaces;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Data.Repositories.Interfaces;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.Repositories
 {

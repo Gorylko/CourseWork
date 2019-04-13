@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Shop.Data.DataContext.Interfaces
+﻿namespace Shop.Data.DataContext.Interfaces
 {
     public interface IProductDetailsContext<T> : IDataContext<T>
     {

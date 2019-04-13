@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Shop.Shared.Entities.Authorize;
+using Shop.Shared.Entities.Enums;
 using System.Web;
 using System.Web.Mvc;
-using Shop.Shared.Entities;
-using Shop.Shared.Entities.Enums;
-using Shop.Shared.Entities.Authorize;
 
 namespace Shop.Web.Attributes
 {

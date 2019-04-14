@@ -49,6 +49,7 @@
     <Compile Include="DataContext\Interfaces\IUserContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\CategoryContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\PurchaseContext.cs" />
+    <Compile Include="Repositories\Interfaces\IProductDetailsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
     <Compile Include="DataContext\Realization\MsSql\LocationContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\ProductContext.cs" />

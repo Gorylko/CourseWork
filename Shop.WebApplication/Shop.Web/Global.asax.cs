@@ -28,7 +28,8 @@ namespace Shop.Web
                 var user = JsonConvert.DeserializeObject<User>(ticket.UserData);
                 var userPrinciple = new UserPrinciple(user.Login)
                 {
-                    Role = user.Role
+                    UserId = user.Id,
+                    Role = user.Role,
                 };
 
                 HttpContext.Current.User = userPrinciple;

@@ -23,6 +23,10 @@ namespace Shop.Business.Services
         {
             return _categoryRepository.GetAll();
         }
-        //еще можно реализовать методы, но они пока не нужны
+
+        public void Save(Category category)
+        {
+            _categoryRepository.Save(category);
+        }
     }
 }

@@ -10,12 +10,12 @@ namespace Shop.Web.Controllers.Product
 {
     public class ProductController : Controller
     {
-        ProductService _productService = new ProductService();
-        PurchaseService _purchaseService = new PurchaseService();
-        CategoryService _categoryService = new CategoryService();
-        UserService _userService = new UserService();
-        StateService _stateService = new StateService();
-        LocationService _locationService = new LocationService();
+        private ProductService _productService = new ProductService();
+        private PurchaseService _purchaseService = new PurchaseService();
+        private CategoryService _categoryService = new CategoryService();
+        private UserService _userService = new UserService();
+        private StateService _stateService = new StateService();
+        private LocationService _locationService = new LocationService();
 
         [User]
         public ActionResult AddNewProduct()

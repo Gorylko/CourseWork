@@ -8,7 +8,7 @@
 
         public string Street { get; set; }
 
-        public string HouseNumber { get; set; } //string т.к. может быть 10a и тд.
+        public string HouseNumber { get; set; }
 
         public string Apartment { get; set; }
     }

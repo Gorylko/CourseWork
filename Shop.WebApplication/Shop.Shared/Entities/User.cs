@@ -10,6 +10,8 @@ namespace Shop.Shared.Entities
 
         public string Password { get; set; }
 
+        public decimal Balance { get; set; }
+
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }

@@ -10,6 +10,8 @@ namespace Shop.Shared.Entities.Authorize
             this.Identity = new GenericIdentity(username);
         }
 
+        public decimal Balance { get; set; }
+
         public int UserId { get; set; }
 
         public string Name => this.Identity.Name;

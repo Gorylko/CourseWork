@@ -184,10 +184,10 @@
     <Compile Include="Attributes\SuperPuperAuthorizeAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ForUser\AdminController.cs" />
+    <Compile Include="Controllers\User\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
-    <Compile Include="Controllers\ForUser\UserController.cs" />
+    <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,6 +257,7 @@
     <Content Include="Views\User\EditUser.cshtml" />
     <Content Include="Views\Shared\Notification.cshtml" />
     <Content Include="Views\Product\AddNewProduct.cshtml" />
+    <Content Include="Views\Admin\AddNewCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

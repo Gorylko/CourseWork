@@ -113,8 +113,9 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
-                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = {id}";
+                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = @id";
                 var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = command.ExecuteReader();
 
                 reader.Read();

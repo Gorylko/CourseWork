@@ -4,11 +4,11 @@ using Shop.Web.Attributes;
 using Shop.Web.Models;
 using System.Web.Mvc;
 
-namespace Shop.Web.Controllers.ForUser
+namespace Shop.Web.Controllers
 {
     public class UserController : Controller
     {
-        UserService _userService = new UserService();
+        private UserService _userService = new UserService();
 
         public ActionResult ShowUsersList()
         {

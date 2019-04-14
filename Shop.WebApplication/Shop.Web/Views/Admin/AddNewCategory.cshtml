@@ -1,0 +1,14 @@
+﻿@using Shop.Web.Models.ProductViewModels;
+@model CategoryViewModel
+@{
+    ViewBag.Title = "Новая категория";
+}
+
+<h2>Добавление новой категории товаров</h2>
+
+@using (Html.BeginForm("AddNewCategory", "Admin", FormMethod.Post))
+{
+    <label for="Name">@Html.DisplayFor(model => model.CategoryName)</label>
+    @Html.EditorFor(model => model.CategoryName);
+    @Html.ValidationMessageFor(model => model.CategoryName);
+}

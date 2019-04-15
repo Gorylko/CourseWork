@@ -10,5 +10,7 @@
 {
     <label for="Name">@Html.DisplayFor(model => model.CategoryName)</label>
     @Html.EditorFor(model => model.CategoryName);
-    @Html.ValidationMessageFor(model => model.CategoryName);
+    @Html.ValidationMessageFor(model => model.CategoryName);<br />
+
+    <button class="btn waves-effect waves-light" type="submit">Добавить</button>
 }

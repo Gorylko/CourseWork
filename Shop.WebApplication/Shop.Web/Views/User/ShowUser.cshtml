@@ -13,28 +13,35 @@
 <body>
     <h2>Информация о пользователе</h2>
     <table>
-        <tr><td><p>Логин : @ViewBag.User.Login</p></td></tr>
-        <tr><td><p>Почта : @ViewBag.User.Email</p></td></tr>
-        <tr><td><p>Роль : @ViewBag.User.Role</p></td></tr>
-        <tr><td><p>Телефон : @ViewBag.User.PhoneNumber</p></td></tr>
+        <tr><td width="150px"><p>Логин : </p></td><td>@ViewBag.User.Login</td></tr>
+        <tr><td width="150px"><p>Почта : </p></td><td>@ViewBag.User.Email</td></tr>
+        <tr><td width="150px"><p>Роль : </p></td><td>@ViewBag.User.Role</td></tr>
+        <tr><td width="150px"><p>Телефон : </p></td><td>@ViewBag.User.PhoneNumber</td></tr>
     </table>
 
 
+    <table>
+        <tr>
+            <td>
+                @if (user != null)
+                {
+                    <form action="~/User/SendMessage">
+                        <button class="btn waves-effect waves-light">Отправить сообщение</button>
+                        <input type="hidden" value="@ViewBag.User.Id" name="id" />
+                    </form>
+                }
+            </td>
+            <td>
+                <input class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
+            </td>
+            <td>
+                <form action="~/Product/ShowByUserId">
+                    <button class="btn waves-effect waves-light">Товары</button>
+                    <input type="hidden" value="@ViewBag.User.Id" name="userId" />
+                </form>
+            </td>
+        </tr>
+    </table>
 
-
-    <div style="width:400px;">
-        @if (user != null)
-        {
-            <form action="~/User/SendMessage">
-                <button>Отправить сообщение</button>
-                <input type="hidden" value="@ViewBag.User.Id" name="id" />
-            </form>
-        }
-        <input type="button" onclick="history.back();" value="Назад" />
-        <form action="~/Product/ShowByUserId">
-            <button>Товары</button>
-            <input type="hidden" value="@ViewBag.User.Id" name="userId" />
-        </form>
-    </div>
 </body>
 </html>

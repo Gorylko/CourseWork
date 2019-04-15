@@ -13,19 +13,21 @@
 <body>
     <h2>Информация о продукте</h2>
     <table>
-        <tr><td><p>Название : @ViewBag.Product.Name</p></td></tr>
-        <tr><td><p>Описание : @ViewBag.Product.Description</p></td></tr>
+        <tr><td><p>Название : </p></td><td>@ViewBag.Product.Name</td></tr>
+        <tr><td><p>Описание : </p></td><td>@ViewBag.Product.Description</td></tr>
         <tr>
             <td>
                 Продавец :
+            </td>
+            <td>
                 <form action="~/User/ShowUser">
                     <input type="hidden" value="@ViewBag.Product.Author.Login" name="login" />
                     <button style="border:none" type="submit">@ViewBag.Product.Author.Login</button>
                 </form>
             </td>
         </tr>
-        <tr><td><p>Категория : @ViewBag.Product.Category.Name</p></td></tr>
-        <tr><td><p>Состояние : @ViewBag.Product.State.Name</p></td></tr>
+        <tr><td><p>Категория : </p></td><td>@ViewBag.Product.Category.Name</td></tr>
+        <tr><td><p>Состояние : </p></td><td>@ViewBag.Product.State.Name</td></tr>
     </table>
 
 
@@ -36,13 +38,13 @@
         {
             <div style="float: left; width: 130px">
                 <form action="~/Product/BuyProduct">
-                    <button>Купить</button>
+                    <button class="btn waves-effect waves-light">Купить</button>
                     <input type="hidden" value="@ViewBag.Product.Id" name="id" />
                 </form>
             </div>
         }
         <div style="float: right; width: 225px">
-            <input type="button" onclick="history.back();" value="Назад" />
+            <input class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
         </div>
     </div>
 </body>

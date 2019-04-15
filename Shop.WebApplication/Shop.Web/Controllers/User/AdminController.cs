@@ -34,11 +34,8 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult AddNewCategory(CategoryViewModel model)
         {
-            if(model.CategoryName != null)
-            {
-                _categoryService.Save(new Category { Name = model.CategoryName });
-            }
-            return Redirect("Home/Index");
+            _categoryService.Save(new Category { Name = model.CategoryName });
+            return View("Views/Home/Index.cshtml");
         }
 
     }

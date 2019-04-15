@@ -35,8 +35,21 @@ namespace Shop.Web.Controllers
         public ActionResult AddNewCategory(CategoryViewModel model)
         {
             _categoryService.Save(new Category { Name = model.CategoryName });
-            return View("Views/Home/Index.cshtml");
+            ViewBag.Message = $"Категория {model.CategoryName} успешно добавлена!";
+            return View("Views/Shared/Notification.cshtml");
         }
 
+        [Admin]
+        public ActionResult EditUser()
+        {
+            return View(new UserViewModel());
+        }
+
+        [Admin]
+        [HttpPost]
+        public ActionResult EditUser(UserViewModel model)
+        {
+            return View();
+        }
     }
 }

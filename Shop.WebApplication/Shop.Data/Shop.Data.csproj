@@ -49,6 +49,7 @@
     <Compile Include="DataContext\Interfaces\IUserContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\CategoryContext.cs" />
     <Compile Include="DataContext\Realization\MsSql\PurchaseContext.cs" />
+    <Compile Include="DataContext\Realization\MsSql\RoleContext.cs" />
     <Compile Include="Repositories\Interfaces\IProductDetailsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
     <Compile Include="DataContext\Realization\MsSql\LocationContext.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />

@@ -53,7 +53,12 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            throw new System.NotImplementedException();
+            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"DELETE [State] WHERE [Id] = {id}", connection);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

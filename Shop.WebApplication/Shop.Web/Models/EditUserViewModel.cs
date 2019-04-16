@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shop.Shared.Entities.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Web.Models
 {
@@ -20,6 +21,8 @@ namespace Shop.Web.Models
         [Required]
         [Display(Name = "Роль")]
         public string Role { get; set; } //сделать выборку через селет
+
+        public RoleType[] AllRoles { get; set; }
 
         [Required]
         [Display(Name = "Телефон")]

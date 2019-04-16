@@ -23,6 +23,14 @@
     @Html.EditorFor(model => model.PhoneNumber);
     @Html.ValidationMessageFor(model => model.PhoneNumber);<br />
 
+    <select name="State.Id">
+        <option disable>Выберите состояние</option>
+        @foreach (var role in ViewBag.Roles)
+        {
+            <option value="@role.ToString()">@role</option>
+        }
+    </select><br /><br />
+
     <button class="btn waves-effect waves-light" type="submit" name="action">Сохранить изменения</button>
 }
 

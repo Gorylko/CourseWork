@@ -44,10 +44,10 @@
                         if (currentUser.IsInRole(RoleType.Administrator.ToString()))
                         {
                             <td>
-                                <form action="~/User/EditUser">
+                                <form action="~/Admin/EditUser">
                                     <div>
                                         <button type="submit">Редактировать*</button>
-                                        <input type="hidden" value="@user.Login" name="login" />
+                                        <input type="hidden" value="@user.Id" name="id" />
                                     </div>
                                 </form>
                             </td>

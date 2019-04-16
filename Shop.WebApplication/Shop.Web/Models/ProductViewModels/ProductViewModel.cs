@@ -16,6 +16,7 @@ namespace Shop.Web.Models.ProductViewModels
 
         [Required]
         [Display(Name = "Описание")]
+        [DataType(DataType.MultilineText)]
         [StringLength(525, ErrorMessage = "Описание может содержать не больше 525-ти символов")]
         public string Description { get; set; }
 

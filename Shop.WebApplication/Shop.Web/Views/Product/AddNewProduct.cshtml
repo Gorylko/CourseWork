@@ -27,7 +27,7 @@
         }
     </select>
     <select name="State.Id">
-        <option disabled>Выберите состояние</option>
+        <option disable>Выберите состояние</option>
         @foreach (var state in ViewBag.States)
         {
             <option value="@state.Id">@state.Name</option>

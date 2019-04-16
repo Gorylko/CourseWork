@@ -259,6 +259,7 @@
     <Content Include="Views\Shared\Notification.cshtml" />
     <Content Include="Views\Product\AddNewProduct.cshtml" />
     <Content Include="Views\Admin\AddNewCategory.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

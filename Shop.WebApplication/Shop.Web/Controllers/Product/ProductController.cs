@@ -29,6 +29,12 @@ namespace Shop.Web.Controllers.Product
         [HttpPost]
         public ActionResult AddNewProduct(ProductViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _categoryService.GetAll();
+                ViewBag.States = _stateService.GetAll();
+                return View(model);
+            }
             var user = User as UserPrinciple;
             if (!_locationService.IsExists(model.LocationOfProduct))
             {

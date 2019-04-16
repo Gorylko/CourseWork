@@ -4,20 +4,24 @@ namespace Shop.Web.Models
 {
     public class EditUserViewModel
     {
+        [Required]
         [Display(Name ="Логин")]
         public string Login { get; set; }
 
+        [Required]
         [Display(Name = "Пароль")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required]
         [Display(Name = "Почта")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required]
         [Display(Name = "Роль")]
-        public string Role { get; set; }
+        public string Role { get; set; } //сделать выборку через селет
 
+        [Required]
         [Display(Name = "Телефон")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }

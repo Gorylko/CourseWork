@@ -34,22 +34,38 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult AddNewCategory(CategoryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             _categoryService.Save(new Category { Name = model.CategoryName });
             ViewBag.Message = $"Категория {model.CategoryName} успешно добавлена!";
-            return View("Views/Shared/Notification.cshtml");
+            return View("~/Views/Shared/Notification.cshtml");
         }
 
         [Admin]
-        public ActionResult EditUser()
+        public ActionResult EditUser(int id)
         {
-            return View(new UserViewModel());
+            var user = _userService.GetById(id);
+            return View(new EditUserViewModel
+            {
+                Login = user.Login,
+                Email = user.Email,
+                Password = user.Password,
+                PhoneNumber = user.PhoneNumber,
+                Role = user.Role.ToString()
+            });
         }
 
         [Admin]
         [HttpPost]
-        public ActionResult EditUser(UserViewModel model)
+        public ActionResult EditUser(EditUserViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return View("~/Views/Shared/Notification.cshtml");
         }
     }
 }

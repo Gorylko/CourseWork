@@ -19,6 +19,11 @@ namespace Shop.Data.Repositories
             return _userContext.GetUserByLoginAndPassword(login, password);
         }
 
+        public void EditUser(User user)
+        {
+            _userContext.EditUser(user);
+        }
+
         public User GetUserByLogin(string login)
         {
             return _userContext.GetUserByLogin(login);

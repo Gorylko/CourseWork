@@ -5,6 +5,8 @@ namespace Shop.Web.Models
 {
     public class EditUserViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [Display(Name ="Логин")]
         public string Login { get; set; }

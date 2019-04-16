@@ -8,5 +8,6 @@ namespace Shop.Data.Repositories.Interfaces
 
         User GetUserByLoginAndPassword(string login, string password);
 
+        void EditUser(User user);
     }
 }

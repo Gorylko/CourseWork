@@ -14,6 +14,11 @@ namespace Shop.Business.Services
             return _userRepository.GetAll();
         }
 
+        public void EditUser(User user)
+        {
+            _userRepository.EditUser(user);
+        }
+
         public IReadOnlyCollection<User> GetAllByName(string searchQuery)
         {
             return _userRepository.GetAllByName(searchQuery);

@@ -10,5 +10,7 @@ namespace Shop.Data.DataContext.Interfaces
         User GetUserByLogin(string login);
 
         IReadOnlyCollection<User> GetAllByName(string searchQuery);
+
+        void EditUser(User user);
     }
 }

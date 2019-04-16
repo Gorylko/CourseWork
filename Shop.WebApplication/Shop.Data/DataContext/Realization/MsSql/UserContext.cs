@@ -18,6 +18,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 Id = (int)reader["Id"],
                 Login = (string)reader["Login"],
                 Email = (string)reader["Email"],
+                Password = (string)reader["Password"],
                 PhoneNumber = (string)reader["PhoneNumber"],
                 Role = RoleHelper.ConvertToRoleType((int)reader["RoleId"])
             };
@@ -48,16 +49,18 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void EditUser(User editedUser)
+        public void EditUser(User editedUser) //страшна
         {
             using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
-                var command = new SqlCommand("UPDATE [User]", connection);
+                connection.Open();
+                var command = new SqlCommand($"UPDATE [User]{Typography.NewLine}SET [RoleId] = @roleId, [Login] = @login, [Password] = @password, [Email] = @email, [PhoneNumber] = @phone {Typography.NewLine}WHERE Id = {editedUser.Id}", connection);
                 command.Parameters.AddWithValue("@login", editedUser.Login);
                 command.Parameters.AddWithValue("@email", editedUser.Email);
                 command.Parameters.AddWithValue("@password", editedUser.Password);
                 command.Parameters.AddWithValue("@phone", editedUser.PhoneNumber);
-                command.Parameters.AddWithValue("@role", editedUser.Role);
+                command.Parameters.AddWithValue("@roleId", (int)editedUser.Role);
+                command.ExecuteNonQuery();
             }
         }
 
@@ -73,21 +76,6 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 return GetUser(reader);
             }
         }
-
-        //public User Register(string login, string password, string email, string phone)
-        //{
-        //    using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
-        //    {
-        //        connection.Open();
-        //        var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
-        //        command.Parameters.AddWithValue("@login", login);
-        //        command.Parameters.AddWithValue("@password", password);
-        //        command.Parameters.AddWithValue("@email", email);
-        //        command.Parameters.AddWithValue("@phonenumber", phone);
-        //        command.ExecuteNonQuery();
-        //        return GetUserByLoginAndPassword(login, password);
-        //    }
-        //}
 
         public void Save(User user)
         {

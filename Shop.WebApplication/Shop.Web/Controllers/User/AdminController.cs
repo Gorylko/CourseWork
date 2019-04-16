@@ -4,6 +4,8 @@ using Shop.Web.Attributes;
 using Shop.Web.Models;
 using Shop.Web.Models.ProductViewModels;
 using System.Web.Mvc;
+using Shop.Shared.Helpers;
+using Shop.Shared.Entities.Enums;
 
 namespace Shop.Web.Controllers
 {
@@ -51,6 +53,7 @@ namespace Shop.Web.Controllers
             ViewBag.Roles = _roleService.GetAll();
             return View(new EditUserViewModel
             {
+                Id = user.Id,
                 Login = user.Login,
                 Email = user.Email,
                 Password = user.Password,
@@ -65,8 +68,19 @@ namespace Shop.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Roles = _roleService.GetAll();
                 return View(model);
             }
+            _userService.EditUser(new User
+            {
+                Id = model.Id,
+                Login = model.Login,
+                Email = model.Email,
+                Password = model.Password,
+                PhoneNumber = model.PhoneNumber,
+                Role = EnumHelper.ParseEnum<RoleType>(model.Role)
+            });
+            ViewBag.Message = $"Пользователь {model.Login} изменен успешно";
             return View("~/Views/Shared/Notification.cshtml");
         }
     }

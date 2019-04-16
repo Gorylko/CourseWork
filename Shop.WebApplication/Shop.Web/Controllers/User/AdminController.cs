@@ -12,6 +12,7 @@ namespace Shop.Web.Controllers
         private UserService _userService = new UserService();
         private ProductService _productService = new ProductService();
         private CategoryService _categoryService = new CategoryService();
+        private RoleService _roleService = new RoleService();
 
         [Admin]
         public ActionResult ShowAdminPanel()
@@ -47,6 +48,7 @@ namespace Shop.Web.Controllers
         public ActionResult EditUser(int id)
         {
             var user = _userService.GetById(id);
+            ViewBag.Roles = _roleService.GetAll();
             return View(new EditUserViewModel
             {
                 Login = user.Login,

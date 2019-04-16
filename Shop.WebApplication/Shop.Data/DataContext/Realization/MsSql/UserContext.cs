@@ -48,6 +48,19 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
+        public void EditUser(User editedUser)
+        {
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                var command = new SqlCommand("UPDATE [User]", connection);
+                command.Parameters.AddWithValue("@login", editedUser.Login);
+                command.Parameters.AddWithValue("@email", editedUser.Email);
+                command.Parameters.AddWithValue("@password", editedUser.Password);
+                command.Parameters.AddWithValue("@phone", editedUser.PhoneNumber);
+                command.Parameters.AddWithValue("@role", editedUser.Role);
+            }
+        }
+
         public User GetUserByLogin(string login)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))

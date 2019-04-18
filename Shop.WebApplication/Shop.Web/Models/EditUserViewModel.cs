@@ -24,8 +24,6 @@ namespace Shop.Web.Models
         [Display(Name = "Роль")]
         public string Role { get; set; } //сделать выборку через селет
 
-        public RoleType[] AllRoles { get; set; }
-
         [Required]
         [Display(Name = "Телефон")]
         [DataType(DataType.PhoneNumber)]

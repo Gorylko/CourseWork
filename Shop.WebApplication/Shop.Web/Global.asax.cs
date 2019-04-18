@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace Shop.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -29,7 +29,7 @@ namespace Shop.Web
                 var userPrinciple = new UserPrinciple(user.Login)
                 {
                     UserId = user.Id,
-                    Role = user.Role,
+                    Role = user.Role
                 };
 
                 HttpContext.Current.User = userPrinciple;

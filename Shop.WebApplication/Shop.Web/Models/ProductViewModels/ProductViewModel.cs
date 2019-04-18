@@ -29,6 +29,7 @@ namespace Shop.Web.Models.ProductViewModels
 
         public DateTime LastModifiedDate { get; set; }
 
+        [Required]
         public Category Category { get; set; }
 
         public User Author { get; set; }

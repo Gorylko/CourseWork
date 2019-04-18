@@ -1,5 +1,6 @@
 ﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Entities;
+using Shop.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -31,6 +32,24 @@ namespace Shop.Data.DataContext.Realization.MsSql
                     }
                 }
                 return products;
+            }
+        }
+
+        public void EditProduct(Product editedProduct)
+        {
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [RoleId] = @roleId, [Login] = @login, [Password] = @password, [Email] = @email, [PhoneNumber] = @phone {Typography.NewLine}WHERE Id = {editedProduct.Id}", connection);
+                command.Parameters.AddWithValue("@name", editedProduct.Name);
+                command.Parameters.AddWithValue("@description", editedProduct.Description);
+                command.Parameters.AddWithValue("@category", editedProduct.Category.Id);
+                command.Parameters.AddWithValue("@lastModifiedDate", editedProduct.LastModifiedDate);
+                command.Parameters.AddWithValue("@locationOfProduct", editedProduct.LocationOfProduct);
+                command.Parameters.AddWithValue("@price", editedProduct.Price);
+                command.Parameters.AddWithValue("@stateId", editedProduct.State.Id);
+                command.Parameters.AddWithValue("@userId", editedProduct.Author.Id);
+                command.ExecuteNonQuery();
             }
         }
 
@@ -72,7 +91,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                         {
                             if ((int)reader["UserId"] == userId)
                             {
-                                    products.Add(GetProduct(reader));
+                                products.Add(GetProduct(reader));
                             }
                         }
                     }
@@ -97,7 +116,15 @@ namespace Shop.Data.DataContext.Realization.MsSql
                     Id = (int)reader["CategoryId"],
                     Name = (string)reader["Category"]
                 },
-                Author = _userContext.GetUser(reader),
+                Author = new User
+                {
+                    Id = (int)reader["Id"],
+                    Login = (string)reader["Login"],
+                    Email = (string)reader["Email"],
+                    PhoneNumber = (string)reader["PhoneNumber"],
+                    Role = RoleHelper.ConvertToRoleType((int)reader["RoleId"])
+                },
+                //_userContext.GetUser(reader),
                 LocationOfProduct = (string)reader["Location"],
                 State = new State
                 {
@@ -134,14 +161,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    try
-                    {
-                        returnProducts.Add(GetProduct(reader));
-                    }
-                    catch (SqlException)
-                    {
+                    returnProducts.Add(GetProduct(reader));
 
-                    }
                 }
                 return returnProducts;
             }

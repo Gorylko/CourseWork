@@ -43,11 +43,7 @@ namespace Shop.Web.Controllers.Product
             _productService.Save(new Shared.Entities.Product
             {
                 Name = model.Name,
-                Category = new Category
-                {
-                    Id = model.Category.Id,
-                    Name = model.Category.Name
-                },
+                Category = model.Category,
                 CreationDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 Description = model.Description,
@@ -59,7 +55,7 @@ namespace Shop.Web.Controllers.Product
                 },
                 Author = new User
                 {
-                    Id = _userService.GetByLogin(user.Name).Id
+                    Id = user.UserId
                 }
             });
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
@@ -68,6 +64,7 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult ShowProductList()
         {
+            ViewBag.Message = "Список всех товаров";
             ViewBag.Products = _productService.GetAll();
             return View();
         }

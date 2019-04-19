@@ -11,6 +11,6 @@ namespace Shop.Data.DataContext.Interfaces
 
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
 
-        void EditProduct(Product product);
+        void Edit(Product product);
     }
 }

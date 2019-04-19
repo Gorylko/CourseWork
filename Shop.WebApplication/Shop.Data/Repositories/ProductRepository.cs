@@ -48,5 +48,10 @@ namespace Shop.Data.Repositories
         {
             _productContext.Save(product);
         }
+
+        public void Edit(Product editedProduct)
+        {
+            _productContext.Edit(editedProduct);
+        }
     }
 }

@@ -44,5 +44,9 @@ namespace Shop.Business.Services
             _productRepository.Save(product);
         }
 
+        public void Edit(Product editedProduct)
+        {
+            _productRepository.Edit(editedProduct);
+        }
     }
 }

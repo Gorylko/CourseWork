@@ -35,17 +35,17 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void EditProduct(Product editedProduct)
+        public void Edit(Product editedProduct)
         {
             using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [RoleId] = @roleId, [Login] = @login, [Password] = @password, [Email] = @email, [PhoneNumber] = @phone {Typography.NewLine}WHERE Id = {editedProduct.Id}", connection);
+                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [Name] = @name, [Description] = @description, [CategoryId] = @categoryId, [LastModifiedDate] = @lastModifiedDate, [LocationId] = @locationId, [Price] = @price, [StateId] = @stateId, [UserId] = @userId {Typography.NewLine}WHERE Id = {editedProduct.Id}", connection);
                 command.Parameters.AddWithValue("@name", editedProduct.Name);
                 command.Parameters.AddWithValue("@description", editedProduct.Description);
-                command.Parameters.AddWithValue("@category", editedProduct.Category.Id);
+                command.Parameters.AddWithValue("@categoryId", editedProduct.Category.Id);
                 command.Parameters.AddWithValue("@lastModifiedDate", editedProduct.LastModifiedDate);
-                command.Parameters.AddWithValue("@locationOfProduct", editedProduct.LocationOfProduct);
+                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(editedProduct.LocationOfProduct));
                 command.Parameters.AddWithValue("@price", editedProduct.Price);
                 command.Parameters.AddWithValue("@stateId", editedProduct.State.Id);
                 command.Parameters.AddWithValue("@userId", editedProduct.Author.Id);
@@ -124,7 +124,6 @@ namespace Shop.Data.DataContext.Realization.MsSql
                     PhoneNumber = (string)reader["PhoneNumber"],
                     Role = RoleHelper.ConvertToRoleType((int)reader["RoleId"])
                 },
-                //_userContext.GetUser(reader),
                 LocationOfProduct = (string)reader["Location"],
                 State = new State
                 {
@@ -185,7 +184,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate)", connection);
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
-                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct));
+                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct)); //изменить после того, как сделаю наконец эту систему сложной локации с составными ключами
                 command.Parameters.AddWithValue("@stateId", product.State.Id);
                 command.Parameters.AddWithValue("@authorId", product.Author.Id);
                 command.Parameters.AddWithValue("@productName", product.Name);

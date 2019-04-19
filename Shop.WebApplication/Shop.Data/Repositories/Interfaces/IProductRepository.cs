@@ -10,5 +10,7 @@ namespace Shop.Data.Repositories.Interfaces
         IReadOnlyCollection<Product> GetByUserId(int userId);
 
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
+
+        void Edit(Product editedProduct);
     }
 }

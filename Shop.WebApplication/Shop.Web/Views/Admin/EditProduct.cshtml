@@ -1,10 +1,10 @@
 ﻿@using Shop.Web.Models.ProductViewModels
 @model EditProductViewModel
 @{
-    ViewBag.Title = "EditProduct";
+    ViewBag.Title = "Edit";
 }
 
-<h2>EditProduct</h2>
+<h2>Редактирование товара</h2>
 
 @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post))
 {
@@ -24,6 +24,9 @@
     @Html.EditorFor(model => model.LocationOfProduct);
     @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />
 
+    <input type="hidden" value="@Model.Id" name="Id" />
+    <input type="hidden" value="@Model.Author.Id" name="Author.Id" />
+
     <table>
         <tr>
             <td>
@@ -36,23 +39,33 @@
         <tr>
             <td>
                 <select name="Category.Id">
-                    <option disabled>Выберите категорию</option>
                     @foreach (var category in ViewBag.Categories)
                     {
+                        if (Model.Category.Id == category.Id)
+                        {
+                            <option selected value="@category.Id">@category.Name</option>
+                            continue;
+                        }
                         <option value="@category.Id">@category.Name</option>
                     }
                 </select>
             </td>
             <td>
                 <select name="State.Id">
-                    <option disable>Выберите состояние</option>
                     @foreach (var state in ViewBag.States)
                     {
+                        if (Model.State.Id == state.Id)
+                        {
+                            <option selected value="@state.Id">@state.Name</option>
+                            continue;
+                        }
                         <option value="@state.Id">@state.Name</option>
                     }
-                </select><br /><br />
+                </select>
             </td>
         </tr>
     </table>
+    <br />
+    <button class="btn waves-effect waves-light" type="submit" name="action">Сохранить изменения</button>
 }
 

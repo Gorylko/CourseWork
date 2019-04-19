@@ -28,8 +28,6 @@ namespace Shop.Web.Models.ProductViewModels
         [Range(0, 999999, ErrorMessage = "Некорректная цена")]
         public decimal Price { get; set; }
 
-        public DateTime CreationDate { get; set; }
-
         public DateTime LastModifiedDate { get; set; }
 
         [Required]

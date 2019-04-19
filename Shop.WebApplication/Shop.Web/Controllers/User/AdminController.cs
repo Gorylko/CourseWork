@@ -6,6 +6,7 @@ using Shop.Web.Models.ProductViewModels;
 using System.Web.Mvc;
 using Shop.Shared.Helpers;
 using Shop.Shared.Entities.Enums;
+using System;
 
 namespace Shop.Web.Controllers
 {
@@ -15,6 +16,8 @@ namespace Shop.Web.Controllers
         private ProductService _productService = new ProductService();
         private CategoryService _categoryService = new CategoryService();
         private RoleService _roleService = new RoleService();
+        private StateService _stateService = new StateService();
+        private LocationService _locationService = new LocationService();
 
         [Admin]
         public ActionResult ShowAdminPanel()
@@ -80,13 +83,16 @@ namespace Shop.Web.Controllers
                 PhoneNumber = model.PhoneNumber,
                 Role = EnumHelper.ParseEnum<RoleType>(model.Role)
             });
-            ViewBag.Message = $"Пользователь {model.Login} изменен успешно";
+            ViewBag.Message = $"Пользователь {model.Login} изменён успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
 
+        [Moder]
         public ActionResult EditProduct(int id)
         {
             var product = _productService.GetProductById(id);
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.States = _stateService.GetAll();
             return View(new EditProductViewModel
             {
                 Id = id,
@@ -96,14 +102,37 @@ namespace Shop.Web.Controllers
                 Author = product.Author,
                 Price = product.Price,
                 State = product.State,
-                CreationDate = product.CreationDate,
                 LocationOfProduct = product.LocationOfProduct
             });
         }
 
+        [Moder]
+        [HttpPost]
         public ActionResult EditProduct(EditProductViewModel model)
         {
-            ViewBag.Message = $"Товар \"{model.Name}\" был успешно изменён";
+            if(!ModelState.IsValid)
+            {
+                ViewBag.Categories = _categoryService.GetAll();
+                ViewBag.States = _stateService.GetAll();
+                return View(model);
+            }
+            if (!_locationService.IsExists(model.LocationOfProduct))
+            {
+                _locationService.Save(model.LocationOfProduct);
+            }
+            _productService.Edit(new Shared.Entities.Product
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                LocationOfProduct = model.LocationOfProduct,
+                LastModifiedDate = DateTime.Now,
+                State = model.State,
+                Category = model.Category,
+                Author = model.Author
+            });
+            ViewBag.Message = $"Товар \"{model.Name}\" изменён успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
     }

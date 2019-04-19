@@ -118,7 +118,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 },
                 Author = new User
                 {
-                    Id = (int)reader["Id"],
+                    Id = (int)reader["UserId"],
                     Login = (string)reader["Login"],
                     Email = (string)reader["Email"],
                     PhoneNumber = (string)reader["PhoneNumber"],

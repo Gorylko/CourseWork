@@ -1,6 +1,8 @@
-﻿
+﻿@using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
 @{
     ViewBag.Title = "Информация о продукте";
+    var user = User as UserPrinciple;
 }
 
 
@@ -36,12 +38,26 @@
     <div style="width:400px;">
         @if (Request.IsAuthenticated)
         {
-            <div style="float: left; width: 130px">
-                <form action="~/Product/BuyProduct">
-                    <button class="btn waves-effect waves-light">Купить</button>
+        <div style="float: left; width: 130px">
+            <form action="~/Product/BuyProduct">
+                <button class="btn waves-effect waves-light">Купить</button>
+                <input type="hidden" value="@ViewBag.Product.Id" name="id" />
+            </form>
+            @if (user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
+            {
+                <form action="~/Admin/EditProduct">
+                    <button class="btn waves-effect waves-light">Редактировать</button>
                     <input type="hidden" value="@ViewBag.Product.Id" name="id" />
                 </form>
-            </div>
+            }
+            else if (ViewBag.Product.Author.Id == user.UserId)
+            {
+                <form action="~/Product/EditProduct">
+                    <button class="btn waves-effect waves-light">Редактировать</button>
+                    <input type="hidden" value="@ViewBag.Product.Id" name="id" />
+                </form>
+            }
+        </div>
         }
         <div style="float: right; width: 225px">
             <input class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />

@@ -83,5 +83,25 @@ namespace Shop.Web.Controllers
             ViewBag.Message = $"Пользователь {model.Login} изменен успешно";
             return View("~/Views/Shared/Notification.cshtml");
         }
+
+        public ActionResult EditProduct(int id)
+        {
+            var product = _productService.GetProductById(id);
+            var model = new EditProductViewModel
+            {
+                Id = id,
+                Name = product.Name,
+                Description = product.Description,
+                Category = product.Category,
+                Author = product.Author,
+                Price = product.Price,
+                State = product.State,
+                CreationDate = product.CreationDate,
+                LocationOfProduct = product.LocationOfProduct
+            };
+            return View(model);
+        }
+
+        public ActionResult EditProduct()
     }
 }

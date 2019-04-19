@@ -19,20 +19,36 @@
     @Html.EditorFor(model => model.Price);
     @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
-    <select name="Category.Id">
-        <option disabled>Выберите категорию</option>
-        @foreach (var category in ViewBag.Categories)
-        {
-            <option value="@category.Id">@category.Name</option>
-        }
-    </select>
-    <select name="State.Id">
-        <option disable>Выберите состояние</option>
-        @foreach (var state in ViewBag.States)
-        {
-            <option value="@state.Id">@state.Name</option>
-        }
-    </select><br /><br />
+    <table>
+        <tr>
+            <td>
+                <label for="">@Html.DisplayNameFor(model => model.Category)</label>
+            </td>
+            <td>
+                <label for="">@Html.DisplayNameFor(model => model.State)</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select name="Category.Id">
+                    <option disabled>Выберите категорию</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <select name="State.Id">
+                    <option disable>Выберите состояние</option>
+                    @foreach (var state in ViewBag.States)
+                    {
+                        <option value="@state.Id">@state.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
     <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
     @Html.EditorFor(model => model.LocationOfProduct);
     @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />

@@ -72,9 +72,10 @@ namespace Shop.Web.Controllers.Product
             return View();
         }
 
-        public ActionResult ShowByUserId(int userId)
+        public ActionResult ShowByUserId(int id)
         {
-            ViewBag.Products = _productService.GetByUserId(userId);
+            ViewBag.Products = _productService.GetByUserId(id);
+            ViewBag.Message = $"Товары пользователя {_userService.GetById(id).Login}";
             return View("~/Views/Product/ShowProductList.cshtml");
         }
 

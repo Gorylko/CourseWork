@@ -87,7 +87,7 @@ namespace Shop.Web.Controllers
         public ActionResult EditProduct(int id)
         {
             var product = _productService.GetProductById(id);
-            var model = new EditProductViewModel
+            return View(new EditProductViewModel
             {
                 Id = id,
                 Name = product.Name,
@@ -98,10 +98,13 @@ namespace Shop.Web.Controllers
                 State = product.State,
                 CreationDate = product.CreationDate,
                 LocationOfProduct = product.LocationOfProduct
-            };
-            return View(model);
+            });
         }
 
-        public ActionResult EditProduct()
+        public ActionResult EditProduct(EditProductViewModel model)
+        {
+            ViewBag.Message = $"Товар \"{model.Name}\" был успешно изменён";
+            return View("~/Views/Shared/Notification.cshtml");
+        }
     }
 }

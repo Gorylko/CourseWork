@@ -1,12 +1,12 @@
 ﻿@using Shop.Web.Models.ProductViewModels
-
+@model EditProductViewModel
 @{
     ViewBag.Title = "EditProduct";
 }
 
 <h2>EditProduct</h2>
 
-@using (Html.BeginForm("EditUSer", "Admin", FormMethod.Post))
+@using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post))
 {
     <label for="">@Html.DisplayNameFor(model => model)</label><br />
     @Html.EditorFor(model => model);

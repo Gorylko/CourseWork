@@ -118,7 +118,14 @@ namespace Shop.Web.Controllers.Product
         public ActionResult ShowProductsByCategory(int categoryId)
         {
             ViewBag.Products = _productService.GetProductsByCategoryId(categoryId);
-            return View("~/Views/Product/ShowProductList.cshtml"); //изменить 
+            return View("~/Views/Product/ShowProductList.cshtml");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
+            _productService.DeleteById(id);
+            return View("~/Views/Shared/Notification.cshtml");
         }
     }
 }

@@ -2,6 +2,7 @@
 using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
 using Shop.Web.Models;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Shop.Web.Controllers
@@ -9,6 +10,7 @@ namespace Shop.Web.Controllers
     public class UserController : Controller
     {
         private UserService _userService = new UserService();
+        private ProductService _productService = new ProductService();
 
         public ActionResult ShowUsersList()
         {
@@ -29,7 +31,7 @@ namespace Shop.Web.Controllers
             }
             return View(model);
         }
-        
+
         public ActionResult ShowUser(string login)
         {
             var user = _userService.GetByLogin(login);
@@ -50,6 +52,19 @@ namespace Shop.Web.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Role = user.Role.ToString()
             });
+        }
+
+        [User]
+        public ActionResult Delete(int id)
+        {
+            ViewBag.Message = $"Пользователь \"{_userService.GetById(id).Login}\" удален успешно!";
+            IReadOnlyCollection<Shared.Entities.Product> products = _productService.GetByUserId(id); 
+            foreach(Shared.Entities.Product product in products)
+            {
+                _productService.DeleteById(product.Id);
+            }
+            _userService.DeleteById(id);
+            return View("~/Views/Shared/Notification.cshtml");
         }
     }
 }

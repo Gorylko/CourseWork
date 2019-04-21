@@ -38,5 +38,10 @@ namespace Shop.Business.Services
         {
             return _userRepository.GetUserByLogin(name); // _userRepository.Login(name);
         }
+
+        public void DeleteById(int id)
+        {
+            _userRepository.DeleteById(id);
+        }
     }
 }

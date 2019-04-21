@@ -82,6 +82,7 @@ namespace Shop.Web.Controllers.Product
             return View();
         }
 
+        [User]
         [HttpGet]
         public ActionResult BuyProduct(int id)
         {
@@ -89,6 +90,7 @@ namespace Shop.Web.Controllers.Product
             return View();
         }
 
+        [User]
         [HttpPost]
         public ActionResult BuyProduct(string address, int productId)
         {
@@ -121,6 +123,7 @@ namespace Shop.Web.Controllers.Product
             return View("~/Views/Product/ShowProductList.cshtml");
         }
 
+        [User]
         public ActionResult Delete(int id)
         {
             ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";

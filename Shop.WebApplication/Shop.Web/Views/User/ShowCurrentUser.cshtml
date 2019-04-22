@@ -1,5 +1,6 @@
 ﻿@using Shop.Web.Models;
 @using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
 @model UserViewModel
 @{
     ViewBag.Title = "Личный кабинет";
@@ -35,6 +36,25 @@
                 <input type="hidden" value="@user.UserId" name="id" />
                 <button class="btn waves-effect waves-light" type="submit">Удалить*</button>
             </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @if (user.IsInRole(RoleType.Administrator.ToString()))
+            {
+                <form action="~/Admin/EditUser">
+                    <div>
+                        <button type="submit">Редактировать*</button>
+                        <input type="hidden" value="@user.UserId" name="id" />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form action="~/User/EditUser">
+                    <button class="btn waves-effect waves-light" type="submit">Редактировать</button>
+                </form>
+            }
         </td>
     </tr>
 </table>

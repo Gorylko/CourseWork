@@ -130,5 +130,54 @@ namespace Shop.Web.Controllers.Product
             _productService.DeleteById(id);
             return View("~/Views/Shared/Notification.cshtml");
         }
+
+        [User]
+        public ActionResult EditProduct(int id)
+        {
+            var product = _productService.GetProductById(id);
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.States = _stateService.GetAll();
+            return View(new EditProductViewModel
+            {
+                Id = id,
+                Name = product.Name,
+                Description = product.Description,
+                Category = product.Category,
+                Author = product.Author,
+                Price = product.Price,
+                State = product.State,
+                LocationOfProduct = product.LocationOfProduct
+            });
+        }
+
+        [User]
+        [HttpPost]
+        public ActionResult EditProduct(EditProductViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _categoryService.GetAll();
+                ViewBag.States = _stateService.GetAll();
+                return View(model);
+            }
+            if (!_locationService.IsExists(model.LocationOfProduct))
+            {
+                _locationService.Save(model.LocationOfProduct);
+            }
+            _productService.Edit(new Shared.Entities.Product
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                LocationOfProduct = model.LocationOfProduct,
+                LastModifiedDate = DateTime.Now,
+                State = model.State,
+                Category = model.Category,
+                Author = model.Author
+            });
+            ViewBag.Message = $"Товар \"{model.Name}\" изменён успешно!";
+            return View("~/Views/Shared/Notification.cshtml");
+        }
     }
 }

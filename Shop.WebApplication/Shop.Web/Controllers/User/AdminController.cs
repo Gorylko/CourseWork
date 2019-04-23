@@ -110,7 +110,7 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult EditProduct(EditProductViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ViewBag.Categories = _categoryService.GetAll();
                 ViewBag.States = _stateService.GetAll();
@@ -133,6 +133,35 @@ namespace Shop.Web.Controllers
                 Author = model.Author
             });
             ViewBag.Message = $"Товар \"{model.Name}\" изменён успешно!";
+            return View("~/Views/Shared/Notification.cshtml");
+        }
+
+        [Admin]
+        public ActionResult AddNewUser()
+        {
+            ViewBag.Roles = _roleService.GetAll();
+            return View(new EditUserViewModel());
+        }
+
+        [Admin]
+        [HttpPost]
+        public ActionResult AddNewUser(EditUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Roles = _roleService.GetAll();
+                return View(model);
+            }
+            _userService.Save(new User
+            {
+                Id = model.Id,
+                Login = model.Login,
+                Email = model.Email,
+                Password = model.Password,
+                PhoneNumber = model.PhoneNumber,
+                Role = EnumHelper.ParseEnum<RoleType>(model.Role)
+            });
+            ViewBag.Message = $"Пользователь \"{model.Login}\" добавлен успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
     }

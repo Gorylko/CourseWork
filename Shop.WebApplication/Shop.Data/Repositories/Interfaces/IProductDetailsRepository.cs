@@ -6,5 +6,4 @@ namespace Shop.Data.Repositories.Interfaces
     {
         int GetIdByName(string name);
     }
-
 }

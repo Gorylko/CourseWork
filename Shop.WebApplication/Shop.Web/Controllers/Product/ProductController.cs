@@ -134,9 +134,18 @@ namespace Shop.Web.Controllers.Product
         [User]
         public ActionResult EditProduct(int id)
         {
+            var user = User as UserPrinciple;
             var product = _productService.GetProductById(id);
+
+            if(product.Author.Id != user.UserId)
+            {
+                ViewBag.ErrorText = "Данный товар вам не принадлежит!";
+                return View("~/Shared/Error.cshtml");
+            }
+
             ViewBag.Categories = _categoryService.GetAll();
             ViewBag.States = _stateService.GetAll();
+
             return View(new EditProductViewModel
             {
                 Id = id,

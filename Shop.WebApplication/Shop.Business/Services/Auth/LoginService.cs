@@ -2,7 +2,6 @@
 using Shop.Shared.Entities;
 using Shop.Data.Repositories;
 using Shop.Data.DataContext.Realization.MsSql;
-using Shop.Shared.Entities.Authorize;
 using System.Web.Security;
 using System.Web;
 using Newtonsoft.Json;

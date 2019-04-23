@@ -12,16 +12,17 @@
 <body>
     <div>
         <h3>@ViewBag.Message</h3>
+        <br />
         <table>
             <tr>
-                <td width="150px"><p>Название товара</p></td>
-                <td width="150px"><p>Категория</p></td>
-                <td width="50px"><p>Цена</p></td>
+                <td width="150px"><b>Название товара</b></td>
+                <td width="150px"><b>Категория</b></td>
+                <td width="50px"><b>Цена</b></td>
                 <td></td>
             </tr>
             @foreach (var product in ViewBag.Products)
             {
-                <tr>
+                <tr style="height:50px">
                     <td><p>@product.Name</p></td>
                     <td><p>@product.Category.Name</p></td>
                     <td><p>@product.Price</p></td>

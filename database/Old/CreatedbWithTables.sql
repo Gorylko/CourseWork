@@ -1,6 +1,6 @@
-CREATE DATABASE [ConsoleShop]
+CREATE DATABASE [UglyExpressShop]
 GO
-USE [ConsoleShop];
+USE [UglyExpressShop];
 CREATE TABLE [dbo].[Category]
 (
 	[Id] INT IDENTITY (1,1) NOT NULL,

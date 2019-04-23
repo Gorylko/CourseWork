@@ -1,4 +1,4 @@
-USE[ConsoleShop];
+USE[UglyExpressShop];
 INSERT INTO [dbo].[Category]([Name]) VALUES('Food')
 INSERT INTO [dbo].[Category]([Name]) VALUES('Toys')
 INSERT INTO [dbo].[Category]([Name]) VALUES('ForPets')

@@ -1,1 +1,1 @@
-DROP DATABASE [ConsoleShop]
+DROP DATABASE [UglyExpressShop]

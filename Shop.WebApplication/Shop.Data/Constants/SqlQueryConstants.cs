@@ -4,7 +4,7 @@ namespace Shop.Data.Constants
 {
     public class SqlQueryConstants
     {
-        public const string SelectAllProductInDbString = "USE ConsoleShop" + Typography.NewLine +
+        public const string SelectAllProductInDbString = "USE [UglyExpressShop]" + Typography.NewLine +
         "SELECT Product.*, [Category].[Name] AS [Category], [Location].[Name] AS [Location], [State].[Name] AS [State], [Role].[Id] AS [RoleId], [User].[Login] AS [Login], [User].[Email] AS [Email], [User].[PhoneNumber] AS [PhoneNumber], [User].[Id] AS [UserId] " + Typography.NewLine +
         "FROM [Product]" + Typography.NewLine +
         "JOIN [Category] ON [Product].[CategoryId] = [Category].Id" + Typography.NewLine +
@@ -14,7 +14,7 @@ namespace Shop.Data.Constants
         "JOIN [Role] ON [User].[RoleId] = [Role].[Id]";
 
 
-        public const string ConnectionToConsoleShopString = "Data Source=LAPTOP-P3338OQH;Initial Catalog=ConsoleShop;Integrated Security=True"; //менять при необходимости
+        public const string ConnectionToConsoleShopString = "Data Source=LAPTOP-P3338OQH;Initial Catalog=UglyExpressShop;Integrated Security=True"; //менять при необходимости
 
         public const string ConnectionToUsersString = "";
     }

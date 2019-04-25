@@ -26,7 +26,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader[searchParameter].ToString().Contains(searchQuery))
+                    if (reader[searchParameter].ToString().IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         products.Add(GetProduct(reader));
                     }

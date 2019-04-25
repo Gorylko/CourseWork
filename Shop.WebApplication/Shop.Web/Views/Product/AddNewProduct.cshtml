@@ -16,7 +16,7 @@
     @Html.ValidationMessageFor(model => model.Description);<br />
 
     <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
-    @Html.EditorFor(model => model.Price);
+    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"[0-9]{1,8}" } });
     @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
     <table>
@@ -34,6 +34,14 @@
                     <option disable>Выберите категорию</option>
                     @foreach (var category in ViewBag.Categories)
                     {
+                        if (Model.Category != null)
+                        {
+                            if (Model.Category.Id == category.Id)
+                            {
+                            <option selected value="@category.Id">@category.Name</option>
+                                continue;
+                            }
+                        }
                         <option value="@category.Id">@category.Name</option>
                     }
                 </select>
@@ -43,12 +51,22 @@
                     <option disable>Выберите состояние</option>
                     @foreach (var state in ViewBag.States)
                     {
+                        if (Model.Category != null)
+                        {
+                            if (Model.State.Id == state.Id)
+                            {
+                            <option selected value="@state.Id">@state.Name</option>
+                                continue;
+                            }
+                        }
                         <option value="@state.Id">@state.Name</option>
                     }
                 </select>
             </td>
         </tr>
     </table>
+    @Html.ValidationMessageFor(model => model.Category);
+    @Html.ValidationMessageFor(model => model.State);<br /><br />
     <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
     @Html.EditorFor(model => model.LocationOfProduct);
     @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />

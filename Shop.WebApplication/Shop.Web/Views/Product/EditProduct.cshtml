@@ -17,7 +17,7 @@
     @Html.ValidationMessageFor(model => model.Description);<br /><br />
 
     <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
-    @Html.EditorFor(model => model.Price);
+    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"[0-9]{1,8}" } });
     @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
     <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />

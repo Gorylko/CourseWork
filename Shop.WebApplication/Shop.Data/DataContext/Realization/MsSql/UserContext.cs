@@ -154,7 +154,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<User> users = new List<User>();
-                var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection);
+                var command = new SqlCommand("SELECT * FROM [User]", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {

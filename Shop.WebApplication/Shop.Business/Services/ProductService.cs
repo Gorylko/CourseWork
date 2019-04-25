@@ -1,6 +1,7 @@
 ﻿using Shop.Data.DataContext.Realization.MsSql;
 using Shop.Data.Repositories;
 using Shop.Shared.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Shop.Business.Services
@@ -48,5 +49,59 @@ namespace Shop.Business.Services
         {
             _productRepository.Edit(editedProduct);
         }
+
+        public IReadOnlyCollection<Product> GetAllWithFilters(IEnumerable<Predicate<Product>> filters)
+        {
+            List<Product> products = (List<Product>)_productRepository.GetAll();
+            List<Product> returnList = new List<Product>();
+            bool IsCorrect;
+            for (int i = 0 ; i < products.Count; i++)
+            {
+                IsCorrect = true;
+                foreach(var filter in filters)
+                {
+                    if (!filter(products[i]))
+                    {
+                        IsCorrect = false;
+                    }
+                }
+                if (IsCorrect)
+                {
+                    returnList.Add(products[i]);
+                }
+            }
+            return returnList;
+        }
+
+        public IReadOnlyCollection<Product> GetAllByFilterParameters(ProductFilterParameters parameters)
+        {
+            List<Predicate<Product>> filters = new List<Predicate<Product>>();
+            if (parameters.MaxPrice != default(decimal))
+            {
+                filters.Add(product => product.Price <= parameters.MaxPrice);
+            }
+            if (parameters.MinPrice != default(decimal))
+            {
+                filters.Add(product => product.Price >= parameters.MinPrice);
+            }
+            if (parameters.Name != default(string))
+            {
+                filters.Add(product => product.Name.IndexOf(parameters.Name, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            if (parameters.State.Id != default(int))
+            {
+                filters.Add(product => product.State.Id == parameters.State.Id);
+            }
+            if (parameters.Category.Id != default(int))
+            {
+                filters.Add(product => product.Category.Id == parameters.Category.Id);
+            }
+            if(filters == null)
+            {
+                return GetAll();
+            }
+            return GetAllWithFilters(filters);
+        }
+
     }
 }

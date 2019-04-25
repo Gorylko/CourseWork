@@ -29,6 +29,10 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult ShowUsersList(SearchViewModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
             if (model.Name == null)
             {
                 ViewBag.Users = _userService.GetAll();

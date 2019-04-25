@@ -1,9 +1,12 @@
 ﻿using Shop.Business.Services;
 using Shop.Shared.Entities;
+using ProductEntity = Shop.Shared.Entities.Product;
 using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
+using Shop.Web.Models;
 using Shop.Web.Models.ProductViewModels;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Shop.Web.Controllers.Product
@@ -40,7 +43,7 @@ namespace Shop.Web.Controllers.Product
             {
                 _locationService.Save(model.LocationOfProduct);
             }
-            _productService.Save(new Shared.Entities.Product
+            _productService.Save(new ProductEntity
             {
                 Name = model.Name,
                 Category = model.Category,
@@ -95,8 +98,8 @@ namespace Shop.Web.Controllers.Product
         public ActionResult BuyProduct(string address, int productId)
         {
             var user = User as UserPrinciple;
-            Shared.Entities.Product product = _productService.GetProductById(productId);
-            Purchase purchase = new Purchase
+            ProductEntity product = _productService.GetProductById(productId);
+            var purchase = new Shop.Shared.Entities.Purchase
             {
                 Seller = product.Author,
                 Customer = _userService.GetByLogin(user.Name),
@@ -173,7 +176,7 @@ namespace Shop.Web.Controllers.Product
             {
                 _locationService.Save(model.LocationOfProduct);
             }
-            _productService.Edit(new Shared.Entities.Product
+            _productService.Edit(new ProductEntity
             {
                 Id = model.Id,
                 Name = model.Name,
@@ -187,6 +190,31 @@ namespace Shop.Web.Controllers.Product
             });
             ViewBag.Message = $"Товар \"{model.Name}\" изменён успешно!";
             return View("~/Views/Shared/Notification.cshtml");
+        }
+
+        public ActionResult ShowSearchList()
+        {
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.States = _stateService.GetAll();
+            ViewBag.Products = _productService.GetAll();
+            return View(new SearchViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult ShowSearchList(SearchViewModel model)
+        {
+            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.States = _stateService.GetAll();
+
+            ViewBag.Products = _productService.GetAllByFilterParameters(new ProductFilterParameters
+            {
+                Category = model.Category,
+                MaxPrice = model.MaxPrice,
+                MinPrice = model.MinPrice,
+                Name = model.Name,
+                State = model.State
+            });
+            return View(model);
         }
     }
 }

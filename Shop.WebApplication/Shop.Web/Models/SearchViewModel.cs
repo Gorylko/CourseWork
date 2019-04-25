@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Shop.Shared.Entities;
 
 namespace Shop.Web.Models
 {
@@ -9,6 +10,16 @@ namespace Shop.Web.Models
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
-        //позже добавлю
+        [Display(Name = "Минимальная цена")]
+        public decimal MinPrice { get; set; }
+
+        [Display(Name = "Максимальная цена")]
+        public decimal MaxPrice { get; set; }
+
+        [Display(Name = "Состояние")]
+        public State State { get; set; }
+
+        [Display(Name = "Категория")]
+        public Category Category { get; set; }
     }
 }

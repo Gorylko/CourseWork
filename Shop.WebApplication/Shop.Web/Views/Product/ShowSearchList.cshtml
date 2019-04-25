@@ -21,42 +21,58 @@
         {
             @Html.EditorFor(model => model.Name)
             <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
-            @Html.ValidationMessageFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name) <br />
+            <select name="State.Id">
+                <option disable>Выберите состояние</option>
+                @foreach (var state in ViewBag.States)
+                {
+                    if (Model.State != null)
+                    {
+                        if (Model.State.Id == state.Id)
+                        {
+                        <option selected value="@state.Id">@state.Name</option>
+                            continue;
+                        }
+                    }
+                    <option value="@state.Id">@state.Name</option>
+                }
+            </select>
+            <select name="Category.Id">
+                <option disable>Выберите категорию</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    if (Model.Category != null)
+                    {
+                        if (Model.Category.Id == category.Id)
+                        {
+                        <option selected value="@category.Id">@category.Name</option>
+                            continue;
+                        }
+                    }
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
         }
 
         <br />
         <table>
             <tr>
-                <td><b>Логин</b></td>
-                <td><b>Роль</b></td>
+                <td><b>Название</b></td>
+                <td><b>Категория</b></td>
             </tr>
-            @foreach (var user in ViewBag.Users)
+            @foreach (var product in ViewBag.Products)
             {
                 <tr>
-                    <td width="150px"><p>@user.Login</p></td>
-                    <td width="150px"><p>@user.Role</p></td>
+                    <td width="150px"><p>@product.Name</p></td>
+                    <td width="150px"><p>@product.Category.Name</p></td>
                     <td>
-                        <form action="~/User/ShowUser">
+                        <form action="~/Product/ShowProductInfo">
                             <div>
                                 <button type="submit">Открыть</button>
-                                <input type="hidden" value="@user.Login" name="login" />
+                                <input type="hidden" value="@product.Id" name="id" />
                             </div>
                         </form>
                     </td>
-                    @if (Request.IsAuthenticated)
-                    {
-                        if (currentUser.IsInRole(RoleType.Administrator.ToString()))
-                        {
-                            <td>
-                                <form action="~/Admin/EditUser">
-                                    <div>
-                                        <button type="submit">Редактировать*</button>
-                                        <input type="hidden" value="@user.Id" name="id" />
-                                    </div>
-                                </form>
-                            </td>
-                        }
-                    }
                 </tr>
             }
         </table>

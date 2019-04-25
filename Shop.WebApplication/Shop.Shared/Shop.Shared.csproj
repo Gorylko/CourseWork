@@ -48,6 +48,7 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
     <Compile Include="Entities\Images\Image.cs" />
+    <Compile Include="Entities\ProductFilterParameters.cs" />
     <Compile Include="Entities\Product\Location\City.cs" />
     <Compile Include="Entities\Product\Location\Country.cs" />
     <Compile Include="Entities\Product\Location\Location.cs" />

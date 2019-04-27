@@ -16,7 +16,7 @@
     @Html.ValidationMessageFor(model => model.Description);<br />
 
     <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
-    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"[0-9]{1,8}" } });
+    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } });
     @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
     <table>

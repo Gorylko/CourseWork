@@ -117,5 +117,11 @@ namespace Shop.Web.Controllers
             ViewBag.Message = $"Редактирование вашего аккаунта завершено успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
+        
+        public ActionResult SendMessage(int id)
+        {
+            ViewBag.Message = $"Разработчик ленивая морда и не реализовал эту функцию";
+            return View("~/Views/Shared/Notification.cshtml");
+        }
     }
 }

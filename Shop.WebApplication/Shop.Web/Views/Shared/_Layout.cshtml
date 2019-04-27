@@ -34,7 +34,7 @@
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     @if (user == null) { }
-                    else if (user.IsInRole(RoleType.Moderator.ToString()) || user.IsInRole(RoleType.Administrator.ToString()))
+                    else if (user.IsInRole(RoleType.Administrator.ToString()))
                     {
                         <li>@Html.ActionLink("Admin Panel :D", "ShowAdminPanel", "Admin", routeValues: null, htmlAttributes: new { id = "adminPanelLink" })</li>
                     }

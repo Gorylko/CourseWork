@@ -21,7 +21,7 @@
         {
             @Html.EditorFor(model => model.Name)
             <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
-            @Html.ValidationMessageFor(model => model.Name) <br />
+            @Html.ValidationMessageFor(model => model.Name) <br /> <br />
             <select name="State.Id">
                 <option disable>Выберите состояние</option>
                 @foreach (var state in ViewBag.States)
@@ -30,7 +30,7 @@
                     {
                         if (Model.State.Id == state.Id)
                         {
-                        <option selected value="@state.Id">@state.Name</option>
+                            <option selected value="@state.Id">@state.Name</option>
                             continue;
                         }
                     }
@@ -45,13 +45,32 @@
                     {
                         if (Model.Category.Id == category.Id)
                         {
-                        <option selected value="@category.Id">@category.Name</option>
+                            <option selected value="@category.Id">@category.Name</option>
                             continue;
                         }
                     }
                     <option value="@category.Id">@category.Name</option>
                 }
             </select>
+
+            <br />
+            <br />
+            <table>
+                <tr>
+                    <td><label for="MinPrice">@Html.DisplayNameFor(model => model.MinPrice)</label></td>
+                    <td><label for="MaxPrice">@Html.DisplayNameFor(model => model.MaxPrice)</label></td>
+                </tr>
+                <tr>
+                    <td>@Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } })</td>
+                    <td>@Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } })</td>
+                </tr>
+                <tr>
+                    <td>@Html.ValidationMessageFor(model => model.MinPrice)</td>
+                    <td>@Html.ValidationMessageFor(model => model.MaxPrice)</td>
+                </tr>
+            </table>
+
+            <input type="hidden" value="@Model.Products" name="Products" />
         }
 
         <br />
@@ -60,7 +79,7 @@
                 <td><b>Название</b></td>
                 <td><b>Категория</b></td>
             </tr>
-            @foreach (var product in ViewBag.Products)
+            @foreach (var product in Model.Products)
             {
                 <tr>
                     <td width="150px"><p>@product.Name</p></td>

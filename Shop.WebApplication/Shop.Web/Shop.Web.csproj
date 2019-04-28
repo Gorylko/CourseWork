@@ -200,7 +200,8 @@
     <Compile Include="Models\ProductViewModels\StateViewModel.cs" />
     <Compile Include="Models\PurchaseModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\ProductViewModels\SearchViewModel.cs" />
+    <Compile Include="Models\Shared\ConfirmViewModel.cs" />
     <Compile Include="Models\SiteStatViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Admin\EditProduct.cshtml" />
     <Content Include="Views\Admin\AddNewUser.cshtml" />
     <Content Include="Views\Product\ShowSearchList.cshtml" />
+    <Content Include="Views\Shared\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

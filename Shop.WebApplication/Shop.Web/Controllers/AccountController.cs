@@ -2,6 +2,7 @@
 using Shop.Business.Services.Auth;
 using Shop.Web.Attributes;
 using Shop.Web.Models;
+using Shop.Web.Models.Shared;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 
@@ -70,6 +71,11 @@ namespace Shop.Web.Controllers
             _loginService.Logout();
             //return View("~/Views/Home/Index.cshtml");
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Confirm(ConfirmViewModel model)
+        {
+            return View(model);
         }
 
 

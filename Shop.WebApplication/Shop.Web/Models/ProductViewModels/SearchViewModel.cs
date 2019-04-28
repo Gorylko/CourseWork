@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Shop.Shared.Entities;
 
 namespace Shop.Web.Models
@@ -7,7 +8,6 @@ namespace Shop.Web.Models
     {
         [Display(Name = "Введите ваш запрос")]
         [StringLength(20, ErrorMessage = "запрос может содержать до 20 символов")]
-        [DataType(DataType.Text)]
         public string Name { get; set; }
 
         [Display(Name = "Минимальная цена")]
@@ -21,5 +21,7 @@ namespace Shop.Web.Models
 
         [Display(Name = "Категория")]
         public Category Category { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }

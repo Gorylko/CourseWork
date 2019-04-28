@@ -1,0 +1,16 @@
+﻿@using Shop.Web.Models.Shared;
+@model ConfirmViewModel
+@{
+    ViewBag.Title = "ConfirmationMenu";
+}
+
+<h2>Подтвердите ваше действие</h2>
+<p>@Model.Message</p>
+<form action="@Model.Url">
+    <input type="hidden" value="@Model.Value" name="id" />
+    <button class="btn waves-effect waves-light" type="submit">Подтвердить</button>
+</form>
+<br />
+<input style="width:75px" class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
+
+

@@ -70,8 +70,10 @@
                 @if (user.UserId == ViewBag.Product.Author.Id || user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
                 {
                     <td>
-                        <form action="~/Product/Delete" style="color:crimson">
-                            <input type="hidden" value="@ViewBag.Product.Id" name="id" />
+                        <form action="~/Account/Confirm" style="color:crimson">
+                            <input type="hidden" value="~/Product/Delete" name="Url" />
+                            <input type="hidden" value="@ViewBag.Product.Id" name="Value" />
+                            <input type="hidden" value="Вы уверены, что хотите удалить товар @ViewBag.Product.Name ?" name="Message" />
                             <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Удалить*</button>
                         </form>
                     </td>

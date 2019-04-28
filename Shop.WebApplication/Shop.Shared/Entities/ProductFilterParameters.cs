@@ -1,4 +1,6 @@
-﻿namespace Shop.Shared.Entities
+﻿using System.Collections.Generic;
+
+namespace Shop.Shared.Entities
 {
     public class ProductFilterParameters
     {

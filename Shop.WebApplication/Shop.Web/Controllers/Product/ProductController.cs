@@ -196,8 +196,7 @@ namespace Shop.Web.Controllers.Product
         {
             ViewBag.Categories = _categoryService.GetAll();
             ViewBag.States = _stateService.GetAll();
-            ViewBag.Products = _productService.GetAll();
-            return View(new SearchViewModel());
+            return View(new SearchViewModel() { Products = (List<ProductEntity>)_productService.GetAll()});
         }
 
         [HttpPost]
@@ -206,13 +205,13 @@ namespace Shop.Web.Controllers.Product
             ViewBag.Categories = _categoryService.GetAll();
             ViewBag.States = _stateService.GetAll();
 
-            ViewBag.Products = _productService.GetAllByFilterParameters(new ProductFilterParameters
+            model.Products = (List<ProductEntity>)_productService.GetAllByFilterParameters(new ProductFilterParameters
             {
                 Category = model.Category,
                 MaxPrice = model.MaxPrice,
                 MinPrice = model.MinPrice,
                 Name = model.Name,
-                State = model.State
+                State = model.State,
             });
             return View(model);
         }

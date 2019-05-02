@@ -20,6 +20,7 @@ namespace Shop.Web.Controllers.Product
         private StateService _stateService = new StateService();
         private LocationService _locationService = new LocationService();
 
+
         [User]
         public ActionResult AddNewProduct()
         {
@@ -131,6 +132,7 @@ namespace Shop.Web.Controllers.Product
         {
             ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
             _productService.DeleteById(id);
+            
             return View("~/Views/Shared/Notification.cshtml");
         }
 

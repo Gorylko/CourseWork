@@ -69,9 +69,7 @@ CREATE TABLE [dbo].[Purchase]
 	[CustomerId]INT NOT NULL,
 	[Address]NVARCHAR(100)NOT NULL,
 	[Date]DATETIME NOT NULL,
-	PRIMARY KEY CLUSTERED ([Id]ASC),
-	FOREIGN KEY([SellerId])REFERENCES [dbo].[User](Id),
-	FOREIGN KEY([CustomerId])REFERENCES [dbo].[User](Id),
+	PRIMARY KEY CLUSTERED ([Id]ASC)
 
 );
 GO

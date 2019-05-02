@@ -44,3 +44,7 @@ INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],
 VALUES(2,4,1,5,'Цыбуля','Для дифирент дишс',12, 2019-02-08, 2019-02-08)
 INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate])
 VALUES(3,5,2,1,'Бурак','Возможны боли в области мозга после употребления',12, 2019-02-09, 2019-02-09)
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate])
+VALUES(2,1,2,2,'Небесный бульон','На вкус как облочко',12, 2019-02-09, 2019-02-09)
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate])
+VALUES(1,1,1,3,'Бульба','Гэта супер класс',12, 2019-02-09, 2019-02-09)

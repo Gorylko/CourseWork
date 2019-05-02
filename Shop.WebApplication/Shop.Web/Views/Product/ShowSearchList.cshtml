@@ -23,7 +23,7 @@
             <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
             @Html.ValidationMessageFor(model => model.Name) <br /> <br />
             <select name="State.Id">
-                <option disable>Выберите состояние</option>
+                <option disable>Выберите состояние</option> 
                 @foreach (var state in ViewBag.States)
                 {
                     if (Model.State != null)

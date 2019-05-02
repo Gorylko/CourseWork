@@ -6,7 +6,7 @@ using Shop.Web.Attributes;
 using Shop.Web.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
+using Shop.Business.Services.Auth;
 using EnumConverter = Shop.Shared.Helpers.EnumHelper;
 
 namespace Shop.Web.Controllers
@@ -19,6 +19,7 @@ namespace Shop.Web.Controllers
         private RoleService _roleService = new RoleService();
         private StateService _stateService = new StateService();
         private LocationService _locationService = new LocationService();
+        private LoginService _loginService = new LoginService();
 
         public ActionResult ShowUsersList()
         {
@@ -76,6 +77,7 @@ namespace Shop.Web.Controllers
                 _productService.DeleteById(product.Id);
             }
             _userService.DeleteById(id);
+            _loginService.Logout();
             return View("~/Views/Shared/Notification.cshtml");
         }
 

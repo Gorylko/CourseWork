@@ -73,3 +73,28 @@ CREATE TABLE [dbo].[Purchase]
 
 );
 GO
+CREATE TABLE [dbo].[ProductArchive]
+(
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[UserId] INT NOT NULL,
+	[CategoryId]INT NOT NULL,
+	[LocationId]INT NOT NULL,
+	[StateId]INT NOT NULL,
+	[Name]NVARCHAR(MAX) NOT NULL,
+	[Description]NVARCHAR(MAX) NOT NULL,
+	[Price]DECIMAL NOT NULL,
+	[CreationDate]DATETIME NOT NULL,
+	[LastModifiedDate]DATETIME NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC),
+);
+GO
+CREATE TABLE [dbo].[UserArchive]
+(
+	[Id] INT IDENTITY (1,1) NOT NULL,
+	[RoleId] INT NOT NULL,
+   	[Login] NVARCHAR(20) NOT NULL UNIQUE,
+	[Password] NVARCHAR(20) NOT NULL,
+	[Email] NVARCHAR(20) NOT NULL UNIQUE,
+	[PhoneNumber] NVARCHAR(15) NULL,
+ 	PRIMARY KEY CLUSTERED([Id] ASC),
+)

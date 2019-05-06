@@ -268,6 +268,7 @@
     <Content Include="Views\Admin\AddNewUser.cshtml" />
     <Content Include="Views\Product\ShowSearchList.cshtml" />
     <Content Include="Views\Shared\Confirm.cshtml" />
+    <Content Include="Views\Shared\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

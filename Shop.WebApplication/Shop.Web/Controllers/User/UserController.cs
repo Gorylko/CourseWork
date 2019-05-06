@@ -45,6 +45,7 @@ namespace Shop.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public ActionResult ShowUser(string login)
         {
             var user = _userService.GetByLogin(login);

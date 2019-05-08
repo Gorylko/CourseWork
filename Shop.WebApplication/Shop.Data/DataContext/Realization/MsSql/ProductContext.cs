@@ -18,7 +18,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
@@ -37,7 +37,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Edit(Product editedProduct)
         {
-            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [Name] = @name, [Description] = @description, [CategoryId] = @categoryId, [LastModifiedDate] = @lastModifiedDate, [LocationId] = @locationId, [Price] = @price, [StateId] = @stateId, [UserId] = @userId {Typography.NewLine}WHERE Id = {editedProduct.Id}", connection);
@@ -56,7 +56,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         public IReadOnlyCollection<Product> GetByCategoryId(int categoryId)
         {
             List<Product> products = new List<Product>();
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection))
@@ -80,7 +80,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         public IReadOnlyCollection<Product> GetByUserId(int userId)
         {
             List<Product> products = new List<Product>();
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection))
@@ -135,7 +135,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public Product GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
@@ -152,7 +152,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         public IReadOnlyCollection<Product> GetAll()
         {
             List<Product> returnProducts = new List<Product>();
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
@@ -169,7 +169,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [Product] WHERE [Id] = {id}", connection);
@@ -179,7 +179,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(Product product)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate)", connection);

@@ -14,7 +14,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<Purchase> GetAll()
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<Purchase> allPurchases = new List<Purchase>();
@@ -31,7 +31,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public Purchase GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Purchase] WHERE [Id] = {id}", connection);
@@ -43,7 +43,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [Purchase] WHERE [Id] = {id}", connection);
@@ -53,7 +53,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(Purchase purchase)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [Purchase] (ProductId, SellerId, CustomerId, Address, Date) VALUES ({purchase.Product.Id}, {_userContext.GetIdByUser(purchase.Seller)}, {_userContext.GetIdByUser(purchase.Customer)}, '{purchase.Address}', @date)", connection);

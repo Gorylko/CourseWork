@@ -13,7 +13,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
     {
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [Role] WHERE [Id] = {id}", connection);
@@ -23,7 +23,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<RoleType> GetAll()
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<RoleType> allRoles = new List<RoleType>();
@@ -40,7 +40,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public RoleType GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Role] WHERE [Id] = {id}", connection);
@@ -52,7 +52,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(RoleType role)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [Role] (Name) VALUES ('{role.ToString()}')", connection);

@@ -10,7 +10,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
     {
         public int GetIdByName(string name)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"SELECT * FROM [State] WHERE [Name] = '{name}'", connection);
@@ -22,7 +22,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<State> GetAll()
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<State> allCategories = new List<State>();
@@ -53,7 +53,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [State] WHERE [Id] = {id}", connection);

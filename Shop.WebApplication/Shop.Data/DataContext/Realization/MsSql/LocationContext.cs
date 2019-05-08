@@ -11,7 +11,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public int GetIdByName(string name)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"SELECT * FROM [Location] WHERE [Name] = '{name}'", connection);
@@ -30,7 +30,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(string location)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [Location] (Name) VALUES (@location)", connection);

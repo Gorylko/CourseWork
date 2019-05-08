@@ -30,7 +30,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 return null;
             }
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login AND [Password] = @password", connection);
@@ -51,7 +51,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void EditUser(User editedUser) //страшна
         {
-            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"UPDATE [User]{Typography.NewLine}SET [RoleId] = @roleId, [Login] = @login, [Password] = @password, [Email] = @email, [PhoneNumber] = @phone {Typography.NewLine}WHERE Id = {editedUser.Id}", connection);
@@ -66,7 +66,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public User GetUserByLogin(string login)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT * FROM [User] WHERE [Login] = @login", connection);
@@ -79,7 +79,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(User user)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
@@ -94,7 +94,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         public IReadOnlyCollection<User> GetAll()
         {
             List<User> returnList = new List<User>();
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT * FROM [User]", connection);
@@ -113,7 +113,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public User GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<User> products = new List<User>();
@@ -127,7 +127,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [User] WHERE [Id] = {id}", connection);
@@ -137,7 +137,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public int GetIdByUser(User user)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 string query = "SELECT * FROM [User]" + Typography.NewLine + $"WHERE [Login] = '{user.Login}'";
@@ -150,7 +150,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<User> GetAllByName(string searchQuery)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<User> users = new List<User>();

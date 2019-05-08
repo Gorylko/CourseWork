@@ -28,7 +28,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     if (reader[searchParameter].ToString().IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        products.Add(GetProduct(reader));
+                        products.Add(MapProduct(reader));
                     }
                 }
                 return products;
@@ -67,7 +67,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                         {
                             if ((int)reader["CategoryId"] == categoryId)
                             {
-                                products.Add(GetProduct(reader));
+                                products.Add(MapProduct(reader));
                             }
                         }
                     }
@@ -91,7 +91,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                         {
                             if ((int)reader["UserId"] == userId)
                             {
-                                products.Add(GetProduct(reader));
+                                products.Add(MapProduct(reader));
                             }
                         }
                     }
@@ -101,7 +101,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public Product GetProduct(SqlDataReader reader)
+        public Product MapProduct(SqlDataReader reader)
         {
             return new Product
             {
@@ -145,7 +145,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
 
                 reader.Read();
-                return GetProduct(reader);
+                return MapProduct(reader);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    returnProducts.Add(GetProduct(reader));
+                    returnProducts.Add(MapProduct(reader));
 
                 }
                 return returnProducts;

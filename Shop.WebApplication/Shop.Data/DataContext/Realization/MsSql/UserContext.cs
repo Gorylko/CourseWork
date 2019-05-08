@@ -11,7 +11,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 {
     public class UserContext : IUserContext
     {
-        public User GetUser(SqlDataReader reader)
+        private User MapUser(SqlDataReader reader)
         {
             return new User
             {
@@ -40,7 +40,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 reader.Read();
                 try
                 {
-                    return GetUser(reader);
+                    return MapUser(reader);
                 }
                 catch
                 {
@@ -49,7 +49,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void EditUser(User editedUser) //страшна
+        public void EditUser(User editedUser)
         {
             using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
@@ -73,7 +73,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.Parameters.AddWithValue("@login", login);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return GetUser(reader);
+                return MapUser(reader);
             }
         }
 
@@ -103,7 +103,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     try
                     {
-                        returnList.Add(GetUser(reader));
+                        returnList.Add(MapUser(reader));
                     }
                     catch (SqlException) { }
                 }
@@ -121,7 +121,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return GetUser(reader);
+                return MapUser(reader);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     if (reader["Login"].ToString().IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        users.Add(GetUser(reader));
+                        users.Add(MapUser(reader));
                     }
                 }
                 return users;

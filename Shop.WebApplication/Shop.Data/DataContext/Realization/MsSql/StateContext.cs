@@ -8,6 +8,15 @@ namespace Shop.Data.DataContext.Realization.MsSql
 {
     public class StateContext : IProductDetailsContext<State>
     {
+        private State MapState(SqlDataReader reader)
+        {
+            return new State
+            {
+                Id = (int)reader["Id"],
+                Name = (string)reader["Name"]
+            };
+        }
+
         public int GetIdByName(string name)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
@@ -31,11 +40,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
                 while (reader.Read())
                 {
-                    allCategories.Add(new State
-                    {
-                        Id = (int)reader["Id"],
-                        Name = (string)reader["Name"]
-                    });
+                    allCategories.Add(MapState(reader));
                 }
                 return allCategories;
             }

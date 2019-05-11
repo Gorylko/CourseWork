@@ -36,15 +36,15 @@ INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],
 VALUES(1,1,1,1,'СЯЛЁДКА','Пожилая сельдь, с озер украины прямо к вам на стол',123, 2019-02-04, 2019-02-04, 0)
 INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(1,1,2,2,'Пожилой Самовар','Дадая, это именно он',123, 2019-02-05, 2019-02-05, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(2,2,1,3,'Тухлый Тунец','Можно ограбить банк при помощи запаха',13, 2019-02-06, 2019-02-06, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(2,3,2,4,'Картошка','Нету смысла писать где выращено',12, 2019-02-07, 2019-02-07, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(2,4,1,5,'Цыбуля','Для дифирент дишс',12, 2019-02-08, 2019-02-08, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(3,5,2,1,'Бурак','Возможны боли в области мозга после употребления',12, 2019-02-09, 2019-02-09, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(2,1,2,2,'Небесный бульон','На вкус как облочко',12, 2019-02-09, 2019-02-09, 0)
-INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]
+INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(1,1,1,3,'Бульба','Гэта супер класс',12, 2019-02-09, 2019-02-09, 0)

@@ -184,6 +184,7 @@
     <Compile Include="Attributes\SuperPuperAuthorizeAttribute.cs" />
     <Compile Include="Attributes\UserAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Image\ImageController.cs" />
     <Compile Include="Controllers\User\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
@@ -192,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductViewModels\CategoryViewModel.cs" />
@@ -269,6 +271,7 @@
     <Content Include="Views\Product\ShowSearchList.cshtml" />
     <Content Include="Views\Shared\Confirm.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
+    <Content Include="Views\Image\ShowTestImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

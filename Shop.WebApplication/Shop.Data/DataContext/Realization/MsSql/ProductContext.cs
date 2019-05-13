@@ -59,16 +59,13 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection))
+                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString + $"WHERE [CategoryId] = {categoryId}", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            if ((int)reader["CategoryId"] == categoryId)
-                            {
-                                products.Add(MapProduct(reader));
-                            }
+                            products.Add(MapProduct(reader));
                         }
                     }
                 }
@@ -83,16 +80,13 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection))
+                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [UserId] = {userId} AND [IsArchive] = 0", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            if ((int)reader["UserId"] == userId)
-                            {
-                                products.Add(MapProduct(reader));
-                            }
+                            products.Add(MapProduct(reader));
                         }
                     }
                 }
@@ -139,7 +133,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
-                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = @id";
+                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = @id AND [IsArchive] = 0";
                 var command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = command.ExecuteReader();
@@ -156,7 +150,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
-                var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection);
+                var command = new SqlCommand(SqlConst.SelectAllProductInDbString + Typography.NewLine + "WHERE [IsArchive] = 0", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -182,7 +176,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate)", connection);
+                var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate, @isArchive)", connection);
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
                 command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct)); //изменить после того, как сделаю наконец эту систему сложной локации с составными ключами
                 command.Parameters.AddWithValue("@stateId", product.State.Id);
@@ -192,6 +186,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.Parameters.AddWithValue("@price", product.Price);
                 command.Parameters.AddWithValue("@creationDate", product.CreationDate);
                 command.Parameters.AddWithValue("@lastModifiedDate", product.LastModifiedDate);
+                command.Parameters.AddWithValue("@isArchive", 0);
                 command.ExecuteNonQuery();
             }
         }

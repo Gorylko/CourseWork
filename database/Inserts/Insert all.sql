@@ -1,4 +1,13 @@
 USE[UglyExpressShop];
+GO
+
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 1
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Мыш.jpg', SINGLE_BLOB) AS [Data]
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'png', BulkColumn, 2
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Рик.png', SINGLE_BLOB) AS [Data]
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 3
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Лис-Чипидрис.jpg', SINGLE_BLOB) AS [Data]
+
 INSERT INTO [dbo].[Category]([Name]) VALUES('Food')
 INSERT INTO [dbo].[Category]([Name]) VALUES('Toys')
 INSERT INTO [dbo].[Category]([Name]) VALUES('ForPets')
@@ -48,3 +57,5 @@ INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],
 VALUES(2,1,2,2,'Небесный бульон','На вкус как облочко',12, 2019-02-09, 2019-02-09, 0)
 INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive])
 VALUES(1,1,1,3,'Бульба','Гэта супер класс',12, 2019-02-09, 2019-02-09, 0)
+
+

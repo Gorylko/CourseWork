@@ -22,5 +22,10 @@ namespace Shop.Business.Services
         {
             return _imageRepository.GetAllByUserId(id);
         }
+
+        public Image GetById(int id)
+        {
+            return _imageRepository.GetById(id);
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using Shop.Shared.Entities.Images;
 using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Shared.Entities
@@ -26,6 +28,7 @@ namespace Shop.Shared.Entities
 
         public State State { get; set; }
 
+        public IReadOnlyCollection<Image> Images { get; set; }
 
         public string GetInfoAboutProduct()
         {

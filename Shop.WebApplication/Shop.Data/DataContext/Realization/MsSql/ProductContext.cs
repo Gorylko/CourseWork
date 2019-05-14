@@ -15,6 +15,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         CategoryContext _categoryContext = new CategoryContext();
         StateContext _stateContext = new StateContext();
         LocationContext _locationContext = new LocationContext();
+        ImageContext _imageContext = new ImageContext();
 
         public IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery)
         {
@@ -123,7 +124,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     Id = (int)reader["StateId"],
                     Name = (string)reader["State"]
-                }
+                },
+                Images = _imageContext.GetAllByProductId((int)reader["Id"])
             };
         }
 

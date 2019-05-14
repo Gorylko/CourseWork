@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Shop.Web.Models;
 using Shop.Business.Services;
 
-namespace Shop.Web.Controllers.Image
+namespace Shop.Web.Controllers
 {
     public class ImageController : Controller
     {

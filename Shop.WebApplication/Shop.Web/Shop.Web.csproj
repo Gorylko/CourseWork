@@ -198,6 +198,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductViewModels\CategoryViewModel.cs" />
     <Compile Include="Models\ProductViewModels\EditProductViewModel.cs" />
+    <Compile Include="Models\ProductViewModels\ProductListViewModel.cs" />
     <Compile Include="Models\ProductViewModels\ProductViewModel.cs" />
     <Compile Include="Models\ProductViewModels\StateViewModel.cs" />
     <Compile Include="Models\PurchaseModel.cs" />

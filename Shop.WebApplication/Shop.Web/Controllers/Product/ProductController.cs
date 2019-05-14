@@ -1,5 +1,6 @@
 ﻿using Shop.Business.Services;
 using Shop.Shared.Entities;
+using Shop.Shared.Entities.Images;
 using ProductEntity = Shop.Shared.Entities.Product;
 using Shop.Shared.Entities.Authorize;
 using Shop.Web.Attributes;
@@ -8,6 +9,7 @@ using Shop.Web.Models.ProductViewModels;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web;
 
 namespace Shop.Web.Controllers.Product
 {
@@ -31,7 +33,7 @@ namespace Shop.Web.Controllers.Product
 
         [User]
         [HttpPost]
-        public ActionResult AddNewProduct(ProductViewModel model)
+        public ActionResult AddNewProduct(ProductViewModel model, HttpPostedFileBase image = null)
         {
             if (!ModelState.IsValid)
             {
@@ -60,24 +62,46 @@ namespace Shop.Web.Controllers.Product
                 Author = new User
                 {
                     Id = user.UserId
+                },
+                Images = new List<Image>
+                {
+                    new Image
+                    {
+                        Data = GetImageData(image),
+                        Extension = image.ContentType
+                    }
                 }
+
             });
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
             return View("~/Views/Shared/Notification.cshtml");
         }
 
+        public byte[] GetImageData(HttpPostedFileBase image)
+        {
+            var returnData = new byte[image.ContentLength];
+            image.InputStream.Read(returnData, 0, image.ContentLength);
+            return returnData;
+        }
+
         public ActionResult ShowProductList()
         {
             ViewBag.Message = "Список всех товаров";
-            ViewBag.Products = _productService.GetAll();
-            return View();
+            var model = new ProductListViewModel
+            {
+                Products = _productService.GetAll()
+            };
+            return View(model);
         }
 
         public ActionResult ShowByUserId(int id)
         {
-            ViewBag.Products = _productService.GetByUserId(id);
+            var model = new ProductListViewModel
+            {
+                Products = _productService.GetByUserId(id)
+            };
             ViewBag.Message = $"Товары пользователя {_userService.GetById(id).Login}";
-            return View("~/Views/Product/ShowProductList.cshtml");
+            return View("~/Views/Product/ShowProductList.cshtml", model);
         }
 
         public ActionResult ShowProductInfo(int id)
@@ -123,8 +147,11 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult ShowProductsByCategory(int categoryId)
         {
-            ViewBag.Products = _productService.GetProductsByCategoryId(categoryId);
-            return View("~/Views/Product/ShowProductList.cshtml");
+            var model = new ProductListViewModel
+            {
+                Products = _productService.GetProductsByCategoryId(categoryId)
+            };
+            return View("~/Views/Product/ShowProductList.cshtml", model);
         }
 
         [User]
@@ -132,7 +159,7 @@ namespace Shop.Web.Controllers.Product
         {
             ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
             _productService.DeleteById(id);
-            
+
             return View("~/Views/Shared/Notification.cshtml");
         }
 
@@ -142,7 +169,7 @@ namespace Shop.Web.Controllers.Product
             var user = User as UserPrinciple;
             var product = _productService.GetProductById(id);
 
-            if(product.Author.Id != user.UserId)
+            if (product.Author.Id != user.UserId)
             {
                 ViewBag.ErrorText = "Данный товар вам не принадлежит!";
                 return View("~/Shared/Error.cshtml");
@@ -198,7 +225,7 @@ namespace Shop.Web.Controllers.Product
         {
             ViewBag.Categories = _categoryService.GetAll();
             ViewBag.States = _stateService.GetAll();
-            return View(new SearchViewModel() { Products = (List<ProductEntity>)_productService.GetAll()});
+            return View(new SearchViewModel() { Products = (List<ProductEntity>)_productService.GetAll() });
         }
 
         [HttpPost]

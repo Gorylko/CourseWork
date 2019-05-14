@@ -5,7 +5,7 @@
 }
 
 <h2>Меню добавления товара</h2>
-@using (Html.BeginForm("AddNewProduct", "Product", FormMethod.Post))
+@using (Html.BeginForm("AddNewProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <label for="Name">@Html.DisplayNameFor(model => model.Name)</label><br />
     @Html.EditorFor(model => model.Name);
@@ -38,7 +38,7 @@
                         {
                             if (Model.Category.Id == category.Id)
                             {
-                            <option selected value="@category.Id">@category.Name</option>
+                                <option selected value="@category.Id">@category.Name</option>
                                 continue;
                             }
                         }
@@ -55,7 +55,7 @@
                         {
                             if (Model.State.Id == state.Id)
                             {
-                            <option selected value="@state.Id">@state.Name</option>
+                                <option selected value="@state.Id">@state.Name</option>
                                 continue;
                             }
                         }
@@ -70,6 +70,21 @@
     <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
     @Html.EditorFor(model => model.LocationOfProduct);
     @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />
+
+    <div class="form-group">
+        <div style="position:relative;">
+            <label>Картинка</label>
+            <a class='btn' href='javascript:;'>
+                Выберите файл...
+                <input type="file" name="Image" size="40"
+                       style="position:absolute;z-index:2;top:0;
+                                left:0;filter: alpha(opacity=0); opacity:0;
+                                background-color:transparent;color:transparent;"
+                       onchange='$("#upload-file-info").html($(this).val());'>
+            </a>
+            <span class='label label-info' id="upload-file-info"></span>
+        </div>
+    </div>
 
     <button class="btn waves-effect waves-light" type="submit" name="action">Добавить</button>
 }

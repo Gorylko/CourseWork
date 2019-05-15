@@ -65,5 +65,10 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.ExecuteNonQuery();
             }
         }
+
+        public bool IsExists(State obj)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

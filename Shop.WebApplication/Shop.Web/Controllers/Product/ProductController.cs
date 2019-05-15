@@ -42,9 +42,9 @@ namespace Shop.Web.Controllers.Product
                 return View(model);
             }
             var user = User as UserPrinciple;
-            if (!_locationService.IsExists(model.LocationOfProduct))
+            if (!_locationService.IsExists(model.Location))
             {
-                _locationService.Save(model.LocationOfProduct);
+                _locationService.Save(model.Location);
             }
             _productService.Save(new ProductEntity
             {
@@ -53,7 +53,7 @@ namespace Shop.Web.Controllers.Product
                 CreationDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 Description = model.Description,
-                LocationOfProduct = model.LocationOfProduct,
+                Location = model.Location,
                 Price = model.Price,
                 State = new State
                 {
@@ -187,7 +187,7 @@ namespace Shop.Web.Controllers.Product
                 Author = product.Author,
                 Price = product.Price,
                 State = product.State,
-                LocationOfProduct = product.LocationOfProduct
+                Location = product.Location
             });
         }
 
@@ -201,17 +201,14 @@ namespace Shop.Web.Controllers.Product
                 ViewBag.States = _stateService.GetAll();
                 return View(model);
             }
-            if (!_locationService.IsExists(model.LocationOfProduct))
-            {
-                _locationService.Save(model.LocationOfProduct);
-            }
+            _locationService.Save(model.Location);
             _productService.Edit(new ProductEntity
             {
                 Id = model.Id,
                 Name = model.Name,
                 Description = model.Description,
                 Price = model.Price,
-                LocationOfProduct = model.LocationOfProduct,
+                Location = model.Location,
                 LastModifiedDate = DateTime.Now,
                 State = model.State,
                 Category = model.Category,

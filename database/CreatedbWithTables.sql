@@ -5,15 +5,7 @@ CREATE TABLE [dbo].[Category]
 (
 	[Id] INT IDENTITY (1,1) NOT NULL,
    	[Name] NVARCHAR(20) NOT NULL,
-
  	PRIMARY KEY CLUSTERED([Id] ASC)
-);
-GO
-CREATE TABLE [dbo].[Location]
-(
-	[Id] INT IDENTITY(1,1) NOT NULL,
-	[Name] NVARCHAR(50) NOT NULL,
-	PRIMARY KEY CLUSTERED([Id]ASC)
 );
 GO
 CREATE TABLE [dbo].[State]
@@ -57,7 +49,6 @@ CREATE TABLE [dbo].[Product]
 	[LastModifiedDate]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED([Id]ASC),
 	FOREIGN KEY([CategoryId]) REFERENCES [dbo].[Category]([Id]),
-	FOREIGN KEY([LocationId]) REFERENCES [dbo].[Location]([Id]),
 	FOREIGN KEY([StateId]) REFERENCES [dbo].[State]([Id]),
 	FOREIGN KEY([UserId]) REFERENCES [dbo].[User]([Id])
 );
@@ -71,8 +62,8 @@ CREATE TABLE [dbo].[Purchase]
 	[Address]NVARCHAR(100)NOT NULL,
 	[Date]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED ([Id]ASC)
-
 );
+
  GO
  CREATE TABLE [dbo].[Image]
  (
@@ -81,5 +72,39 @@ CREATE TABLE [dbo].[Purchase]
 	[Extension]NVARCHAR(40),
 	[ProductId]INT NULL,
 	[UserId]INT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[Location]
+ (
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[CountryId]INT NOT NULL,
+	[CityId]INT NOT NULL,
+	[AddressId]INT NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[Country]
+ (
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[Name]NVARCHAR(50) NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[City]
+ (
+	[Id]INT IDENTITY NOT NULL,
+	[Name] NVARCHAR(50) NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+GO
+
+ CREATE TABLE [dbo].[Address]
+ (
+	[Id]INT IDENTITY NOT NULL,
+	[Name] NVARCHAR(MAX) NOT NULL,
 	PRIMARY KEY CLUSTERED([Id]ASC)
  );

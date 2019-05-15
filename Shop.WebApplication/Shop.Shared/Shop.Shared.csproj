@@ -51,6 +51,7 @@
     <Compile Include="Entities\Images\ProductImage.cs" />
     <Compile Include="Entities\Images\UserImage.cs" />
     <Compile Include="Entities\ProductFilterParameters.cs" />
+    <Compile Include="Entities\Product\Location\Address.cs" />
     <Compile Include="Entities\Product\Location\City.cs" />
     <Compile Include="Entities\Product\Location\Country.cs" />
     <Compile Include="Entities\Product\Location\Location.cs" />

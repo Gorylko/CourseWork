@@ -24,7 +24,7 @@ namespace Shop.Shared.Entities
 
         public User Author { get; set; }
 
-        public string LocationOfProduct { get; set; }
+        public Location Location { get; set; }
 
         public State State { get; set; }
 
@@ -44,7 +44,7 @@ namespace Shop.Shared.Entities
             returnString.AppendLine(this.Author.Login);
             returnString.AppendLine(this.Author.PhoneNumber);
             returnString.AppendLine(this.Author.Email);
-            returnString.AppendLine($"Местоположение товара : {this.LocationOfProduct}");
+            returnString.AppendLine($"Местоположение товара : {this.Location}");
             returnString.AppendLine($"Состояние : {this.State}{Typography.NewLineX2}");
             return returnString.ToString();
         }

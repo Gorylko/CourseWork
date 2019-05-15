@@ -37,7 +37,7 @@ namespace Shop.Web.Models.ProductViewModels
 
         [Required]
         [Display(Name = "Местонахождение товара")]
-        public string LocationOfProduct { get; set; }
+        public Location Location { get; set; }
 
         [Required]
         [Display(Name = "Состояние товара")]

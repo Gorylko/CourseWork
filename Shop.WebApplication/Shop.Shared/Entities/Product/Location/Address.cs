@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Shared.Entities
 {
-    public class City
+    public class Address
     {
         public int Id { get; set; }
 

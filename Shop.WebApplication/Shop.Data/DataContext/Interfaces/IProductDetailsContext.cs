@@ -2,6 +2,6 @@
 {
     public interface IProductDetailsContext<T> : IDataContext<T>
     {
-        int GetIdByName(string name);
+        bool IsExists(T obj);
     }
 }

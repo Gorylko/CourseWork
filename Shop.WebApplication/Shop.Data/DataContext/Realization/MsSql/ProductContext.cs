@@ -46,7 +46,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 command.Parameters.AddWithValue("@description", editedProduct.Description);
                 command.Parameters.AddWithValue("@categoryId", editedProduct.Category.Id);
                 command.Parameters.AddWithValue("@lastModifiedDate", editedProduct.LastModifiedDate);
-                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(editedProduct.LocationOfProduct));
+                command.Parameters.AddWithValue("@locationId", editedProduct.Location.Id);
                 command.Parameters.AddWithValue("@price", editedProduct.Price);
                 command.Parameters.AddWithValue("@stateId", editedProduct.State.Id);
                 command.Parameters.AddWithValue("@userId", editedProduct.Author.Id);
@@ -119,7 +119,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                     PhoneNumber = (string)reader["PhoneNumber"],
                     Role = RoleHelper.ConvertToRoleType((int)reader["RoleId"])
                 },
-                LocationOfProduct = (string)reader["Location"],
+                Location = _locationContext.GetById((int)reader["LocationId"]),
                 State = new State
                 {
                     Id = (int)reader["StateId"],
@@ -180,7 +180,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate, @isArchive)", connection);
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
-                command.Parameters.AddWithValue("@locationId", _locationContext.GetIdByName(product.LocationOfProduct)); //изменить после того, как сделаю наконец эту систему сложной локации с составными ключами
+                command.Parameters.AddWithValue("@locationId", product.Location.Id); //изменить после того, как сделаю наконец эту систему сложной локации с составными ключами
                 command.Parameters.AddWithValue("@stateId", product.State.Id);
                 command.Parameters.AddWithValue("@authorId", product.Author.Id);
                 command.Parameters.AddWithValue("@productName", product.Name);

@@ -102,7 +102,7 @@ namespace Shop.Web.Controllers
                 Author = product.Author,
                 Price = product.Price,
                 State = product.State,
-                LocationOfProduct = product.LocationOfProduct
+                Location = product.Location
             });
         }
 
@@ -116,9 +116,9 @@ namespace Shop.Web.Controllers
                 ViewBag.States = _stateService.GetAll();
                 return View(model);
             }
-            if (!_locationService.IsExists(model.LocationOfProduct))
+            if (!_locationService.IsExists(model.Location))
             {
-                _locationService.Save(model.LocationOfProduct);
+                _locationService.Save(model.Location);
             }
             _productService.Edit(new Shared.Entities.Product
             {
@@ -126,7 +126,7 @@ namespace Shop.Web.Controllers
                 Name = model.Name,
                 Description = model.Description,
                 Price = model.Price,
-                LocationOfProduct = model.LocationOfProduct,
+                Location = model.Location,
                 LastModifiedDate = DateTime.Now,
                 State = model.State,
                 Category = model.Category,

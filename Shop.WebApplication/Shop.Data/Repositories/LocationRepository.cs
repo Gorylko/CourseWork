@@ -6,25 +6,21 @@ using Shop.Data.DataContext.Interfaces;
 
 namespace Shop.Data.Repositories
 {
-    public class LocationRepository : IProductDetailsRepository<string>
+    public class LocationRepository : IProductDetailsRepository<Location>
     {
-        IProductDetailsContext<string> _locationContext;
+        IProductDetailsContext<Location> _locationContext;
 
-        public LocationRepository(IProductDetailsContext<string> context)
+        public LocationRepository(IProductDetailsContext<Location> context)
         {
             _locationContext = context;
         }
 
-        public IReadOnlyCollection<string> GetAll()
+        public IReadOnlyCollection<Location> GetAll()
         {
             return _locationContext.GetAll();
         }
 
-        public int GetIdByName(string name)
-        {
-            return _locationContext.GetIdByName(name);
-        }
-        public void Save(string location)
+        public void Save(Location location)
         {
             _locationContext.Save(location);
         }
@@ -34,11 +30,14 @@ namespace Shop.Data.Repositories
             _locationContext.DeleteById(id);
         }
 
-        public string GetById(int id)
+        public Location GetById(int id)
         {
             return _locationContext.GetById(id);
         }
 
-
+        public bool IsExists(Location location)
+        {
+            return _locationContext.IsExists(location);
+        }
     }
 }

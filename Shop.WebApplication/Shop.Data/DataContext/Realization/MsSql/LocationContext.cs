@@ -1,13 +1,16 @@
 ﻿using Shop.Data.DataContext.Interfaces;
+using Shop.Shared.Entities;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
+using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
-    public class LocationContext : IProductDetailsContext<string>
+    public class LocationContext : IProductDetailsContext<Location>
     {
-        public IReadOnlyCollection<string> GetAll() { return null; } //пока не нужно
+        public IReadOnlyCollection<Location> GetAll() { return null; } //пока не нужно
 
         public int GetIdByName(string name)
         {
@@ -28,25 +31,178 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public void Save(string location)
+        public void Save(Location location)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [Location] (Name) VALUES (@location)", connection);
-                command.Parameters.AddWithValue("@location", location);
+                var command = new SqlCommand("INSERT INTO [Location] (CountryId, CityId, AddressId) VALUES (@countryId, @cityId, @addressId)", connection);
+                command.Parameters.AddWithValue("@countryId", SaveCountryAndGetId(location.Country));
+                command.Parameters.AddWithValue("@cityId", SaveCityAndGetId(location.City));
+                command.Parameters.AddWithValue("@addressId", SaveAddressAndGetId(location.Address));
                 command.ExecuteNonQuery();
             }
         }
 
-        public string GetById(int id)
+        public Location GetById(int id)
         {
-            throw new System.NotImplementedException();
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand(SqlConst.SelectLocationString + $"\nWHERE [Location].[Id] = {id}", connection);
+                var reader = command.ExecuteReader();
+                reader.Read();
+                return MapLocation(reader);
+            }
         }
 
         public void DeleteById(int id)
         {
             throw new System.NotImplementedException();
         }
+
+        public bool IsExists(Location location)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand(SqlConst.SelectLocationString, connection);
+                var reader = command.ExecuteReader();
+                if(reader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+
+        #region PrivateMethods
+
+        private Location MapLocation(SqlDataReader reader)
+        {
+            return new Location
+            {
+                Id = (int)reader["Id"],
+                Address = new Address
+                {
+                    Id = (int)reader["AddressId"],
+                    Name = (string)reader["Address"]
+                },
+                City = new City
+                {
+                    Id = (int)reader["CityId"],
+                    Name = (string)reader["City"]
+                },
+                Country = new Country
+                {
+                    Id = (int)reader["CountryId"],
+                    Name = (string)reader["Country"]
+                }
+            };
+        }
+
+        private int? SaveCountryAndGetId(Country country)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                if (IsExists(country))
+                {
+                    var insertCommand = new SqlCommand("INSERT INTO [Country] (Name) VALUES (@country)", connection);
+                    insertCommand.Parameters.AddWithValue("@country", country.Name);
+                    insertCommand.ExecuteNonQuery();
+                }
+                var selectCommand = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = {country.Name}");
+
+                var reader = selectCommand.ExecuteReader();
+                reader.Read();
+                return (int?)reader["Id"];
+            }
+        }
+
+        private int? SaveCityAndGetId(City city)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                if (IsExists(city))
+                {
+                    var insertCommand = new SqlCommand("INSERT INTO [City] (Name) VALUES (@city)", connection);
+                    insertCommand.Parameters.AddWithValue("@city", city.Name);
+                    insertCommand.ExecuteNonQuery();
+                }
+                var selectCommand = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = {city.Name}");
+
+                var reader = selectCommand.ExecuteReader();
+                reader.Read();
+                return (int?)reader["Id"];
+            }
+        }
+
+        private int? SaveAddressAndGetId(Address address)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                if (IsExists(address))
+                {
+                    var insertCommand = new SqlCommand("INSERT INTO [Address] (Name) VALUES (@address)", connection);
+                    insertCommand.Parameters.AddWithValue("@address", address.Name);
+                    insertCommand.ExecuteNonQuery();
+                }
+                var selectCommand = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = {address.Name}");
+
+                var reader = selectCommand.ExecuteReader();
+                reader.Read();
+                return (int?)reader["Id"];
+            }
+        }
+
+        private bool IsExists(Address address)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = {address.Name}", connection);
+                var reader = command.ExecuteReader();
+                if(reader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private bool IsExists(City city)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = {city.Name}", connection);
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private bool IsExists(Country country)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = {country.Name}", connection);
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        #endregion
     }
 }

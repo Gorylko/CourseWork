@@ -1,5 +1,6 @@
 ﻿using Shop.Data.DataContext.Realization.MsSql;
 using Shop.Data.Repositories;
+using Shop.Shared.Entities;
 using System.Collections.Generic;
 
 namespace Shop.Business.Services
@@ -7,28 +8,19 @@ namespace Shop.Business.Services
     public class LocationService
     {
         LocationRepository _locationRepository = new LocationRepository(new LocationContext());
-        public IReadOnlyCollection<string> GetAll()
+        public IReadOnlyCollection<Location> GetAll()
         {
             return _locationRepository.GetAll();
         }
 
-        public int GetIdByName(string name)
-        {
-            return _locationRepository.GetIdByName(name);
-        }
-
-        public void Save(string location)
+        public void Save(Location location)
         {
             _locationRepository.Save(location);
         }
 
-        public bool IsExists(string name)
+        public bool IsExists(Location location)
         {
-            if(_locationRepository.GetIdByName(name) == 0)
-            {
-                return false;
-            }
-            return true;
+            return _locationRepository.IsExists(location);
         }
     }
 }

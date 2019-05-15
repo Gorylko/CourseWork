@@ -30,11 +30,6 @@ namespace Shop.Data.Repositories
             return _stateContext.GetById(id);
         }
 
-        public int GetIdByName(string name)
-        {
-            return _stateContext.GetIdByName(name);
-        }
-
         public void Save(State state)
         {
             _stateContext.Save(state);

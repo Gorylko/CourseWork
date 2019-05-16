@@ -20,9 +20,14 @@
     @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } });
     @Html.ValidationMessageFor(model => model.Price);<br /><br />
 
-    <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
-    @Html.EditorFor(model => model.LocationOfProduct);
-    @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />
+    <label for="Country">Страна</label><br />
+    @Html.EditorFor(model => model.Location.Country.Name);<br /><br />
+
+    <label for="City">Город</label><br />
+    @Html.EditorFor(model => model.Location.City.Name);<br /><br />
+
+    <label for="Address">Адрес</label><br />
+    @Html.EditorFor(model => model.Location.Address.Name);<br /><br />
 
     <input type="hidden" value="@Model.Id" name="Id" />
     <input type="hidden" value="@Model.Author.Id" name="Author.Id" />

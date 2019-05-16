@@ -53,7 +53,6 @@ namespace Shop.Web.Controllers
         public ActionResult EditUser(int id)
         {
             var user = _userService.GetById(id);
-            ViewBag.Roles = _roleService.GetAll();
             return View(new EditUserViewModel
             {
                 Id = user.Id,
@@ -61,7 +60,8 @@ namespace Shop.Web.Controllers
                 Email = user.Email,
                 Password = user.Password,
                 PhoneNumber = user.PhoneNumber,
-                Role = user.Role.ToString()
+                Role = user.Role.ToString(),
+                Roles = _roleService.GetAll()
             });
         }
 
@@ -116,10 +116,8 @@ namespace Shop.Web.Controllers
                 ViewBag.States = _stateService.GetAll();
                 return View(model);
             }
-            if (!_locationService.IsExists(model.Location))
-            {
-                _locationService.Save(model.Location);
-            }
+            _locationService.Save(model.Location);
+            model.Location.Id = _locationService.GetId(model.Location);
             _productService.Edit(new Shared.Entities.Product
             {
                 Id = model.Id,

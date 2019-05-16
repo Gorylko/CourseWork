@@ -33,6 +33,7 @@ namespace Shop.Web.Models.ProductViewModels
         [Required]
         public Category Category { get; set; }
 
+        public IReadOnlyCollection<Category> Categories { get; set; }
         public User Author { get; set; }
 
         [Required]
@@ -42,5 +43,7 @@ namespace Shop.Web.Models.ProductViewModels
         [Required]
         [Display(Name = "Состояние товара")]
         public State State { get; set; }
+
+        public IReadOnlyCollection<State> States { get; set; }
     }
 }

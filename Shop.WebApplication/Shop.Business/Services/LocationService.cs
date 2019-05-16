@@ -18,9 +18,9 @@ namespace Shop.Business.Services
             _locationRepository.Save(location);
         }
 
-        public bool IsExists(Location location)
+        public int GetId(Location location)
         {
-            return _locationRepository.IsExists(location);
+            return _locationRepository.GetId(location);
         }
     }
 }

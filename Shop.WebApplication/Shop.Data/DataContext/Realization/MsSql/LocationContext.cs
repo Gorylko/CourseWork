@@ -8,26 +8,19 @@ using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
-    public class LocationContext : IProductDetailsContext<Location>
+    public class LocationContext : ILocationContext<Location>
     {
         public IReadOnlyCollection<Location> GetAll() { return null; } //пока не нужно
 
-        public int GetIdByName(string name)
+        public int GetId(Location location)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"SELECT * FROM [Location] WHERE [Name] = '{name}'", connection);
+                var command = new SqlCommand(SqlConst.SelectLocationString + $"\nWHERE [Country] = '{location.Country.Name}' AND [City] = {location.City.Name} AND [Address] = {location.Address}", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                try
-                {
-                    return (int)reader["Id"];
-                }
-                catch
-                {
-                    return 0;
-                }
+                return (int)reader["Id"];
             }
         }
 
@@ -68,7 +61,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 connection.Open();
                 var command = new SqlCommand(SqlConst.SelectLocationString, connection);
                 var reader = command.ExecuteReader();
-                if(reader.HasRows)
+                if (reader.HasRows)
                 {
                     return true;
                 }
@@ -166,7 +159,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 connection.Open();
                 var command = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = {address.Name}", connection);
                 var reader = command.ExecuteReader();
-                if(reader.HasRows)
+                if (reader.HasRows)
                 {
                     return true;
                 }

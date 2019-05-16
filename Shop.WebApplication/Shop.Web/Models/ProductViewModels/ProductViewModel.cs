@@ -1,5 +1,6 @@
 ﻿using Shop.Shared.Entities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Web.Models.ProductViewModels
@@ -30,6 +31,9 @@ namespace Shop.Web.Models.ProductViewModels
 
         [Required]
         public Category Category { get; set; }
+
+        public IReadOnlyCollection<Category> Categories { get; set; }
+
 
         public User Author { get; set; }
 

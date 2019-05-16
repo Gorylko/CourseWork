@@ -6,11 +6,11 @@ using Shop.Data.DataContext.Interfaces;
 
 namespace Shop.Data.Repositories
 {
-    public class LocationRepository : IProductDetailsRepository<Location>
+    public class LocationRepository : ILocationRepository<Location>
     {
-        IProductDetailsContext<Location> _locationContext;
+        ILocationContext<Location> _locationContext;
 
-        public LocationRepository(IProductDetailsContext<Location> context)
+        public LocationRepository(ILocationContext<Location> context)
         {
             _locationContext = context;
         }
@@ -35,9 +35,9 @@ namespace Shop.Data.Repositories
             return _locationContext.GetById(id);
         }
 
-        public bool IsExists(Location location)
+        public int GetId(Location location)
         {
-            return _locationContext.IsExists(location);
+            return _locationContext.GetId(location);
         }
     }
 }

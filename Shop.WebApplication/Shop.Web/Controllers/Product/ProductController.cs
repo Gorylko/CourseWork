@@ -42,10 +42,8 @@ namespace Shop.Web.Controllers.Product
                 return View(model);
             }
             var user = User as UserPrinciple;
-            if (!_locationService.IsExists(model.Location))
-            {
-                _locationService.Save(model.Location);
-            }
+            _locationService.Save(model.Location);
+            model.Location.Id = _locationService.GetId(model.Location);
             _productService.Save(new ProductEntity
             {
                 Name = model.Name,
@@ -175,18 +173,17 @@ namespace Shop.Web.Controllers.Product
                 return View("~/Shared/Error.cshtml");
             }
 
-            ViewBag.Categories = _categoryService.GetAll();
-            ViewBag.States = _stateService.GetAll();
-
             return View(new EditProductViewModel
             {
                 Id = id,
                 Name = product.Name,
                 Description = product.Description,
                 Category = product.Category,
+                Categories = _categoryService.GetAll(),
                 Author = product.Author,
                 Price = product.Price,
                 State = product.State,
+                States = _stateService.GetAll(),
                 Location = product.Location
             });
         }
@@ -197,8 +194,6 @@ namespace Shop.Web.Controllers.Product
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = _categoryService.GetAll();
-                ViewBag.States = _stateService.GetAll();
                 return View(model);
             }
             _locationService.Save(model.Location);

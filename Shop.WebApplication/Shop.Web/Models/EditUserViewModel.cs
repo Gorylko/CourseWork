@@ -1,4 +1,5 @@
 ﻿using Shop.Shared.Entities.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Web.Models
@@ -22,7 +23,9 @@ namespace Shop.Web.Models
 
         [Required]
         [Display(Name = "Роль")]
-        public string Role { get; set; } //сделать выборку через селет
+        public string Role { get; set; }
+
+        public IReadOnlyCollection<RoleType> Roles { get; set; }
 
         [Required]
         [Display(Name = "Телефон")]

@@ -45,6 +45,7 @@
     <Compile Include="DataContext\Interfaces\ICategoryContext.cs" />
     <Compile Include="DataContext\Interfaces\IDataContext.cs" />
     <Compile Include="DataContext\Interfaces\IImageContext.cs" />
+    <Compile Include="DataContext\Interfaces\ILocationContext.cs" />
     <Compile Include="DataContext\Interfaces\IProductContext.cs" />
     <Compile Include="DataContext\Interfaces\IProductDetailsContext.cs" />
     <Compile Include="DataContext\Interfaces\IUserContext.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="DataContext\Realization\MsSql\RoleContext.cs" />
     <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\Interfaces\IImageRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILocationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductDetailsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
     <Compile Include="DataContext\Realization\MsSql\LocationContext.cs" />

@@ -67,9 +67,15 @@
     </table>
     @Html.ValidationMessageFor(model => model.Category);
     @Html.ValidationMessageFor(model => model.State);<br /><br />
-    <label for="LocationOfProduct">@Html.DisplayNameFor(model => model.LocationOfProduct)</label><br />
-    @Html.EditorFor(model => model.LocationOfProduct);
-    @Html.ValidationMessageFor(model => model.LocationOfProduct);<br /><br />
+
+    <label for="Country">Страна</label><br />
+    @Html.EditorFor(model => model.Location.Country);<br /><br />
+
+    <label for="City">Город</label><br />
+    @Html.EditorFor(model => model.Location.City);<br /><br />
+
+    <label for="Address">Адрес</label><br />
+    @Html.EditorFor(model => model.Location.Address);<br /><br />
 
     <div class="form-group">
         <div style="position:relative;">

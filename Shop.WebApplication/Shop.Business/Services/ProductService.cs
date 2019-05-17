@@ -15,6 +15,11 @@ namespace Shop.Business.Services
             return _productRepository.GetAll();
         }
 
+        public void Archive(int id)
+        {
+            _productRepository.Archive(id);
+        }
+
         public IReadOnlyCollection<Product> GetSearchList(string searchParameter, string searchQuery)
         {
             return _productRepository.GetAllByName(searchParameter, searchQuery);

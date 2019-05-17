@@ -37,7 +37,7 @@ GO
 CREATE TABLE [dbo].[Product]
 (
 	[Id]INT IDENTITY(1,1) NOT NULL,
-	[UserId] INT NOT NULL,
+	[UserId] INT NULL,
 	[CategoryId]INT NOT NULL,
 	[LocationId]INT NOT NULL,
 	[StateId]INT NOT NULL,
@@ -49,8 +49,7 @@ CREATE TABLE [dbo].[Product]
 	[LastModifiedDate]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED([Id]ASC),
 	FOREIGN KEY([CategoryId]) REFERENCES [dbo].[Category]([Id]),
-	FOREIGN KEY([StateId]) REFERENCES [dbo].[State]([Id]),
-	FOREIGN KEY([UserId]) REFERENCES [dbo].[User]([Id])
+	FOREIGN KEY([StateId]) REFERENCES [dbo].[State]([Id])
 );
 GO
 CREATE TABLE [dbo].[Purchase]
@@ -59,7 +58,7 @@ CREATE TABLE [dbo].[Purchase]
 	[ProductId]INT NOT NULL,
 	[SellerId]INT NOT NULL,
 	[CustomerId]INT NOT NULL,
-	[Address]NVARCHAR(100)NOT NULL,
+	[LocationId]INT NOT NULL,
 	[Date]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED ([Id]ASC)
 );

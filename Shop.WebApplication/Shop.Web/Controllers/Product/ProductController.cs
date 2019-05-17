@@ -112,27 +112,30 @@ namespace Shop.Web.Controllers.Product
         [HttpGet]
         public ActionResult BuyProduct(int id)
         {
-            ViewBag.Product = _productService.GetProductById(id);
-            return View();
+            return View(new PurchaseViewModel());
         }
 
         [User]
         [HttpPost]
-        public ActionResult BuyProduct(string address, int productId)
+        public ActionResult BuyProduct(PurchaseViewModel model)
         {
             var user = User as UserPrinciple;
-            ProductEntity product = _productService.GetProductById(productId);
-            var purchase = new Shop.Shared.Entities.Purchase
+            var product = _productService.GetProductById(model.ProductId);
+            _locationService.Save(model.Location);
+            var purchase = new Purchase
             {
                 Seller = product.Author,
                 Customer = _userService.GetByLogin(user.Name),
                 Product = product,
-                Address = address,
+                Location = new Location
+                {
+                    Id = _locationService.GetId(model.Location)
+                },
                 Date = DateTime.Now
             };
             _purchaseService.Save(purchase);
-            _productService.DeleteById(purchase.Product.Id);
-            ViewBag.Purchase = purchase;
+            _productService.Archive(purchase.Product.Id);
+            ViewBag.Purchase = purchase; //поменять
             return View("~/Views/Product/ShowPurchaseInfo.cshtml");
         }
 

@@ -12,5 +12,7 @@ namespace Shop.Data.Repositories.Interfaces
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
 
         void Edit(Product editedProduct);
+
+        void Archive(int id);
     }
 }

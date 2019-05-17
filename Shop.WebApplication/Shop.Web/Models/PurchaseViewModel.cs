@@ -4,7 +4,7 @@ using System;
 
 namespace Shop.Web.Models
 {
-    public class Purchase
+    public class PurchaseViewModel
     {
         public int PurchaseId { get; set; }
 
@@ -12,7 +12,7 @@ namespace Shop.Web.Models
 
         public User Customer { get; set; }
 
-        public string Address { get; set; }
+        public Location Location { get; set; }
 
         public int ProductId { get; set; }
 

@@ -17,6 +17,18 @@ namespace Shop.Data.DataContext.Realization.MsSql
         LocationContext _locationContext = new LocationContext();
         ImageContext _imageContext = new ImageContext();
 
+        public void Archive(int productId)
+        {
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [IsArchive] = 1, [UserId] = @null{Typography.NewLine}WHERE Id = @productId", connection);
+                command.Parameters.AddWithValue("@productId", productId);
+                command.Parameters.AddWithValue("@null", null);
+                command.ExecuteNonQuery();
+            }
+        }
+
         public IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
@@ -81,7 +93,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [UserId] = {userId} AND [IsArchive] = 0", connection))
+                using (var command = new SqlCommand(SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [UserId] = {userId}", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -135,7 +147,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
             {
                 connection.Open();
                 List<Product> products = new List<Product>();
-                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = @id AND [IsArchive] = 0";
+                string query = SqlConst.SelectAllProductInDbString + Typography.NewLine + $"WHERE [Product].[Id] = @id";
                 var command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = command.ExecuteReader();
@@ -157,7 +169,6 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 while (reader.Read())
                 {
                     returnProducts.Add(MapProduct(reader));
-
                 }
                 return returnProducts;
             }

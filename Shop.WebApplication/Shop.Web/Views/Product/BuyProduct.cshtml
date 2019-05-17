@@ -1,4 +1,5 @@
-﻿
+﻿@using Shop.Web.Models;
+@model PurchaseViewModel
 @{
     ViewBag.Title = "Оформление заказа";
 }
@@ -13,19 +14,27 @@
 <body>
     <div>
         <h3>Форма оформления покупки</h3>
-        <form method="post" action="">
-            <input type="hidden" value="@ViewBag.Product.Id" name="productId" />
+        @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
+        {
+            <input type="hidden" value="@Model.ProductId" name="ProductId" />
             <table>
 
                 <tr>
                     <td><p>Введите адрес :</p></td>
                     <td>
-                        <input type="text" name="address" />
+                        <label for="Country">Страна</label><br />
+                        @Html.EditorFor(model => model.Location.Country.Name);<br /><br />
+
+                        <label for="City">Город</label><br />
+                        @Html.EditorFor(model => model.Location.City.Name);<br /><br />
+
+                        <label for="Address">Адрес</label><br />
+                        @Html.EditorFor(model => model.Location.Address.Name);<br /><br />
                     </td>
                 </tr>
                 <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
             </table>
-        </form>
+        }
     </div>
 </body>
 </html>

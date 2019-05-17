@@ -10,7 +10,7 @@ namespace Shop.Shared.Entities
 
         public User Customer { get; set; }
 
-        public string Address { get; set; }
+        public Location Location { get; set; }
 
         public Product Product { get; set; }
 

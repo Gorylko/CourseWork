@@ -201,7 +201,7 @@
     <Compile Include="Models\ProductViewModels\ProductListViewModel.cs" />
     <Compile Include="Models\ProductViewModels\ProductViewModel.cs" />
     <Compile Include="Models\ProductViewModels\StateViewModel.cs" />
-    <Compile Include="Models\PurchaseModel.cs" />
+    <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ProductViewModels\SearchViewModel.cs" />
     <Compile Include="Models\Shared\ConfirmViewModel.cs" />

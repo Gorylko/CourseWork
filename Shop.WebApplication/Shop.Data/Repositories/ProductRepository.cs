@@ -53,5 +53,10 @@ namespace Shop.Data.Repositories
         {
             _productContext.Edit(editedProduct);
         }
+
+        public void Archive(int id)
+        {
+            _productContext.Archive(id);
+        }
     }
 }

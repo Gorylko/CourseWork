@@ -13,7 +13,7 @@ namespace Shop.Data.Constants
         "JOIN [User] ON [Product].[UserId] = [User].[Id]" + Typography.NewLine +
         "JOIN [Role] ON [User].[RoleId] = [Role].[Id]";
 
-        public const string SelectLocationString = "SELECT [Location].*, [Country].[Name] AS Country, [City].[Name] AS City, [Address].[Name] AS [Address]" + Typography.NewLine + 
+        public const string SelectLocationString = "SELECT [Location].*, [Country].[Name] AS [CountryName], [City].[Name] AS [CityName], [Address].[Name] AS [AddressName]" + Typography.NewLine + 
         "FROM[Location]" + Typography.NewLine +
         "JOIN[Country] ON[Location].[CountryId] = [Country].[Id]" + Typography.NewLine +
         "JOIN[City] ON[Location].[CityId] = [City].[Id]" + Typography.NewLine +

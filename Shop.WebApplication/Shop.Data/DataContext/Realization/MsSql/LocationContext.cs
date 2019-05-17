@@ -17,7 +17,10 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand(SqlConst.SelectLocationString + $"\nWHERE [Country] = '{location.Country.Name}' AND [City] = {location.City.Name} AND [Address] = {location.Address}", connection);
+                var command = new SqlCommand(SqlConst.SelectLocationString + $"\nWHERE [Country].[Name] = @country AND [City].[Name] = @city AND [Address].[Name] = @address", connection);
+                command.Parameters.AddWithValue("@country", location.Country.Name);
+                command.Parameters.AddWithValue("@city", location.City.Name);
+                command.Parameters.AddWithValue("@address", location.Address.Name);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 return (int)reader["Id"];
@@ -80,17 +83,17 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 Address = new Address
                 {
                     Id = (int)reader["AddressId"],
-                    Name = (string)reader["Address"]
+                    Name = (string)reader["AddressName"]
                 },
                 City = new City
                 {
                     Id = (int)reader["CityId"],
-                    Name = (string)reader["City"]
+                    Name = (string)reader["CityName"]
                 },
                 Country = new Country
                 {
                     Id = (int)reader["CountryId"],
-                    Name = (string)reader["Country"]
+                    Name = (string)reader["CountryName"]
                 }
             };
         }
@@ -100,14 +103,14 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                if (IsExists(country))
+                if (!IsExists(country))
                 {
                     var insertCommand = new SqlCommand("INSERT INTO [Country] (Name) VALUES (@country)", connection);
                     insertCommand.Parameters.AddWithValue("@country", country.Name);
                     insertCommand.ExecuteNonQuery();
                 }
-                var selectCommand = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = {country.Name}");
-
+                var selectCommand = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = @country", connection);
+                selectCommand.Parameters.AddWithValue("@country", country.Name);
                 var reader = selectCommand.ExecuteReader();
                 reader.Read();
                 return (int?)reader["Id"];
@@ -119,14 +122,14 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                if (IsExists(city))
+                if (!IsExists(city))
                 {
                     var insertCommand = new SqlCommand("INSERT INTO [City] (Name) VALUES (@city)", connection);
                     insertCommand.Parameters.AddWithValue("@city", city.Name);
                     insertCommand.ExecuteNonQuery();
                 }
-                var selectCommand = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = {city.Name}");
-
+                var selectCommand = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = @city", connection);
+                selectCommand.Parameters.AddWithValue("@city", city.Name);
                 var reader = selectCommand.ExecuteReader();
                 reader.Read();
                 return (int?)reader["Id"];
@@ -138,14 +141,14 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                if (IsExists(address))
+                if (!IsExists(address))
                 {
                     var insertCommand = new SqlCommand("INSERT INTO [Address] (Name) VALUES (@address)", connection);
                     insertCommand.Parameters.AddWithValue("@address", address.Name);
                     insertCommand.ExecuteNonQuery();
                 }
-                var selectCommand = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = {address.Name}");
-
+                var selectCommand = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = @address", connection);
+                selectCommand.Parameters.AddWithValue("@address", address.Name);
                 var reader = selectCommand.ExecuteReader();
                 reader.Read();
                 return (int?)reader["Id"];
@@ -157,7 +160,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = {address.Name}", connection);
+                var command = new SqlCommand($"SELECT * FROM [Address] WHERE [Name] = @address", connection);
+                command.Parameters.AddWithValue("@address", address.Name);
                 var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -172,7 +176,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = {city.Name}", connection);
+                var command = new SqlCommand($"SELECT * FROM [City] WHERE [Name] = @city", connection);
+                command.Parameters.AddWithValue("@city", city.Name);
                 var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -187,7 +192,8 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = {country.Name}", connection);
+                var command = new SqlCommand($"SELECT * FROM [Country] WHERE [Name] = @country", connection);
+                command.Parameters.AddWithValue("@country", country.Name);
                 var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {

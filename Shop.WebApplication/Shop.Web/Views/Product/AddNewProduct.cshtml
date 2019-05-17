@@ -69,13 +69,13 @@
     @Html.ValidationMessageFor(model => model.State);<br /><br />
 
     <label for="Country">Страна</label><br />
-    @Html.EditorFor(model => model.Location.Country);<br /><br />
+    @Html.EditorFor(model => model.Location.Country.Name);<br /><br />
 
     <label for="City">Город</label><br />
-    @Html.EditorFor(model => model.Location.City);<br /><br />
+    @Html.EditorFor(model => model.Location.City.Name);<br /><br />
 
     <label for="Address">Адрес</label><br />
-    @Html.EditorFor(model => model.Location.Address);<br /><br />
+    @Html.EditorFor(model => model.Location.Address.Name);<br /><br />
 
     <div class="form-group">
         <div style="position:relative;">

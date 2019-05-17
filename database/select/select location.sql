@@ -1,6 +1,8 @@
 USE [UglyExpressShop]
-SELECT [Location].*, [Country].[Name] AS Country, [City].[Name] AS City, [Address].[Name] AS [Address] 
-FROM [Location]
-LEFT JOIN [Country] ON [Location].[CountryId] = [Country].[Id]
-LEFT JOIN [City] ON [Location].[CityId] = [City].[Id]
-LEFT JOIN [Address] ON [Location].[AddressId] = [Address].[Id]
+GO
+
+SELECT [Location].*, [Country].[Name] AS CountryName, [City].[Name] AS CityName, [Address].[Name] AS AddressName
+FROM[Location]
+JOIN[Country] ON[Location].[CountryId] = [Country].[Id]
+JOIN[City] ON[Location].[CityId] = [City].[Id]
+JOIN[Address] ON[Location].[AddressId] = [Address].[Id]

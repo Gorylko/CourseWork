@@ -55,6 +55,15 @@ namespace Shop.Business.Services
             _productRepository.Edit(editedProduct);
         }
 
+        public void ArchiveAllByUserId(int userId)
+        {
+            var userProducts = _productRepository.GetByUserId(userId);
+            foreach(var product in userProducts)
+            {
+                _productRepository.Archive(product.Id);
+            }
+        }
+
         public IReadOnlyCollection<Product> GetAllWithFilters(IEnumerable<Predicate<Product>> filters)
         {
             List<Product> products = (List<Product>)_productRepository.GetAll();
@@ -106,6 +115,11 @@ namespace Shop.Business.Services
                 return GetAll();
             }
             return GetAllWithFilters(filters);
+        }
+
+        public int GetIdByProduct(Product product)
+        {
+            return _productRepository.GetIdByProduct(product);
         }
 
     }

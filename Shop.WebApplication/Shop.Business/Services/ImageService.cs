@@ -23,9 +23,24 @@ namespace Shop.Business.Services
             return _imageRepository.GetAllByUserId(id);
         }
 
+        public void DeleteAllByUserId(int userId)
+        {
+            _imageRepository.DeleteAllByUserId(userId);
+        }
+
+        public void DeleteAllByProductId(int productId)
+        {
+            _imageRepository.DeleteAllByProductId(productId);
+        }
+
         public Image GetById(int id)
         {
             return _imageRepository.GetById(id);
+        }
+
+        public void Save(Image image, object owner)
+        {
+            _imageRepository.Save(image, owner);
         }
     }
 }

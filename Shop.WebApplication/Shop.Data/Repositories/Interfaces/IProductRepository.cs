@@ -13,6 +13,8 @@ namespace Shop.Data.Repositories.Interfaces
 
         void Edit(Product editedProduct);
 
+        int GetIdByProduct(Product product);
+
         void Archive(int id);
     }
 }

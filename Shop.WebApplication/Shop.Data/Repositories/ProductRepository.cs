@@ -58,5 +58,10 @@ namespace Shop.Data.Repositories
         {
             _productContext.Archive(id);
         }
+
+        public int GetIdByProduct(Product product)
+        {
+            return _productContext.GetIdByProduct(product);
+        }
     }
 }

@@ -4,6 +4,7 @@ using Shop.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
 using Typography = Shop.Shared.Constants.TypographyConstants;
 
@@ -22,9 +23,9 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [IsArchive] = 1, [UserId] = @null{Typography.NewLine}WHERE Id = @productId", connection);
+                var command = new SqlCommand($"UPDATE [Product]{Typography.NewLine}SET [IsArchive] = @isArchive, [UserId] = null{Typography.NewLine}WHERE Id = @productId", connection);
                 command.Parameters.AddWithValue("@productId", productId);
-                command.Parameters.AddWithValue("@null", null);
+                command.Parameters.AddWithValue("@isArchive", 1);
                 command.ExecuteNonQuery();
             }
         }
@@ -191,7 +192,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [dbo].[Product]([CategoryId],[LocationId],[StateId],[UserId],[Name],[Description],[Price],[CreationDate],[LastModifiedDate],[IsArchive]) VALUES(@categoryId, @locationId, @stateId, @authorId, @productName, @description, @price, @creationDate, @lastModifiedDate, @isArchive)", connection);
                 command.Parameters.AddWithValue("@categoryId", product.Category.Id);
-                command.Parameters.AddWithValue("@locationId", product.Location.Id); //изменить после того, как сделаю наконец эту систему сложной локации с составными ключами
+                command.Parameters.AddWithValue("@locationId", product.Location.Id);
                 command.Parameters.AddWithValue("@stateId", product.State.Id);
                 command.Parameters.AddWithValue("@authorId", product.Author.Id);
                 command.Parameters.AddWithValue("@productName", product.Name);
@@ -204,6 +205,33 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
+        public int GetIdByProduct(Product product)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                //StringBuilder builder = new StringBuilder($"SELECT [Product] WHERE [Name] = '{product.Name}'");
+                //if(product.Price != default(decimal))
+                //{
+                //    builder.Append($" AND [Price] = {product.Price}");
+                //}
+                //if(product.Author.Id != default(int))
+                //{
+                //    builder.Append($" AND [UserId] = {product.Author.Id}");
+                //}
+                //if(product.Description != default(string))
+                //{
+                //    builder.Append($" AND [Description] = '{product.Description}'");
+                //}
 
+                var command = new SqlCommand("SELECT * FROM [Product] WHERE [Name] = @name AND [UserId] = @userId AND [Description] = @description", connection);
+                command.Parameters.AddWithValue("@name", product.Name);
+                command.Parameters.AddWithValue("@userId", product.Author.Id);
+                command.Parameters.AddWithValue("@description", product.Description);
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                return (int)reader["Id"];
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Shop.Web.Controllers
         private StateService _stateService = new StateService();
         private LocationService _locationService = new LocationService();
         private LoginService _loginService = new LoginService();
+        private ImageService _imageService = new ImageService();
 
         public ActionResult ShowUsersList()
         {
@@ -69,16 +70,13 @@ namespace Shop.Web.Controllers
         }
 
         [User]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int userId)
         {
-            ViewBag.Message = $"Пользователь \"{_userService.GetById(id).Login}\" удален успешно!";
-            IReadOnlyCollection<Shared.Entities.Product> products = _productService.GetByUserId(id); 
-            foreach(Shared.Entities.Product product in products)
-            {
-                _productService.DeleteById(product.Id);
-            }
-            _userService.DeleteById(id);
+            _productService.ArchiveAllByUserId(userId);
+            _imageService.DeleteAllByUserId(userId);
+            _userService.DeleteById(userId);
             _loginService.Logout();
+            ViewBag.Message = $"Пользователь \"{_userService.GetById(userId).Login}\" удален успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
 

@@ -18,6 +18,26 @@ namespace Shop.Data.Repositories
             _imageContext = context;
         }
 
+        public void DeleteAllByProductId(int productId)
+        {
+            _imageContext.DeleteAllByProductId(productId);
+        }
+
+        public void DeleteAllByUserId(int userId)
+        {
+            _imageContext.DeleteAllByUserId(userId);
+        }
+
+        public void DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyCollection<Image> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public IReadOnlyCollection<Image> GetAllByProductId(int id)
         {
             return _imageContext.GetAllByProductId(id);
@@ -31,6 +51,11 @@ namespace Shop.Data.Repositories
         public Image GetById(int id)
         {
             return _imageContext.GetById(id);
+        }
+
+        public void Save(Image image, object owner)
+        {
+            _imageContext.Save(image, owner);
         }
     }
 }

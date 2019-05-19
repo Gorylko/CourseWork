@@ -9,10 +9,20 @@ namespace Shop.Data.Repositories.Interfaces
 {
     public interface IImageRepository
     {
-        Image GetById(int id);
-
         IReadOnlyCollection<Image> GetAllByProductId(int id);
 
         IReadOnlyCollection<Image> GetAllByUserId(int id);
+
+        void Save(Image image, object owner);
+
+        IReadOnlyCollection<Image> GetAll();
+
+        void DeleteAllByProductId(int productId);
+
+        void DeleteAllByUserId(int userId);
+
+        Image GetById(int id);
+
+        void DeleteById(int id);
     }
 }

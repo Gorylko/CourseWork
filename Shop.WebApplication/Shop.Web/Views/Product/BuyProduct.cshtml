@@ -14,7 +14,7 @@
 <body>
     <div>
         <h3>Форма оформления покупки</h3>
-        @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
+        @using (Html.BeginForm("BuyProduct", "Product", FormMethod.Post))
         {
             <input type="hidden" value="@Model.ProductId" name="ProductId" />
             <table>

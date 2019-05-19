@@ -54,6 +54,26 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
+        public void DeleteAllByUserId(int userId)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                var command = new SqlCommand("DELETE [Image] WHERE [UserId] = @userId", connection);
+                command.Parameters.AddWithValue("@userId", userId);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteAllByProductId(int productId)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                var command = new SqlCommand("DELETE [Image] WHERE [ProductId] = @productId", connection);
+                command.Parameters.AddWithValue("@productId", productId);
+                command.ExecuteNonQuery();
+            }
+        }
+
         public Image GetById(int id)
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
@@ -71,19 +91,23 @@ namespace Shop.Data.DataContext.Realization.MsSql
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
-                var command = new SqlCommand($"INSERT INTO [Image] ([Data], [Extension], [ProductId], [UserId]) VALUES (@data, @extension, @productId, @userId)", connection);
-                command.Parameters.AddWithValue("@data", image.Data);
-                command.Parameters.AddWithValue("@extension", image.Extension);
+                string productId = "null";
+                string userId = "null";
 
                 if(owner is Product product)
                 {
-                    command.Parameters.AddWithValue("@productId", product.Id);
+                    productId = product.Id.ToString();
                 }
 
                 else if(owner is User user)
                 {
-                    command.Parameters.AddWithValue("@userId", user.Id);
+                    userId = user.Id.ToString();
                 }
+
+                var command = new SqlCommand($"INSERT INTO [Image] ([Data], [Extension], [ProductId], [UserId]) VALUES (@data, @extension, {productId}, {userId})", connection);
+                command.Parameters.AddWithValue("@data", image.Data);
+                command.Parameters.AddWithValue("@extension", image.Extension);
+
                 command.ExecuteNonQuery();
             }
         }

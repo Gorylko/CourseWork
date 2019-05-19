@@ -14,6 +14,10 @@ namespace Shop.Data.DataContext.Interfaces
 
         void Save(Image image, object owner);
 
+        void DeleteAllByProductId(int productId);
+
+        void DeleteAllByUserId(int userId);
+
         IReadOnlyCollection<Image> GetAllByProductId(int id);
 
         IReadOnlyCollection<Image> GetAllByUserId(int id);

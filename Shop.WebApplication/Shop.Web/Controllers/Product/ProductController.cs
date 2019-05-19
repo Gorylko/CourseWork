@@ -21,6 +21,7 @@ namespace Shop.Web.Controllers.Product
         private UserService _userService = new UserService();
         private StateService _stateService = new StateService();
         private LocationService _locationService = new LocationService();
+        private ImageService _imageService = new ImageService();
 
 
         [User]
@@ -33,7 +34,7 @@ namespace Shop.Web.Controllers.Product
 
         [User]
         [HttpPost]
-        public ActionResult AddNewProduct(ProductViewModel model, HttpPostedFileBase image = null)
+        public ActionResult AddNewProduct(ProductViewModel model, HttpPostedFileBase httpFileImage = null)
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +45,12 @@ namespace Shop.Web.Controllers.Product
             var user = User as UserPrinciple;
             _locationService.Save(model.Location);
             model.Location.Id = _locationService.GetId(model.Location);
-            _productService.Save(new ProductEntity
+            var image = new Image
+            {
+                Data = GetImageData(httpFileImage),
+                Extension = httpFileImage.ContentType
+            };
+            var product = new ProductEntity
             {
                 Name = model.Name,
                 Category = model.Category,
@@ -61,16 +67,11 @@ namespace Shop.Web.Controllers.Product
                 {
                     Id = user.UserId
                 },
-                Images = new List<Image>
-                {
-                    new Image
-                    {
-                        Data = GetImageData(image),
-                        Extension = image.ContentType
-                    }
-                }
-
-            });
+                Images = new List<Image> { image }
+            };
+            _productService.Save(product);
+            product.Id = _productService.GetIdByProduct(product);
+            _imageService.Save(image, product);
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
             return View("~/Views/Shared/Notification.cshtml");
         }
@@ -112,7 +113,7 @@ namespace Shop.Web.Controllers.Product
         [HttpGet]
         public ActionResult BuyProduct(int id)
         {
-            return View(new PurchaseViewModel());
+            return View(new PurchaseViewModel() { ProductId = id});
         }
 
         [User]
@@ -129,14 +130,23 @@ namespace Shop.Web.Controllers.Product
                 Product = product,
                 Location = new Location
                 {
-                    Id = _locationService.GetId(model.Location)
+                    Id = _locationService.GetId(model.Location),
+                    Address = model.Location.Address,
+                    City = model.Location.City,
+                    Country = model.Location.Country
                 },
                 Date = DateTime.Now
             };
             _purchaseService.Save(purchase);
             _productService.Archive(purchase.Product.Id);
-            ViewBag.Purchase = purchase; //поменять
-            return View("~/Views/Product/ShowPurchaseInfo.cshtml");
+            return View("~/Views/Product/ShowPurchaseInfo.cshtml", new PurchaseViewModel
+            {
+                Date = purchase.Date,
+                Customer = purchase.Customer,
+                Seller = purchase.Seller,
+                Location = purchase.Location,
+                ProductId = purchase.Product.Id,
+            });
         }
 
 
@@ -158,9 +168,9 @@ namespace Shop.Web.Controllers.Product
         [User]
         public ActionResult Delete(int id)
         {
-            ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
+            _imageService.DeleteAllByProductId(id);
             _productService.DeleteById(id);
-
+            ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
             return View("~/Views/Shared/Notification.cshtml");
         }
 

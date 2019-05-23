@@ -27,9 +27,11 @@ namespace Shop.Web.Controllers.Product
         [User]
         public ActionResult AddNewProduct()
         {
-            ViewBag.Categories = _categoryService.GetAll();
-            ViewBag.States = _stateService.GetAll();
-            return View(new ProductViewModel());
+            return View(new ProductViewModel()
+            {
+                Categories = _categoryService.GetAll(),
+                States = _stateService.GetAll()
+            });
         }
 
         [User]
@@ -42,18 +44,24 @@ namespace Shop.Web.Controllers.Product
                 ViewBag.States = _stateService.GetAll();
                 return View(model);
             }
+
             var user = User as UserPrinciple;
             _locationService.Save(model.Location);
             model.Location.Id = _locationService.GetId(model.Location);
             var imagesList = new List<Image>();
-            foreach (var image in images)
+
+            if (images != null)
             {
-                imagesList.Add(new Image
+                foreach (var image in images)
                 {
-                    Data = GetImageData(image),
-                    Extension = image.ContentType
-                });
+                    imagesList.Add(new Image
+                    {
+                        Data = GetImageData(image),
+                        Extension = image.ContentType
+                    });
+                }
             }
+
             var product = new ProductEntity
             {
                 Name = model.Name,
@@ -73,9 +81,13 @@ namespace Shop.Web.Controllers.Product
                 },
                 Images = imagesList
             };
+
             _productService.Save(product);
             product.Id = _productService.GetIdByProduct(product);
-            _imageService.SaveAll(product.Images, product);
+            if (images != null)
+            {
+                _imageService.SaveAll(product.Images, product);
+            }
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
             return View("~/Views/Shared/Notification.cshtml");
         }

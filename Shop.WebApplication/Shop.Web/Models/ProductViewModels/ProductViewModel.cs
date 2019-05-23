@@ -44,5 +44,7 @@ namespace Shop.Web.Models.ProductViewModels
         [Required]
         [Display(Name = "Состояние товара")]
         public State State { get; set; }
+
+        public IReadOnlyCollection<State> States { get; set; }
     }
 }

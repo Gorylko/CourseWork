@@ -1,6 +1,6 @@
 ﻿@using Shop.Web.Models;
 @using Shop.Shared.Entities.Authorize;
-@using Shop.Shared.Entities.Enums;
+@using Shop.Web.HtmlHelpers;
 @model SearchViewModel
 @{
     ViewBag.Title = "Товары";
@@ -13,85 +13,90 @@
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
-    <div>
+    <div class="row">
         <h3>Поиск товара</h3>
-
-
-        @using (Html.BeginForm("ShowSearchList", "Product", FormMethod.Post))
-        {
-            @Html.EditorFor(model => model.Name)
-            <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
-            @Html.ValidationMessageFor(model => model.Name) <br /> <br />
-            <select name="State.Id">
-                <option disable>Выберите состояние</option>
-                @foreach (var state in ViewBag.States)
+        <div class="col-md-4">
+                @foreach (var product in Model.Products)
                 {
-                    if (Model.State != null && Model.State.Id == state.Id)
-                    {
-                        <option selected value="@state.Id">@state.Name</option>
-                        continue;
-                    }
-                    <option value="@state.Id">@state.Name</option>
-                }
-            </select>
-            <select name="Category.Id">
-                <option disable>Выберите категорию</option>
-                @foreach (var category in ViewBag.Categories)
-                {
-                    if (Model.Category != null)
-                    {
-                        if (Model.Category.Id == category.Id)
+                    <div class="well" style="width: 180%">
+                        @if (product.Images != null && product.Images.Count > 0)
                         {
-                            <option selected value="@category.Id">@category.Name</option>
+                            <div class="pull-left">
+                                @Html.RenderImage(product.Images.FirstOrDefault(), "img - thumbnail", new { width = "75", height = "75" })
+                            </div>
+                        }
+                        <div style="padding-left:15%">
+                            <h4>
+                                <strong>@product.Name</strong>
+                                <span class="pull-right label label-primary">@product.Price.ToString("# шпрэксов")</span>
+                            </h4>
+                            <span class="lead">@product.Description</span>
+
+                            <form action="~/Product/ShowProductInfo">
+                                <div>
+                                    <button class="btn waves-effect waves-light" type="submit">Открыть</button>
+                                    <input type="hidden" value="@product.Id" name="id" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
+        </div>
+
+
+        <div class="col-md-4 col-md-offset-4">
+            @using (Html.BeginForm("ShowSearchList", "Product", FormMethod.Post))
+            {
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                <button class="btn waves-effect waves-light" type="submit" name="action">Найти</button>
+                @Html.ValidationMessageFor(model => model.Name) <br /> <br />
+
+                <select name="State.Id" class="form-control">
+                    <option disable>Выберите состояние</option>
+                    @foreach (var state in ViewBag.States)
+                    {
+                        if (Model.State != null && Model.State.Id == state.Id)
+                        {
+                            <option selected value="@state.Id">@state.Name</option>
                             continue;
                         }
+                        <option value="@state.Id">@state.Name</option>
                     }
-                    <option value="@category.Id">@category.Name</option>
-                }
-            </select>
+                </select>
+                <select name="Category.Id" class="form-control">
+                    <option disable>Выберите категорию</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        if (Model.Category != null)
+                        {
+                            if (Model.Category.Id == category.Id)
+                            {
+                                <option selected value="@category.Id">@category.Name</option>
+                                continue;
+                            }
+                        }
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
 
-            <br />
-            <br />
-            <table>
-                <tr>
-                    <td><label for="MinPrice">@Html.DisplayNameFor(model => model.MinPrice)</label></td>
-                    <td><label for="MaxPrice">@Html.DisplayNameFor(model => model.MaxPrice)</label></td>
-                </tr>
-                <tr>
-                    <td>@Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } })</td>
-                    <td>@Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$" } })</td>
-                </tr>
-                <tr>
-                    <td>@Html.ValidationMessageFor(model => model.MinPrice)</td>
-                    <td>@Html.ValidationMessageFor(model => model.MaxPrice)</td>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <td><label for="MinPrice">@Html.DisplayNameFor(model => model.MinPrice)</label></td>
+                        <td><label for="MaxPrice">@Html.DisplayNameFor(model => model.MaxPrice)</label></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.ValidationMessageFor(model => model.MinPrice)</td>
+                        <td>@Html.ValidationMessageFor(model => model.MaxPrice)</td>
+                    </tr>
+                </table>
 
-            <input type="hidden" value="@Model.Products" name="Products" />
-        }
-
-        <br />
-        <table>
-            <tr>
-                <td><b>Название</b></td>
-                <td><b>Категория</b></td>
-            </tr>
-            @foreach (var product in Model.Products)
-            {
-                <tr>
-                    <td width="150px"><p>@product.Name</p></td>
-                    <td width="150px"><p>@product.Category.Name</p></td>
-                    <td>
-                        <form action="~/Product/ShowProductInfo">
-                            <div>
-                                <button type="submit">Открыть</button>
-                                <input type="hidden" value="@product.Id" name="id" />
-                            </div>
-                        </form>
-                    </td>
-                </tr>
+                <input type="hidden" value="@Model.Products" name="Products" />
             }
-        </table>
+        </div>
     </div>
 </body>
 </html>

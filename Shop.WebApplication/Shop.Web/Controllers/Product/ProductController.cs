@@ -34,7 +34,7 @@ namespace Shop.Web.Controllers.Product
 
         [User]
         [HttpPost]
-        public ActionResult AddNewProduct(ProductViewModel model, HttpPostedFileBase httpFileImage = null)
+        public ActionResult AddNewProduct(ProductViewModel model, IEnumerable<HttpPostedFileBase> images = null)
         {
             if (!ModelState.IsValid)
             {
@@ -45,11 +45,15 @@ namespace Shop.Web.Controllers.Product
             var user = User as UserPrinciple;
             _locationService.Save(model.Location);
             model.Location.Id = _locationService.GetId(model.Location);
-            var image = new Image
+            var imagesList = new List<Image>();
+            foreach (var image in images)
             {
-                Data = GetImageData(httpFileImage),
-                Extension = httpFileImage.ContentType
-            };
+                imagesList.Add(new Image
+                {
+                    Data = GetImageData(image),
+                    Extension = image.ContentType
+                });
+            }
             var product = new ProductEntity
             {
                 Name = model.Name,
@@ -67,11 +71,11 @@ namespace Shop.Web.Controllers.Product
                 {
                     Id = user.UserId
                 },
-                Images = new List<Image> { image }
+                Images = imagesList
             };
             _productService.Save(product);
             product.Id = _productService.GetIdByProduct(product);
-            _imageService.Save(image, product);
+            _imageService.SaveAll(product.Images, product);
             ViewBag.Message = $"Товар \"{model.Name}\" добавлен в каталог и будет отображаться у всех дользователей!";
             return View("~/Views/Shared/Notification.cshtml");
         }
@@ -113,7 +117,7 @@ namespace Shop.Web.Controllers.Product
         [HttpGet]
         public ActionResult BuyProduct(int id)
         {
-            return View(new PurchaseViewModel() { ProductId = id});
+            return View(new PurchaseViewModel() { ProductId = id });
         }
 
         [User]

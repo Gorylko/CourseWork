@@ -1,5 +1,6 @@
 ﻿@using Shop.Web.Models.ProductViewModels;
 @using Shop.Shared.Entities.Images;
+@using Shop.Web.HtmlHelpers;
 @model ProductListViewModel
 @{
     ViewBag.Title = "Товары";
@@ -21,8 +22,7 @@
                 @if (product.Images != null && product.Images.Count > 0)
                 {
                     <div class="pull-left">
-                        @Html.Raw("<img class=\"img - thumbnail\" width=\"75\" height=\"75\";' src=\"data:image/jpeg;base64,"
-                            + Convert.ToBase64String(product.Images.First<Image>().Data) + "\" />")
+                        @Html.RenderImage(product.Images.FirstOrDefault(), "img - thumbnail", new {width = "75", height = "75" })
                     </div>
                 }
                 <div style="padding-left:15%">

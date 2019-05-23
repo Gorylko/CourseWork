@@ -4,15 +4,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Shop.Business.Services;
+using Shop.Shared.Entities.Images;
 
 namespace Shop.Web.HtmlHelpers
 {
     public static class ImageHelper
     {
         private static ImageService _imageService = new ImageService();
-        public static IHtmlString RenderImage(int imageId, string cssClass, object htmlAttributes = null)
+        public static IHtmlString RenderImage(this HtmlHelper helper, Image image, string cssClass, object htmlAttributes = null)
         {
-            var image = _imageService.GetById(imageId);
             var builder = new TagBuilder("img");
             builder.MergeAttribute("class", cssClass);
             builder.MergeAttributes(ObjectToHtmlAttributes(htmlAttributes));

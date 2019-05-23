@@ -42,5 +42,13 @@ namespace Shop.Business.Services
         {
             _imageRepository.Save(image, owner);
         }
+
+        public void SaveAll(IEnumerable<Image> images, object owner)
+        {
+            foreach(var image in images)
+            {
+                Save(image, owner);
+            }
+        }
     }
 }

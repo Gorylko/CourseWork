@@ -2,11 +2,18 @@ USE[UglyExpressShop];
 GO
 
 INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 1
-FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Мыш.jpg', SINGLE_BLOB) AS [Data]
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\сялёдка.jpg', SINGLE_BLOB) AS [Data]
 INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'png', BulkColumn, 2
-FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Рик.png', SINGLE_BLOB) AS [Data]
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\самовар.jpg', SINGLE_BLOB) AS [Data]
 INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 3
 FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Лис-Чипидрис.jpg', SINGLE_BLOB) AS [Data]
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 4
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\бульба.jpg', SINGLE_BLOB) AS [Data]
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 5
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Рик.png', SINGLE_BLOB) AS [Data]
+INSERT INTO [dbo].[Image]([Extension], [Data], [ProductId]) SELECT 'jpg', BulkColumn, 6
+FROM OPENROWSET(BULK 'C:\Users\shamy\YandexDisk\ПРОГРОМИРУЕМ, ЗНЧТ\ГирьИл\Web\CourseWork\database\images\Мыш.jpg', SINGLE_BLOB) AS [Data]
+
 
 INSERT INTO [dbo].[Category]([Name]) VALUES('Food')
 INSERT INTO [dbo].[Category]([Name]) VALUES('Toys')

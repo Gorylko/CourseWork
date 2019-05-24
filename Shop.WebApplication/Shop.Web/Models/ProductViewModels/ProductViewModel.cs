@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Shop.Shared.Entities.Images;
 
 namespace Shop.Web.Models.ProductViewModels
 {
@@ -40,6 +41,8 @@ namespace Shop.Web.Models.ProductViewModels
         [Required]
         [Display(Name = "Местонахождение товара")]
         public Location Location { get; set; }
+
+        public IReadOnlyCollection<Image> Images { get; set; }
 
         [Required]
         [Display(Name = "Состояние товара")]

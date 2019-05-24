@@ -1,4 +1,5 @@
 ﻿using Shop.Shared.Entities.Enums;
+using Shop.Shared.Entities.Images;
 
 namespace Shop.Shared.Entities
 {
@@ -17,6 +18,8 @@ namespace Shop.Shared.Entities
         public string PhoneNumber { get; set; }
 
         public RoleType Role { get; set; }
+
+        public Image Image { get; set; }
 
         public bool InRoles(string role)
         {

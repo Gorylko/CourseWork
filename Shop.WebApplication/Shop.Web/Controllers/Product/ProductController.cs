@@ -121,8 +121,21 @@ namespace Shop.Web.Controllers.Product
 
         public ActionResult ShowProductInfo(int id)
         {
-            ViewBag.Product = _productService.GetProductById(id);
-            return View();
+            var product = _productService.GetProductById(id);
+            return View(new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Images = product.Images,
+                Author = product.Author,
+                Location = product.Location,
+                Category = product.Category,
+                Price = product.Price,
+                State = product.State,
+                CreationDate = product.CreationDate,
+                LastModifiedDate = product.LastModifiedDate,
+            });
         }
 
         [User]

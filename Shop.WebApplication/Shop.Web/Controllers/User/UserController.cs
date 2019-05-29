@@ -70,14 +70,14 @@ namespace Shop.Web.Controllers
         }
 
         [User]
-        public ActionResult Delete(int userId)
+        public ActionResult Delete()
         {
-            _productService.ArchiveAllByUserId(userId);
-            _imageService.DeleteAllByUserId(userId);
-            _userService.DeleteById(userId);
+            var user = User as UserPrinciple;
+            _productService.ArchiveAllByUserId(user.UserId);
+            _imageService.DeleteAllByUserId(user.UserId);
+            _userService.DeleteById(user.UserId);
             _loginService.Logout();
-            ViewBag.Message = $"Пользователь \"{_userService.GetById(userId).Login}\" удален успешно!";
-            return View("~/Views/Shared/Notification.cshtml");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [User]

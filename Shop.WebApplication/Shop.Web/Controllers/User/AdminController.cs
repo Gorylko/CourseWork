@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Shop.Shared.Helpers;
 using Shop.Shared.Entities.Enums;
 using System;
+using Shop.Business.Services.Auth;
 
 namespace Shop.Web.Controllers
 {
@@ -18,6 +19,8 @@ namespace Shop.Web.Controllers
         private RoleService _roleService = new RoleService();
         private StateService _stateService = new StateService();
         private LocationService _locationService = new LocationService();
+        private LoginService _loginService = new LoginService();
+        private ImageService _imageService = new ImageService();
 
         [Admin]
         public ActionResult ShowAdminPanel()
@@ -34,6 +37,16 @@ namespace Shop.Web.Controllers
         public ActionResult AddNewCategory()
         {
             return View(new CategoryViewModel());
+        }
+
+        [Admin]
+        public ActionResult DeleteUser(int userId)
+        {
+            ViewBag.Message = $"Пользователь \"{_userService.GetById(userId).Login}\" удален успешно!";
+            _productService.ArchiveAllByUserId(userId);
+            _imageService.DeleteAllByUserId(userId);
+            _userService.DeleteById(userId);
+            return View("~/Views/Shared/Notification.cshtml");
         }
 
         [Admin]

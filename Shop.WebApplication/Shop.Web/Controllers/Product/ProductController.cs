@@ -198,8 +198,8 @@ namespace Shop.Web.Controllers.Product
         public ActionResult Delete(int id)
         {
             _imageService.DeleteAllByProductId(id);
-            _productService.DeleteById(id);
             ViewBag.Message = $"Товар \"{_productService.GetProductById(id).Name}\" удален успешно!";
+            _productService.DeleteById(id);
             return View("~/Views/Shared/Notification.cshtml");
         }
 

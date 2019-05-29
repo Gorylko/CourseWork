@@ -62,7 +62,8 @@
                         }
                         <option value="@state.Id">@state.Name</option>
                     }
-                </select>
+                </select><br />
+
                 <select name="Category.Id" class="form-control">
                     <option disable>Выберите категорию</option>
                     @foreach (var category in ViewBag.Categories)
@@ -77,7 +78,7 @@
                         }
                         <option value="@category.Id">@category.Name</option>
                     }
-                </select>
+                </select><br />
 
                 <table>
                     <tr>
@@ -85,8 +86,8 @@
                         <td><label for="MaxPrice">@Html.DisplayNameFor(model => model.MaxPrice)</label></td>
                     </tr>
                     <tr>
-                        <td>@Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
-                        <td>@Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,2}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,5}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @pattern = @"^([0-9]{0,5}((,)[0-9]{0,2}))$", @class = "form-control" } })</td>
                     </tr>
                     <tr>
                         <td>@Html.ValidationMessageFor(model => model.MinPrice)</td>

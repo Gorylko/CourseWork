@@ -58,6 +58,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
+                connection.Open();
                 var command = new SqlCommand("DELETE [Image] WHERE [UserId] = @userId", connection);
                 command.Parameters.AddWithValue("@userId", userId);
                 command.ExecuteNonQuery();
@@ -68,6 +69,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         {
             using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
+                connection.Open();
                 var command = new SqlCommand("DELETE [Image] WHERE [ProductId] = @productId", connection);
                 command.Parameters.AddWithValue("@productId", productId);
                 command.ExecuteNonQuery();

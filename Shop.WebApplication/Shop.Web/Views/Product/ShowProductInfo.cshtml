@@ -26,8 +26,8 @@
                 </td>
             </tr>
         }
-        <tr><td><p>Название : </p></td><td>@ViewBag.Product.Name</td></tr>
-        <tr><td><p>Описание : </p></td><td>@ViewBag.Product.Description</td></tr>
+        <tr><td><p>Название : </p></td><td>@Model.Name</td></tr>
+        <tr><td><p>Описание : </p></td><td>@Model.Description</td></tr>
         <tr>
             <td>
                 Продавец :
@@ -67,7 +67,7 @@
                         </form>
                     </td>
                 }
-                else if (ViewBag.Product.Author.Id == user.UserId)
+                else if (Model.Author.Id == user.UserId)
                 {
                     <td>
                         <form action="~/Product/EditProduct">
@@ -78,7 +78,7 @@
                 }
             </tr>
             <tr>
-                @if (user.UserId == ViewBag.Product.Author.Id || user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
+                @if (user.UserId == Model.Author.Id || user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
                 {
                     <td>
                         <form action="~/Account/Confirm" style="color:crimson">

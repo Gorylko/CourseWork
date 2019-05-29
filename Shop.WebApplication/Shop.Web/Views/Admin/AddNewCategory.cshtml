@@ -9,7 +9,7 @@
 @using (Html.BeginForm("AddNewCategory", "Admin", FormMethod.Post))
 {
     <label for="Name">@Html.DisplayFor(model => model.CategoryName)</label>
-    @Html.EditorFor(model => model.CategoryName);
+    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } });
     @Html.ValidationMessageFor(model => model.CategoryName);<br />
 
     <button class="btn waves-effect waves-light" type="submit">Добавить</button>

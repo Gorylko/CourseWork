@@ -48,11 +48,11 @@
             <td>
                 @if (Request.IsAuthenticated)
                 {
-                    if (user.UserId == ViewBag.User.Id || user.IsInRole(RoleType.Administrator.ToString()))
+                    if (user.IsInRole(RoleType.Administrator.ToString()))
                     {
-                        <form action="~/User/Delete" style="color:crimson">
-                            <input type="hidden" value="@ViewBag.User.Id" name="id" />
-                            <button style="width:175px" class="btn waves-effect waves-light" type="submit">Удалить*</button>
+                        <form action="~/Admin/DeleteUser" style="color:crimson">
+                            <input type="hidden" value="@ViewBag.User.Id" name="userId" />
+                            <button style="width:175px" class="btn " type="submit">Удалить*</button>
                         </form>
                     }
                 }

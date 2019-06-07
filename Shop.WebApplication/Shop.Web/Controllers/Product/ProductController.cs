@@ -36,12 +36,12 @@ namespace Shop.Web.Controllers.Product
 
         [User]
         [HttpPost]
-        public ActionResult AddNewProduct(ProductViewModel model, IEnumerable<HttpPostedFileBase> images = null)
+        public ActionResult AddNewProduct(ProductViewModel model, HttpPostedFileBase image = null)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = _categoryService.GetAll();
-                ViewBag.States = _stateService.GetAll();
+                model.Categories = _categoryService.GetAll();
+                model.States = _stateService.GetAll();
                 return View(model);
             }
 
@@ -50,18 +50,14 @@ namespace Shop.Web.Controllers.Product
             model.Location.Id = _locationService.GetId(model.Location);
             var imagesList = new List<Image>();
 
-            if (images != null)
+            if (image != null)
             {
-                foreach (var image in images)
+                imagesList.Add(new Image
                 {
-                    imagesList.Add(new Image
-                    {
-                        Data = GetImageData(image),
-                        Extension = image.ContentType
-                    });
-                }
+                    Data = GetImageData(image),
+                    Extension = image.ContentType
+                });
             }
-
             var product = new ProductEntity
             {
                 Name = model.Name,
@@ -84,7 +80,7 @@ namespace Shop.Web.Controllers.Product
 
             _productService.Save(product);
             product.Id = _productService.GetIdByProduct(product);
-            if (images != null)
+            if (image != null)
             {
                 _imageService.SaveAll(product.Images, product);
             }
@@ -211,7 +207,7 @@ namespace Shop.Web.Controllers.Product
 
             if (product.Author.Id != user.UserId)
             {
-                ViewBag.ErrorText = "Данный товар вам не принадлежит!";
+                ViewBag.ErrorText = "Данный товар вам не принадлежит!!";
                 return View("~/Shared/Error.cshtml");
             }
 

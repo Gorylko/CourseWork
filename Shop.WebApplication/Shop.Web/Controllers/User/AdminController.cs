@@ -8,19 +8,40 @@ using Shop.Shared.Helpers;
 using Shop.Shared.Entities.Enums;
 using System;
 using Shop.Business.Services.Auth;
+using Shop.Business.Services.Interfaces;
 
 namespace Shop.Web.Controllers
 {
     public class AdminController : Controller
     {
-        private UserService _userService = new UserService();
-        private ProductService _productService = new ProductService();
-        private CategoryService _categoryService = new CategoryService();
-        private RoleService _roleService = new RoleService();
-        private StateService _stateService = new StateService();
-        private LocationService _locationService = new LocationService();
-        private LoginService _loginService = new LoginService();
-        private ImageService _imageService = new ImageService();
+        private IProductService _productService;
+        private IPurchaseService _purchaseService;
+        private ICategoryService _categoryService;
+        private IUserService _userService;
+        private IStateService _stateService;
+        private ILocationService _locationService;
+        private IImageService _imageService;
+        private IRoleService _roleService;
+
+        public AdminController(
+            IProductService productService,
+            IPurchaseService purchaseService,
+            ICategoryService categoryService,
+            IUserService userService,
+            IStateService stateService,
+            ILocationService locationService,
+            IImageService imageService,
+            IRoleService roleService)
+        {
+            this._productService = productService;
+            this._purchaseService = purchaseService;
+            this._categoryService = categoryService;
+            this._userService = userService;
+            this._stateService = stateService;
+            this._locationService = locationService;
+            this._imageService = imageService;
+            this._roleService = roleService;
+        }
 
         [Admin]
         public ActionResult ShowAdminPanel()

@@ -2,11 +2,12 @@
 using Shop.Data.Repositories;
 using Shop.Shared.Entities;
 using System;
+using Shop.Business.Services.Interfaces;
 using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private ProductRepository _productRepository = new ProductRepository(new ProductContext());
 

@@ -1,6 +1,10 @@
 ﻿using Newtonsoft.Json;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 using Shop.Shared.Entities;
 using Shop.Shared.Entities.Authorize;
+using Shop.Web.Util;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +21,12 @@ namespace Shop.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            /*================Magic===============*/
+
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
 
         protected void Application_PostAuthenticateRequest(object sender, EventArgs arg)

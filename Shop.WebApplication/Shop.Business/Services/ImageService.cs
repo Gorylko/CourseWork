@@ -1,4 +1,5 @@
-﻿using Shop.Data.DataContext.Realization.MsSql;
+﻿using Shop.Business.Services.Interfaces;
+using Shop.Data.DataContext.Realization.MsSql;
 using Shop.Data.Repositories;
 using Shop.Shared.Entities.Images;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Business.Services
 {
-    public class ImageService
+    public class ImageService : IImageService
     {
         private ImageRepository _imageRepository = new ImageRepository(new ImageContext());
 

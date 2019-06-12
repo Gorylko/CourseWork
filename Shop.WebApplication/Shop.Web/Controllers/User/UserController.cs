@@ -8,20 +8,44 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Shop.Business.Services.Auth;
 using EnumConverter = Shop.Shared.Helpers.EnumHelper;
+using Shop.Business.Services.Interfaces;
+using Shop.Business.Services.Auth.Interfaces;
 
 namespace Shop.Web.Controllers
 {
     public class UserController : Controller
     {
-        private UserService _userService = new UserService();
-        private ProductService _productService = new ProductService();
-        private CategoryService _categoryService = new CategoryService();
-        private RoleService _roleService = new RoleService();
-        private StateService _stateService = new StateService();
-        private LocationService _locationService = new LocationService();
-        private LoginService _loginService = new LoginService();
-        private ImageService _imageService = new ImageService();
+        private IProductService _productService;
+        private IPurchaseService _purchaseService;
+        private ICategoryService _categoryService;
+        private IUserService _userService;
+        private IStateService _stateService;
+        private ILocationService _locationService;
+        private IImageService _imageService;
+        private IRoleService _roleService;
+        private ILoginService _loginService;
 
+        public UserController(
+            IProductService productService,
+            IPurchaseService purchaseService,
+            ICategoryService categoryService,
+            IUserService userService,
+            IStateService stateService,
+            ILocationService locationService,
+            IImageService imageService,
+            IRoleService roleService,
+            ILoginService loginService)
+        {
+            this._productService = productService;
+            this._purchaseService = purchaseService;
+            this._categoryService = categoryService;
+            this._userService = userService;
+            this._stateService = stateService;
+            this._locationService = locationService;
+            this._imageService = imageService;
+            this._roleService = roleService;
+            this._loginService = loginService;
+        }
         public ActionResult UserSearch()
         {
             return View();

@@ -1,5 +1,7 @@
 ﻿using Shop.Business.Services;
 using Shop.Business.Services.Auth;
+using Shop.Business.Services.Auth.Interfaces;
+using Shop.Business.Services.Interfaces;
 using Shop.Web.Attributes;
 using Shop.Web.Models;
 using Shop.Web.Models.Shared;
@@ -11,8 +13,16 @@ namespace Shop.Web.Controllers
     public class AccountController : Controller
     {
         private const int VERSION = 1;
-        private UserService _userService = new UserService();
-        private LoginService _loginService = new LoginService();
+        private IUserService _userService;
+        private ILoginService _loginService;
+
+        public AccountController(
+            IUserService userService,
+            ILoginService loginService)
+        {
+            this._userService = userService;
+            this._loginService = loginService;
+        }
 
         public ActionResult Login()
         {

@@ -5,10 +5,11 @@ using Shop.Data.DataContext.Realization.MsSql;
 using System.Web.Security;
 using System.Web;
 using Newtonsoft.Json;
+using Shop.Business.Services.Auth.Interfaces;
 
 namespace Shop.Business.Services.Auth
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         private readonly UserRepository _userRepository = new UserRepository(new UserContext());
         private const int VERSION = 1;

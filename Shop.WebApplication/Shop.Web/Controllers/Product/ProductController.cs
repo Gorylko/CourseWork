@@ -7,6 +7,7 @@ using Shop.Web.Attributes;
 using Shop.Web.Models;
 using Shop.Web.Models.ProductViewModels;
 using System;
+using Shop.Business.Services.Interfaces;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web;
@@ -15,14 +16,31 @@ namespace Shop.Web.Controllers.Product
 {
     public class ProductController : Controller
     {
-        private ProductService _productService = new ProductService();
-        private PurchaseService _purchaseService = new PurchaseService();
-        private CategoryService _categoryService = new CategoryService();
-        private UserService _userService = new UserService();
-        private StateService _stateService = new StateService();
-        private LocationService _locationService = new LocationService();
-        private ImageService _imageService = new ImageService();
+        private IProductService _productService;
+        private IPurchaseService _purchaseService;
+        private ICategoryService _categoryService;
+        private IUserService _userService;
+        private IStateService _stateService;
+        private ILocationService _locationService;
+        private IImageService _imageService;
 
+        public ProductController(
+            IProductService productService, 
+            IPurchaseService purchaseService, 
+            ICategoryService categoryService, 
+            IUserService userService,
+            IStateService stateService,
+            ILocationService locationService,
+            IImageService imageService)
+        {
+            this._productService = productService;
+            this._purchaseService = purchaseService;
+            this._categoryService = categoryService;
+            this._userService = userService;
+            this._stateService = stateService;
+            this._locationService = locationService;
+            this._imageService = imageService;
+        }
 
         [User]
         public ActionResult AddNewProduct()

@@ -5,12 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using Shop.Web.Models;
 using Shop.Business.Services;
+using Shop.Business.Services.Interfaces;
 
 namespace Shop.Web.Controllers
 {
     public class ImageController : Controller
     {
-        private ImageService _imageService = new ImageService();
+        private IImageService _imageService;
+
+        public ImageController(IImageService imageService)
+        {
+            this._imageService = imageService;
+        }
 
         public ActionResult ShowTestImages()
         {

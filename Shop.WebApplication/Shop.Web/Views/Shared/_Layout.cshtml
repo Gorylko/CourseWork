@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/ajax")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -30,7 +31,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Люди", "ShowUsersList", "User")</li>
+                    <li>@Html.ActionLink("Люди", "UserSearch", "User")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Картинки", "ShowTestImages", "Image")</li>

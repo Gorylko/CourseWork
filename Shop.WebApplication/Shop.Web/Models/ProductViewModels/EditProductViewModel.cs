@@ -25,6 +25,7 @@ namespace Shop.Web.Models.ProductViewModels
 
         [Required]
         [Display(Name = "Цена")]
+        [Range(0, 999999, ErrorMessage = "Некорректная цена")]
         public decimal Price { get; set; }
 
         public DateTime LastModifiedDate { get; set; }

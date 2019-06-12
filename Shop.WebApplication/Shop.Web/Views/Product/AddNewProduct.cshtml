@@ -17,11 +17,11 @@
         @Html.ValidationMessageFor(model => model.Description)<br />
 
         <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
-        @Html.EditorFor(model => model.Price, new { htmlAttributes = new {@class = "form-control", @pattern = @"^([0-9]{0,5}((,)[0-9]{0,2}))$" } })
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"^([0-9]{0,5}((,)[0-9]{0,2}))$", @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Price)<br /><br />
     </div>
-    @*<input type="hidden" value="@Model.States" name="States" />
-    <input type="hidden" value="@Model.Categories" name="Categories" />*@
+    <input type="hidden" value="@Model.States" name="States" />
+    <input type="hidden" value="@Model.Categories" name="Categories" />
 
     <table>
         <tr>
@@ -42,6 +42,7 @@
                         <option value="@category.Id">@category.Name</option>
                     }
                 </select>
+                @Html.ValidationMessageFor(model => model.State)
             </td>
             <td class="col">
                 <label for="">@Html.DisplayNameFor(model => model.State)</label><br />
@@ -60,6 +61,7 @@
                         <option value="@state.Id">@state.Name</option>
                     }
                 </select>
+                @Html.ValidationMessageFor(model => model.Category);
             </td>
         </tr>
     </table><br />
@@ -79,7 +81,7 @@
             <label>Картинка</label>
             <a class='btn' href='javascript:;'>
                 Выберите файл...
-                <input type="file" name="image" size="40"
+                <input type="file" multiple name="images" size="40"
                        style="position:absolute;z-index:2;top:0;
                                 left:0;filter: alpha(opacity=0); opacity:0;
                                 background-color:transparent;color:transparent;"

@@ -22,28 +22,28 @@ namespace Shop.Web.Controllers
         private LoginService _loginService = new LoginService();
         private ImageService _imageService = new ImageService();
 
-        public ActionResult UserSearch()
+        public ActionResult ShowUsersList()
         {
-            return View();
+            ViewBag.Users = _userService.GetAll();
+            return View(new SearchViewModel());
         }
 
         [HttpPost]
-        public ActionResult ShowSearchUsers(SearchViewModel model)
+        public ActionResult ShowUsersList(SearchViewModel model)
         {
-            var usersModel = new UserListViewModel();
-            //if (!ModelState.IsValid)
-            //{
-            //    return PartialView(model);
-            //}
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
             if (model.Name == null)
             {
-                usersModel.Users = _userService.GetAll();
+                ViewBag.Users = _userService.GetAll();
             }
             else
             {
-                usersModel.Users = _userService.GetAllByName(model.Name);
+                ViewBag.Users = _userService.GetAllByName(model.Name);
             }
-            return PartialView(usersModel);
+            return View(model);
         }
 
         [AllowAnonymous]

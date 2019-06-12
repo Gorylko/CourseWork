@@ -22,27 +22,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-.field-validation-valid {
-    display: none;
-}
-
-.input-validation-error {
-    border: 2px solid #EB0000;
-    background-color: white;
-}
-
-.validation-summary-errors {
-    font-weight: bold;
-    color: #EB0000;
-}
-
-.validation-summary-valid {
-    display: none;
-}
-
-.field-validation-error {
-    color: #EB0000;
-    font-weight: 500;
-    text-decoration: underline;
-}

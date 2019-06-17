@@ -51,14 +51,10 @@ namespace Shop.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult ShowSearchUsers(string query)
+        //[HttpPost]
+        public ActionResult ShowSearchUsers(string query = "")
         {
             var usersModel = new UserListViewModel();
-            //if (!ModelState.IsValid)
-            //{
-            //    return PartialView(model);
-            //}
             if (query == null)
             {
                 usersModel.Users = _userService.GetAll();

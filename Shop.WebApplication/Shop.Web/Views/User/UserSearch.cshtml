@@ -21,12 +21,14 @@
                     <input type="text" name="query" class="form-control" />
                 </td>
                 <td>
-                    <input class="btn" type="submit" value="Найти"/>
+                    <input class="btn" type="submit" value="Найти" />
                 </td>
             </tr>
         </table>
     }
-    <div id="results"></div>
+    <div id="results">
+        @Html.Action("ShowSearchUsers", new { query = ""})
+    </div>
     <br />
 
 

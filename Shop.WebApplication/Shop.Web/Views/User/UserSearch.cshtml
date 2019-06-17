@@ -13,15 +13,15 @@
 <body>
     <h3>Поиск пользователя</h3>
 
-    @using (Ajax.BeginForm("ShowSearchUsers", "User", new AjaxOptions { UpdateTargetId = "results" }))
+    @using (Ajax.BeginForm("ShowSearchUsers", new AjaxOptions { UpdateTargetId = "results" }))
     {
         <table>
             <tr>
                 <td>
-                    <input type="text" name="Name" class="form-control" />
+                    <input type="text" name="query" class="form-control" />
                 </td>
                 <td>
-                    <button class="btn" type="submit" name="action">Найти</button>
+                    <input class="btn" type="submit" value="Найти"/>
                 </td>
             </tr>
         </table>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Shared.Entities.Enums;
+﻿using Shop.Shared.Entities.Enums;
+using Shop.Shared.Entities.Images;
 
 namespace Shop.Shared.Entities
 {
@@ -15,11 +11,15 @@ namespace Shop.Shared.Entities
 
         public string Password { get; set; }
 
+        public decimal Balance { get; set; }
+
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }
 
         public RoleType Role { get; set; }
+
+        public Image Image { get; set; }
 
         public bool InRoles(string role)
         {

@@ -1,0 +1,44 @@
+﻿@using Shop.Web.Models;
+@model EditUserViewModel
+@{
+    ViewBag.Title = "AdminEdit";
+}
+
+<h2>Редактирование пользователя</h2>
+@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+{
+    <label for="Login">@Html.DisplayNameFor(model => model.Login)</label><br />
+    @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.Login);<br /><br />
+
+    <label for="Email">@Html.DisplayNameFor(model => model.Email)</label><br />
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.Email);<br /><br />
+
+    <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.Password);<br /><br />
+
+    <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PhoneNumber)</label><br />
+    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.PhoneNumber);
+
+    <input type="hidden" value="@Model.Id" name="Id" />
+    <br /><br />
+
+    <label for="Role">@Html.DisplayNameFor(model => model.Role)</label><br />
+    <select name="Role">
+        @foreach (var role in Model.Roles)
+        {
+            if (role.ToString() == Model.Role)
+            {
+                <option selected value="@role.ToString()">@role</option>
+                continue;
+            }
+            <option value="@role.ToString()">@role</option>
+        }
+    </select><br /><br />
+
+    <button class="btn" type="submit" name="action">Сохранить изменения</button>
+}
+

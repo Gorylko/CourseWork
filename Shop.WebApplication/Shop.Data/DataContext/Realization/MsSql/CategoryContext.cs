@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Entities;
-using Typography = Shop.Shared.Constants.TypographyConstants;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
-using Shop.Data.DataContext.Interfaces;
+using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
@@ -11,7 +11,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
     {
         public string GetAllString()
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 string allCategories = "";
@@ -30,7 +30,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<Category> GetAll()
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<Category> allCategories = new List<Category>();
@@ -51,7 +51,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public Category GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand($"SELECT TOP 1 * FROM [Category] WHERE [Id] = {id}", connection);
@@ -67,7 +67,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [Category] WHERE [Id] = {id}", connection);
@@ -77,7 +77,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public void Save(Category category)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [Category] (Name) VALUES ('{category.Name}')", connection);
@@ -87,7 +87,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public int GetIdByName(string name)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"SELECT * FROM [Category] WHERE [Name] = '{name}'", connection);

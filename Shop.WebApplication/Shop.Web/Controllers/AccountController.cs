@@ -1,31 +1,27 @@
-﻿using System;
-using System.Web;
-using System.Web.Mvc;
-using Shop.Web.Models;
+﻿using Shop.Business.Services;
 using Shop.Business.Services.Auth;
-using Microsoft.Owin.Security;
-using System.Web.Security;
-using Newtonsoft.Json;
-using Shop.Shared.Entities.Authorize;
-using Shop.Business.Services;
+using Shop.Business.Services.Auth.Interfaces;
+using Shop.Business.Services.Interfaces;
+using Shop.Web.Attributes;
+using Shop.Web.Models;
+using Shop.Web.Models.Shared;
 using System.Data.SqlClient;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Shop.Shared.Entities;
+using System.Web.Mvc;
 
 namespace Shop.Web.Controllers
 {
     public class AccountController : Controller
     {
         private const int VERSION = 1;
-        private UserService _userService = new UserService();
-        private LoginService _loginService = new LoginService();
+        private IUserService _userService;
+        private ILoginService _loginService;
 
-        private IAuthenticationManager AuthenticationManager
+        public AccountController(
+            IUserService userService,
+            ILoginService loginService)
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            this._userService = userService;
+            this._loginService = loginService;
         }
 
         public ActionResult Login()
@@ -36,7 +32,7 @@ namespace Shop.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -46,7 +42,6 @@ namespace Shop.Web.Controllers
                 ViewBag.ErrorMessage = "Ахтунг! Ашыбка, проверьте введенные данные";
                 return View(model);
             }
-            Session["User"] = user;
             return Redirect("/Home/Index");
         }
 
@@ -66,16 +61,12 @@ namespace Shop.Web.Controllers
             try
             {
                 var user = _loginService.Register(model.Login, model.Password, model.Email, model.PhoneNumber);
-                var identityClaim = new IdentityUserClaim { ClaimType = "Role", ClaimValue = user.Role.ToString() };
-                //user.Claims = identityClaim;
-                HttpContext.User = new UserPrinciple(model.Login)
+                if (user != null)
                 {
-                    UserId = user.Id,
-                    Name = user.Login,
-                    Role = user.Role
-                };
+                    return RedirectToAction("Login");
+                }
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 ViewBag.ErrorMessage = "логин или почта уже заняты";
                 return View(model);
@@ -84,17 +75,19 @@ namespace Shop.Web.Controllers
             return Redirect("/Home/Index");
         }
 
-
-
-        public ActionResult OpenAccountMenu()
-        {
-            return View();
-        }
-
+        [User]
         public ActionResult Logout()
         {
             _loginService.Logout();
-            return View("~/Views/Home/Index.cshtml");
+            //return View("~/Views/Home/Index.cshtml");
+            return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Confirm(ConfirmViewModel model)
+        {
+            return View(model);
+        }
+
+
     }
 }

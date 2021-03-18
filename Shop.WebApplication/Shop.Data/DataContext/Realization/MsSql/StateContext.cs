@@ -1,14 +1,25 @@
-﻿using System.Data.SqlClient;
+﻿using Shop.Data.DataContext.Interfaces;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using SqlConst = Shop.Data.Constants.SqlQueryConstants;
-using Shop.Data.DataContext.Interfaces;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
-    public class StateContext : IProductDetailsContext
+    public class StateContext : IProductDetailsContext<State>
     {
+        private State MapState(SqlDataReader reader)
+        {
+            return new State
+            {
+                Id = (int)reader["Id"],
+                Name = (string)reader["Name"]
+            };
+        }
+
         public int GetIdByName(string name)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"SELECT * FROM [State] WHERE [Name] = '{name}'", connection);
@@ -16,6 +27,48 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 reader.Read();
                 return (int)reader["State"];
             }
+        }
+
+        public IReadOnlyCollection<State> GetAll()
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                List<State> allCategories = new List<State>();
+                var command = new SqlCommand("SELECT * FROM State", connection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    allCategories.Add(MapState(reader));
+                }
+                return allCategories;
+            }
+        }
+
+        public State GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Save(State obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteById(int id)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"DELETE [State] WHERE [Id] = {id}", connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public bool IsExists(State obj)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

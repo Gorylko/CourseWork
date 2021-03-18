@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
+﻿using Shop.Data.DataContext.Realization.MsSql;
 using Shop.Data.Repositories;
-using Shop.Data.DataContext.Realization.MsSql;
+using Shop.Shared.Entities;
+using System;
+using Shop.Business.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
-        private ProductRepository _productRepository = new ProductRepository(new ProductContext()); //Тут указывается, какую бд использовать в передаваемых конструктору хернях (пока реализованно онли MsSql)
+        private ProductRepository _productRepository = new ProductRepository(new ProductContext());
 
         public IReadOnlyCollection<Product> GetAll()
         {
             return _productRepository.GetAll();
+        }
+
+        public void Archive(int id)
+        {
+            _productRepository.Archive(id);
         }
 
         public IReadOnlyCollection<Product> GetSearchList(string searchParameter, string searchQuery)
@@ -37,6 +44,83 @@ namespace Shop.Business.Services
         public void DeleteById(int id)
         {
             _productRepository.DeleteById(id);
+        }
+        
+        public void Save(Product product)
+        {
+            _productRepository.Save(product);
+        }
+
+        public void Edit(Product editedProduct)
+        {
+            _productRepository.Edit(editedProduct);
+        }
+
+        public void ArchiveAllByUserId(int userId)
+        {
+            var userProducts = _productRepository.GetByUserId(userId);
+            foreach(var product in userProducts)
+            {
+                _productRepository.Archive(product.Id);
+            }
+        }
+
+        public IReadOnlyCollection<Product> GetAllWithFilters(IEnumerable<Predicate<Product>> filters)
+        {
+            List<Product> products = (List<Product>)_productRepository.GetAll();
+            List<Product> returnList = new List<Product>();
+            bool IsCorrect;
+            for (int i = 0 ; i < products.Count; i++)
+            {
+                IsCorrect = true;
+                foreach(var filter in filters)
+                {
+                    if (!filter(products[i]))
+                    {
+                        IsCorrect = false;
+                    }
+                }
+                if (IsCorrect)
+                {
+                    returnList.Add(products[i]);
+                }
+            }
+            return returnList;
+        }
+
+        public IReadOnlyCollection<Product> GetAllByFilterParameters(ProductFilterParameters parameters)
+        {
+            List<Predicate<Product>> filters = new List<Predicate<Product>>();
+            if (parameters.MaxPrice != default(decimal))
+            {
+                filters.Add(product => product.Price <= parameters.MaxPrice);
+            }
+            if (parameters.MinPrice != default(decimal))
+            {
+                filters.Add(product => product.Price >= parameters.MinPrice);
+            }
+            if (parameters.Name != default(string))
+            {
+                filters.Add(product => product.Name.IndexOf(parameters.Name, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            if (parameters.State.Id != default(int))
+            {
+                filters.Add(product => product.State.Id == parameters.State.Id);
+            }
+            if (parameters.Category.Id != default(int))
+            {
+                filters.Add(product => product.Category.Id == parameters.Category.Id);
+            }
+            if(filters == null)
+            {
+                return GetAll();
+            }
+            return GetAllWithFilters(filters);
+        }
+
+        public int GetIdByProduct(Product product)
+        {
+            return _productRepository.GetIdByProduct(product);
         }
 
     }

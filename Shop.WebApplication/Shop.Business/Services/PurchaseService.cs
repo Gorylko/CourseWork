@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
-using Shop.Data.Repositories;
+﻿using Shop.Business.Services.Interfaces;
 using Shop.Data.DataContext.Realization.MsSql;
+using Shop.Data.Repositories;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {
-    public class PurchaseService
+    public class PurchaseService : IPurchaseService
     {
         PurchaseRepository _purchaseRepository = new PurchaseRepository(new PurchaseContext());
 

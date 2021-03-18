@@ -1,33 +1,39 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
-using Shop.Data.DataContext.Interfaces;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Data.Repositories.Interfaces;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        IUserContext _userContext;
+        private readonly IUserContext _userContext;
 
         public UserRepository(IUserContext userContext)
         {
-            this._userContext = userContext;
+            _userContext = userContext;
         }
 
-        public User Login(string login, string password)
+        public User GetUserByLoginAndPassword(string login, string password)
         {
-            return _userContext.Login(login, password);
+            return _userContext.GetUserByLoginAndPassword(login, password);
         }
 
-        public User Login(string login)
+        public void EditUser(User user)
         {
-            return _userContext.Login(login);
+            _userContext.EditUser(user);
         }
 
-        public User Register(string login, string password, string email, string phone)
+        public User GetUserByLogin(string login)
         {
-            return _userContext.Register(login, password, email, phone);
+            return _userContext.GetUserByLogin(login);
         }
+
+        // низя так делать
+        //public User Register(string login, string password, string email, string phone)
+        //{
+        //    return _userContext.Register(login, password, email, phone);
+        //}
 
         public void Save(User user)
         {

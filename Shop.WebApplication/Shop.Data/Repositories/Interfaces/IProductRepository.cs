@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Shop.Shared.Entities;
+﻿using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.Repositories.Interfaces
 {
@@ -10,5 +10,11 @@ namespace Shop.Data.Repositories.Interfaces
         IReadOnlyCollection<Product> GetByUserId(int userId);
 
         IReadOnlyCollection<Product> GetAllByName(string searchParameter, string searchQuery);
+
+        void Edit(Product editedProduct);
+
+        int GetIdByProduct(Product product);
+
+        void Archive(int id);
     }
 }

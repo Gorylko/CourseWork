@@ -18,23 +18,23 @@
         {
             
             <label for="Login">@Html.DisplayNameFor(model => model.Login)</label><br />
-            @Html.EditorFor(model => model.Login);
+            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } });
             @Html.ValidationMessageFor(model => model.Login);<br />
 
             <label for="Email">@Html.DisplayNameFor(model => model.Email)</label><br />
-            @Html.EditorFor(model => model.Email);
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } });
             @Html.ValidationMessageFor(model => model.Email);<br />
 
             <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
-            @Html.EditorFor(model => model.Password);
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } });
             @Html.ValidationMessageFor(model => model.Password);<br />
 
             <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PasswordConfirm)</label><br />
-            @Html.EditorFor(model => model.PasswordConfirm);
+            @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } });
             @Html.ValidationMessageFor(model => model.PasswordConfirm);<br />
 
             <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PhoneNumber)</label><br />
-            @Html.EditorFor(model => model.PhoneNumber);
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } });
             @Html.ValidationMessageFor(model => model.PhoneNumber);<br />
 
             <button class="btn waves-effect waves-light" type="submit" name="action">Войти</button>

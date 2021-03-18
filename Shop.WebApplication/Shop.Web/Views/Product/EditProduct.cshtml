@@ -1,0 +1,77 @@
+﻿@using Shop.Web.Models.ProductViewModels
+@model EditProductViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Редактирование товара</h2>
+
+@using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
+{
+    <label for="Name">@Html.DisplayNameFor(model => model.Name)</label><br />
+    @Html.EditorFor(model => model.Name);
+    @Html.ValidationMessageFor(model => model.Name);<br /><br />
+
+    <label for="Description">@Html.DisplayNameFor(model => model.Description)</label><br />
+    @Html.EditorFor(model => model.Description);
+    @Html.ValidationMessageFor(model => model.Description);<br /><br />
+
+    <label for="Price">@Html.DisplayNameFor(model => model.Price)</label><br />
+    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @pattern = @"^([0-9]{0,5}((,)[0-9]{0,2}))$" } });
+    @Html.ValidationMessageFor(model => model.Price);<br /><br />
+
+    <label for="Country">Страна</label><br />
+    @Html.EditorFor(model => model.Location.Country.Name);<br /><br />
+
+    <label for="City">Город</label><br />
+    @Html.EditorFor(model => model.Location.City.Name);<br /><br />
+
+    <label for="Address">Адрес</label><br />
+    @Html.EditorFor(model => model.Location.Address.Name);<br /><br />
+
+    <input type="hidden" value="@Model.Id" name="Id" />
+    <input type="hidden" value="@Model.Author.Id" name="Author.Id" />
+
+    <table>
+        <tr>
+            <td>
+                <label for="">@Html.DisplayNameFor(model => model.Category)</label><br />
+            </td>
+            <td>
+                <label for="">@Html.DisplayNameFor(model => model.State)</label><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select name="Category.Id">
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (Model.Category.Id == category.Id)
+                        {
+                            <option selected value="@category.Id">@category.Name</option>
+                            continue;
+                        }
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <select name="State.Id">
+                    @foreach (var state in Model.States)
+                    {
+                        if (Model.State.Id == state.Id)
+                        {
+                            <option selected value="@state.Id">@state.Name</option>
+                            continue;
+                        }
+                        <option value="@state.Id">@state.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <button class="btn waves-effect waves-light" type="submit" name="action">Сохранить изменения</button>
+    <br />
+}
+

@@ -47,10 +47,21 @@
     <Compile Include="Entities\Authorize\UserPrinciple.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums\RoleType.cs" />
-    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Images\Image.cs" />
+    <Compile Include="Entities\Images\ProductImage.cs" />
+    <Compile Include="Entities\Images\UserImage.cs" />
+    <Compile Include="Entities\ProductFilterParameters.cs" />
+    <Compile Include="Entities\Product\Location\Address.cs" />
+    <Compile Include="Entities\Product\Location\City.cs" />
+    <Compile Include="Entities\Product\Location\Country.cs" />
+    <Compile Include="Entities\Product\Location\Location.cs" />
+    <Compile Include="Entities\Product\Product.cs" />
     <Compile Include="Entities\Purchase.cs" />
+    <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

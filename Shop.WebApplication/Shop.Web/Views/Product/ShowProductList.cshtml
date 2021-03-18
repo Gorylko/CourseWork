@@ -1,4 +1,7 @@
-﻿
+﻿@using Shop.Web.Models.ProductViewModels;
+@using Shop.Shared.Entities.Images;
+@using Shop.Web.HtmlHelpers;
+@model ProductListViewModel
 @{
     ViewBag.Title = "Товары";
 }
@@ -11,31 +14,33 @@
 </head>
 <body>
     <div>
-        <h3>Список товаров</h3>
-        <table>
-            <tr>
-                <td width="150px"><p>Название товара</p></td>
-                <td width="150px"><p>Категория</p></td>
-                <td width="50px"><p>Цена</p></td>
-                <td></td>
-            </tr>
-            @foreach (var product in ViewBag.Products)
-            {
-                <tr>
-                    <td><p>@product.Name</p></td>
-                    <td><p>@product.Category.Name</p></td>
-                    <td><p>@product.Price</p></td>
-                    <td>
-                        <form action="~/Product/ShowProductInfo">
-                            <div>
-                                <button type="submit">Открыть</button>
-                                <input type="hidden" value="@product.Id" name="id" />
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </table>
+        <h3>@ViewBag.Message</h3>
+        <br />
+        @foreach (var product in Model.Products)
+        {
+            <div class="well" style="width: 70%">
+                @if (product.Images != null && product.Images.Count > 0)
+                {
+                    <div class="pull-left">
+                        @Html.RenderImage(product.Images.FirstOrDefault(), "img - thumbnail", new {width = "75", height = "75" })
+                    </div>
+                }
+                <div style="padding-left:15%">
+                    <h4>
+                        <strong>@product.Name</strong>
+                        <span class="pull-right label label-primary">@product.Price.ToString("# шпрэксов")</span>
+                    </h4>
+                    <span class="lead">@product.Description</span>
+
+                    <form action="~/Product/ShowProductInfo">
+                        <div>
+                            <button class="btn waves-effect waves-light" type="submit">Открыть</button>
+                            <input type="hidden" value="@product.Id" name="id" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
     </div>
 </body>
 </html>

@@ -5,24 +5,24 @@ namespace Shop.Web.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Логин*")]
+        [Display(Name = "Логин")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Логин может содержать от 5 до 20 символов")]
         public string Login { get; set; }
-
+    
         [Required]
-        [Display(Name = "Пароль*")]
+        [Display(Name = "Пароль")]
         [DataType(DataType.Password)]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Пароль может содержать от 6 до 16 символов")]
         public string Password { get; set; }
 
         [Required]
-        [Display(Name = "Повторите пароль*")]
+        [Display(Name = "Повторите пароль")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string PasswordConfirm { get; set; }
 
         [Required]
-        [Display(Name = "Почта*")]
+        [Display(Name = "Почта")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

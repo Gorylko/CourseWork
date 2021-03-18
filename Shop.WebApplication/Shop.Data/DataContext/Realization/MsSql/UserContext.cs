@@ -1,35 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Entities;
-using System.Data.SqlClient;
-using Typography = Shop.Shared.Constants.TypographyConstants;
-using SqlConst = Shop.Data.Constants.SqlQueryConstants;
-using Shop.Data.DataContext.Interfaces;
 using Shop.Shared.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using SqlConst = Shop.Data.Constants.SqlQueryConstants;
+using Typography = Shop.Shared.Constants.TypographyConstants;
 
 namespace Shop.Data.DataContext.Realization.MsSql
 {
     public class UserContext : IUserContext
     {
-        public User GetUser(SqlDataReader reader)
+        private User MapUser(SqlDataReader reader)
         {
             return new User
             {
                 Id = (int)reader["Id"],
                 Login = (string)reader["Login"],
                 Email = (string)reader["Email"],
+                Password = (string)reader["Password"],
                 PhoneNumber = (string)reader["PhoneNumber"],
                 Role = RoleHelper.ConvertToRoleType((int)reader["RoleId"])
             };
         }
 
-        public User Login(string login, string password)
+        public User GetUserByLoginAndPassword(string login, string password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
                 return null;
             }
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT TOP 1 * FROM [User] WHERE [Login] = @login AND [Password] = @password", connection);
@@ -39,7 +40,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 reader.Read();
                 try
                 {
-                    return GetUser(reader);
+                    return MapUser(reader);
                 }
                 catch
                 {
@@ -48,37 +49,37 @@ namespace Shop.Data.DataContext.Realization.MsSql
             }
         }
 
-        public User Login(string login)
+        public void EditUser(User editedUser)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (SqlConnection connection = new SqlConnection(SqlConst.ConnectionToShopString))
+            {
+                connection.Open();
+                var command = new SqlCommand($"UPDATE [User]{Typography.NewLine}SET [RoleId] = @roleId, [Login] = @login, [Password] = @password, [Email] = @email, [PhoneNumber] = @phone {Typography.NewLine}WHERE Id = {editedUser.Id}", connection);
+                command.Parameters.AddWithValue("@login", editedUser.Login);
+                command.Parameters.AddWithValue("@email", editedUser.Email);
+                command.Parameters.AddWithValue("@password", editedUser.Password);
+                command.Parameters.AddWithValue("@phone", editedUser.PhoneNumber);
+                command.Parameters.AddWithValue("@roleId", (int)editedUser.Role);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public User GetUserByLogin(string login)
+        {
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT * FROM [User] WHERE [Login] = @login", connection);
                 command.Parameters.AddWithValue("@login", login);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return GetUser(reader);
-            }
-        }
-
-        public User Register(string login, string password, string email, string phone)
-        {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
-            {
-                connection.Open();
-                var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
-                command.Parameters.AddWithValue("@login", login);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@phonenumber", phone);
-                command.ExecuteNonQuery();
-                return Login(login, password);
+                return MapUser(reader);
             }
         }
 
         public void Save(User user)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"INSERT INTO [User] (RoleId, Login, Password, Email, PhoneNumber) VALUES (1, @login, @password, @email, @phonenumber)", connection);
@@ -93,7 +94,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
         public IReadOnlyCollection<User> GetAll()
         {
             List<User> returnList = new List<User>();
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand("SELECT * FROM [User]", connection);
@@ -102,7 +103,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 {
                     try
                     {
-                        returnList.Add(GetUser(reader));
+                        returnList.Add(MapUser(reader));
                     }
                     catch (SqlException) { }
                 }
@@ -112,7 +113,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public User GetById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<User> products = new List<User>();
@@ -120,13 +121,13 @@ namespace Shop.Data.DataContext.Realization.MsSql
                 var command = new SqlCommand(query, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                return GetUser(reader);
+                return MapUser(reader);
             }
         }
 
         public void DeleteById(int id)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 var command = new SqlCommand($"DELETE [User] WHERE [Id] = {id}", connection);
@@ -136,7 +137,7 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public int GetIdByUser(User user)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 string query = "SELECT * FROM [User]" + Typography.NewLine + $"WHERE [Login] = '{user.Login}'";
@@ -149,17 +150,17 @@ namespace Shop.Data.DataContext.Realization.MsSql
 
         public IReadOnlyCollection<User> GetAllByName(string searchQuery)
         {
-            using (var connection = new SqlConnection(SqlConst.ConnectionToConsoleShopString))
+            using (var connection = new SqlConnection(SqlConst.ConnectionToShopString))
             {
                 connection.Open();
                 List<User> users = new List<User>();
-                var command = new SqlCommand(SqlConst.SelectAllProductInDbString, connection);
+                var command = new SqlCommand("SELECT * FROM [User]", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     if (reader["Login"].ToString().IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        users.Add(GetUser(reader));
+                        users.Add(MapUser(reader));
                     }
                 }
                 return users;

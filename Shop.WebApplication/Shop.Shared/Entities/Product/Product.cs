@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Shop.Shared.Entities.Images;
+using Typography = Shop.Shared.Constants.TypographyConstants;
+
+namespace Shop.Shared.Entities
+{
+    public class Product
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal Price { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        public DateTime LastModifiedDate { get; set; }
+
+        public Category Category { get; set; }
+
+        public User Author { get; set; }
+
+        public Location Location { get; set; }
+
+        public State State { get; set; }
+
+        public IReadOnlyCollection<Image> Images { get; set; }
+
+        public string GetInfoAboutProduct()
+        {
+            StringBuilder returnString = new StringBuilder();
+            returnString.AppendLine($"Название : {this.Name}");
+            returnString.AppendLine($"Описание : {this.Description}");
+            returnString.AppendLine($"Цена : {this.Price}");
+            returnString.AppendLine($"Дата изготовления: {this.CreationDate}");
+            returnString.AppendLine($"Дата последнего изменения : {this.LastModifiedDate}");
+            returnString.AppendLine($"Категория : {this.Category}");
+            returnString.AppendLine($"Контакты производителя : ");
+            returnString.AppendLine((this.Author.Role).ToString());
+            returnString.AppendLine(this.Author.Login);
+            returnString.AppendLine(this.Author.PhoneNumber);
+            returnString.AppendLine(this.Author.Email);
+            returnString.AppendLine($"Местоположение товара : {this.Location}");
+            returnString.AppendLine($"Состояние : {this.State}{Typography.NewLineX2}");
+            return returnString.ToString();
+        }
+
+        
+    }
+}

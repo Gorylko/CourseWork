@@ -1,11 +1,12 @@
-﻿using Shop.Data.Repositories;
+﻿using Shop.Business.Services.Interfaces;
 using Shop.Data.DataContext.Realization.MsSql;
-using System.Collections.Generic;
+using Shop.Data.Repositories;
 using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private CategoryRepository _categoryRepository = new CategoryRepository(new CategoryContext());
         
@@ -23,6 +24,10 @@ namespace Shop.Business.Services
         {
             return _categoryRepository.GetAll();
         }
-        //еще можно реализовать методы, но они пока не нужны
+
+        public void Save(Category category)
+        {
+            _categoryRepository.Save(category);
+        }
     }
 }

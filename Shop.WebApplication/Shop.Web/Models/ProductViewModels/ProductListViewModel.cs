@@ -6,9 +6,8 @@ using System.Web;
 
 namespace Shop.Web.Models.ProductViewModels
 {
-    
     public class ProductListViewModel
     {
-        public IReadOnlyCollection<Product> Products;
+        public IReadOnlyCollection<Product> Products { get; set; }
     }
 }

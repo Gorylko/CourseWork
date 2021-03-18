@@ -1,11 +1,15 @@
-﻿
+﻿@using Shop.Web.Models;
+@model PurchaseViewModel
 @{
     ViewBag.Title = "ShowPurchaseInfo";
 }
 
 <h2>Товар успешно куплен!</h2>
 
-<p>Продавец: @ViewBag.Purchase.Seller.Login</p>
-<p>Покупатель : @ViewBag.Purchase.Customer.Login</p>
-<p>Дата покупки : @ViewBag.Purchase.Date</p>
-<p>Будет отправлено на адрес : @ViewBag.Purchase.Address</p>
+<p>Продавец: @Model.Seller.Login</p>
+<p>Покупатель : @Model.Customer.Login</p>
+<p>Дата покупки : @Model.Date</p>
+<p>Будет отправлено на адрес : @Model.Location.Country.Name @Model.Location.City.Name @Model.Location.Address.Name</p>
+<form action="~/Home/Index">
+    <button class="btn waves-effect waves-light">Главное меню</button>
+</form>

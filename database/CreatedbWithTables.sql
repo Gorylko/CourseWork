@@ -1,19 +1,11 @@
-CREATE DATABASE [ConsoleShop]
+CREATE DATABASE [UglyExpressShop]
 GO
-USE [ConsoleShop];
+USE [UglyExpressShop];
 CREATE TABLE [dbo].[Category]
 (
 	[Id] INT IDENTITY (1,1) NOT NULL,
    	[Name] NVARCHAR(20) NOT NULL,
-
  	PRIMARY KEY CLUSTERED([Id] ASC)
-);
-GO
-CREATE TABLE [dbo].[Location]
-(
-	[Id] INT IDENTITY(1,1) NOT NULL,
-	[Name] NVARCHAR(50) NOT NULL,
-	PRIMARY KEY CLUSTERED([Id]ASC)
 );
 GO
 CREATE TABLE [dbo].[State]
@@ -45,20 +37,19 @@ GO
 CREATE TABLE [dbo].[Product]
 (
 	[Id]INT IDENTITY(1,1) NOT NULL,
-	[UserId] INT NOT NULL,
+	[UserId] INT NULL,
 	[CategoryId]INT NOT NULL,
 	[LocationId]INT NOT NULL,
 	[StateId]INT NOT NULL,
 	[Name]NVARCHAR(MAX) NOT NULL,
 	[Description]NVARCHAR(MAX) NOT NULL,
 	[Price]DECIMAL NOT NULL,
+	[IsArchive] BIT NOT NULL,
 	[CreationDate]DATETIME NOT NULL,
 	[LastModifiedDate]DATETIME NOT NULL,
 	PRIMARY KEY CLUSTERED([Id]ASC),
 	FOREIGN KEY([CategoryId]) REFERENCES [dbo].[Category]([Id]),
-	FOREIGN KEY([LocationId]) REFERENCES [dbo].[Location]([Id]),
-	FOREIGN KEY([StateId]) REFERENCES [dbo].[State]([Id]),
-	FOREIGN KEY([UserId]) REFERENCES [dbo].[User]([Id])
+	FOREIGN KEY([StateId]) REFERENCES [dbo].[State]([Id])
 );
 GO
 CREATE TABLE [dbo].[Purchase]
@@ -67,11 +58,52 @@ CREATE TABLE [dbo].[Purchase]
 	[ProductId]INT NOT NULL,
 	[SellerId]INT NOT NULL,
 	[CustomerId]INT NOT NULL,
-	[Address]NVARCHAR(100)NOT NULL,
+	[LocationId]INT NOT NULL,
 	[Date]DATETIME NOT NULL,
-	PRIMARY KEY CLUSTERED ([Id]ASC),
-	FOREIGN KEY([SellerId])REFERENCES [dbo].[User](Id),
-	FOREIGN KEY([CustomerId])REFERENCES [dbo].[User](Id),
-
+	PRIMARY KEY CLUSTERED ([Id]ASC)
 );
+
+ GO
+ CREATE TABLE [dbo].[Image]
+ (
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[Data]VARBINARY(MAX) NOT NULL,
+	[Extension]NVARCHAR(40),
+	[ProductId]INT NULL,
+	[UserId]INT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[Location]
+ (
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[CountryId]INT NOT NULL,
+	[CityId]INT NOT NULL,
+	[AddressId]INT NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[Country]
+ (
+	[Id]INT IDENTITY(1,1) NOT NULL,
+	[Name]NVARCHAR(50) NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
+ GO
+
+ CREATE TABLE [dbo].[City]
+ (
+	[Id]INT IDENTITY NOT NULL,
+	[Name] NVARCHAR(50) NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );
 GO
+
+ CREATE TABLE [dbo].[Address]
+ (
+	[Id]INT IDENTITY NOT NULL,
+	[Name] NVARCHAR(MAX) NOT NULL,
+	PRIMARY KEY CLUSTERED([Id]ASC)
+ );

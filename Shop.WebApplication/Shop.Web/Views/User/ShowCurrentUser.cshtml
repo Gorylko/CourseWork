@@ -1,0 +1,59 @@
+﻿@using Shop.Web.Models;
+@using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
+@model UserViewModel
+@{
+    ViewBag.Title = "Личный кабинет";
+    var user = User as UserPrinciple;
+}
+<h2>Личный кабинет</h2>
+<table height="300">
+    <tr><td width="160"><b>Логин:</b></td><td>@Model.Login</td></tr>
+    <tr><td><b>Почта: </b></td><td>@Model.Email</td></tr>
+    <tr><td><b>Номер телефона: </b></td><td>@Model.PhoneNumber</td></tr>
+    <tr><td><b>Роль: </b></td><td>@Model.Role</td></tr>
+    <tr>
+        <td>
+            <input style="width: 150px" class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
+        </td>
+        <td>
+            <form action="~/Product/AddNewProduct">
+                <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Добавить товар</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/Product/ShowByUserId">
+                <input type="hidden" value="@user.UserId" name="id" />
+                <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Мои товары</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @if (user.IsInRole(RoleType.Administrator.ToString()))
+            {
+                <form action="~/Admin/EditUser">
+                    <div>
+                        <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Редактировать*</button>
+                        <input type="hidden" value="@user.UserId" name="id" />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form action="~/User/EditUser">
+                    <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Редактировать</button>
+                </form>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/User/Delete" style="color:crimson">
+                <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Удалить*</button>
+            </form>
+        </td>
+    </tr>
+</table>

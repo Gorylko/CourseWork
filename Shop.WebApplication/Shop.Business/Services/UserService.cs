@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Shared.Entities;
-using Shop.Data.Repositories;
+﻿using Shop.Business.Services.Interfaces;
 using Shop.Data.DataContext.Realization.MsSql;
-using Shop.Shared.Entities.Authorize;
+using Shop.Data.Repositories;
+using Shop.Shared.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Shop.Business.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         UserRepository _userRepository = new UserRepository(new UserContext());
 
         public IReadOnlyCollection<User> GetAll()
         {
             return _userRepository.GetAll();
+        }
+
+        public void EditUser(User user)
+        {
+            _userRepository.EditUser(user);
         }
 
         public IReadOnlyCollection<User> GetAllByName(string searchQuery)
@@ -34,10 +36,14 @@ namespace Shop.Business.Services
             return _userRepository.GetById(id);
         }
 
-        public User GetByName(string name)
+        public User GetByLogin(string name)
         {
-            return _userRepository.Login(name);
+            return _userRepository.GetUserByLogin(name); // _userRepository.Login(name);
         }
 
+        public void DeleteById(int id)
+        {
+            _userRepository.DeleteById(id);
+        }
     }
 }

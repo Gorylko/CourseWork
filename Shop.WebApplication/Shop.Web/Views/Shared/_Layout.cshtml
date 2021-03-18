@@ -1,11 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Shop.Shared.Entities.Enums;
+@using Shop.Shared.Entities.Authorize;
+
+@{
+    var user = User as UserPrinciple;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/ajax")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -22,9 +31,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Люди", "ShowUsersList", "User")</li>
+                    <li>@Html.ActionLink("Люди", "UserSearch", "User")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Картинки", "ShowTestImages", "Image")</li>
+                    @if (user != null && user.IsInRole(RoleType.Administrator.ToString()))
+                    {
+                        <li>@Html.ActionLink("Admin Panel :D", "ShowAdminPanel", "Admin", routeValues: null, htmlAttributes: new { id = "adminPanelLink" })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

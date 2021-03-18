@@ -13,20 +13,27 @@
 
 <body>
     <h1>Добро пожаловать!</h1>
-    <p>Вы находитесь на супир-пупир крутом сайте по продаже всякого (колеса, кристаллы, мука), ниже вы можете заметить доступные вам функции. </p>
+    <p>Вы находитесь на супир-пупир крутом сайте по продаже всякого, ниже вы можете заметить доступные вам функции. </p>
     <div>
         <table>
             <tr>
                 <td>
                     <form action="~/Product/ShowProductList">
-                        <button type="submit">Посмотреть список всех товаров</button>
+                        <button class="btn waves-effect waves-light" type="submit">Посмотреть список всех товаров</button>
                     </form>
                 </td>
             </tr>
             <tr>
                 <td>
                     <form action="~/Product/OpenCategoryMenu">
-                        <button type="submit">Выбрать категорию</button>
+                        <button class="btn waves-effect waves-light" type="submit">Выбрать категорию</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form action="~/Product/ShowSearchList">
+                        <button class="btn waves-effect waves-light" type="submit">Крутой поиск по товарам(BETA)</button>
                     </form>
                 </td>
             </tr>

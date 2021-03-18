@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Shop.Shared.Entities;
-using Shop.Data.DataContext.Interfaces;
+﻿using Shop.Data.DataContext.Interfaces;
 using Shop.Data.Repositories.Interfaces;
+using Shop.Shared.Entities;
+using System.Collections.Generic;
 
 namespace Shop.Data.Repositories
 {
@@ -48,7 +46,22 @@ namespace Shop.Data.Repositories
 
         public void Save(Product product)
         {
-            //ы
+            _productContext.Save(product);
+        }
+
+        public void Edit(Product editedProduct)
+        {
+            _productContext.Edit(editedProduct);
+        }
+
+        public void Archive(int id)
+        {
+            _productContext.Archive(id);
+        }
+
+        public int GetIdByProduct(Product product)
+        {
+            return _productContext.GetIdByProduct(product);
         }
     }
 }

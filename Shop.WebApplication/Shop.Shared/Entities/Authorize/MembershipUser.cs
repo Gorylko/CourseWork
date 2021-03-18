@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Shared.Entities.Enums;
+﻿using Shop.Shared.Entities.Enums;
 
 namespace Shop.Shared.Entities.Authorize
 {

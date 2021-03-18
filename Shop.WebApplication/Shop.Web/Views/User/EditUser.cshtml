@@ -1,7 +1,29 @@
-﻿
+﻿@using Shop.Web.Models;
+@model EditUserViewModel
 @{
-    ViewBag.Title = "Редактирование";
+    ViewBag.Title = "AdminEdit";
 }
 
-<h2>EditUser</h2>
+<h2>Редактирование профиля</h2>
+@using (Html.BeginForm("EditUser", "User", FormMethod.Post))
+{
+    <label for="Email">@Html.DisplayNameFor(model => model.Email)</label><br />
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.Email);<br /><br />
+
+    <label for="Password">@Html.DisplayNameFor(model => model.Password)</label><br />
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.Password);<br /><br />
+
+    <label for="PasswordConfirm">@Html.DisplayNameFor(model => model.PhoneNumber)</label><br />
+    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } });
+    @Html.ValidationMessageFor(model => model.PhoneNumber);
+
+    <input type="hidden" value="@Model.Id" name="Id" />
+    <input type="hidden" value="@Model.Login" name="Login" />
+    <input type="hidden" value="@Model.Role" name="Role"/>
+    <br /><br />
+
+    <button class="btn" type="submit" name="action">Сохранить изменения</button>
+}
 

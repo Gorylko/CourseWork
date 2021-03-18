@@ -1,5 +1,8 @@
-﻿@{
-    Shop.Shared.Entities.User user = (Shop.Shared.Entities.User)Session["User"];
+﻿@using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
+
+@{
+    var user = User as UserPrinciple;
 }
 
 
@@ -11,28 +14,51 @@
 <body>
     <h2>Информация о пользователе</h2>
     <table>
-        <tr><td><p>Логин : @ViewBag.User.Login</p></td></tr>
-        <tr><td><p>Почта : @ViewBag.User.Email</p></td></tr>
-        <tr><td><p>Роль : @ViewBag.User.Role</p></td></tr>
-        <tr><td><p>Телефон : @ViewBag.User.PhoneNumber</p></td></tr>
+        <tr><td width="150px"><p><b>Логин : </b></p></td><td>@ViewBag.User.Login</td></tr>
+        <tr><td width="150px"><p><b>Почта : </b></p></td><td>@ViewBag.User.Email</td></tr>
+        <tr><td width="150px"><p><b>Роль : </b></p></td><td>@ViewBag.User.Role</td></tr>
+        <tr><td width="150px"><p><b>Телефон : </b></p></td><td>@ViewBag.User.PhoneNumber</td></tr>
     </table>
 
 
+    <table width="300" height="150">
+        <tr>
+            <td>
+                @if (user != null)
+                {
+                    <form action="~/User/SendMessage">
+                        <button style="width:175px" class="btn waves-effect waves-light">Отправить сообщение</button>
+                        <input type="hidden" value="@ViewBag.User.Id" name="id" />
+                    </form>
+                }
+            </td>
+            <td>
+                <input style="width:75px" class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="~/Product/ShowByUserId">
+                    <button style="width:175px" class="btn waves-effect waves-light">Товары</button>
+                    <input type="hidden" value="@ViewBag.User.Id" name="id" />
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (Request.IsAuthenticated)
+                {
+                    if (user.IsInRole(RoleType.Administrator.ToString()))
+                    {
+                        <form action="~/Admin/DeleteUser" style="color:crimson">
+                            <input type="hidden" value="@ViewBag.User.Id" name="userId" />
+                            <button style="width:175px" class="btn " type="submit">Удалить*</button>
+                        </form>
+                    }
+                }
+                </td>
+        </tr>
+    </table>
 
-
-    <div style="width:400px;">
-        @if (user != null)
-        {
-            <form action="~/User/SendMessage">
-                <button>Отправить сообщение</button>
-                <input type="hidden" value="@ViewBag.User.Id" name="id" />
-            </form>
-        }
-        <input type="button" onclick="history.back();" value="Назад" />
-        <form action="~/Product/ShowByUserId">
-            <button>Товары</button>
-            <input type="hidden" value="@ViewBag.User.Id" name="userId" />
-        </form>
-    </div>
 </body>
 </html>

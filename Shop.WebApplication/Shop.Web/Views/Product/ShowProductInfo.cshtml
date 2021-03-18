@@ -1,6 +1,11 @@
-﻿
+﻿@using Shop.Shared.Entities.Authorize;
+@using Shop.Shared.Entities.Enums;
+@using Shop.Web.HtmlHelpers;
+@using Shop.Web.Models.ProductViewModels;
+@model ProductViewModel
 @{
     ViewBag.Title = "Информация о продукте";
+    var user = User as UserPrinciple;
 }
 
 
@@ -11,30 +16,87 @@
     <title>Магазин</title>
 </head>
 <body>
-    <h2>Информация о продукте</h2>
+    <h2>Информация о товаре</h2>
     <table>
-        <tr><td><p>Название : @ViewBag.Product.Name</p></td></tr>
-        <tr><td><p>Описание : @ViewBag.Product.Description</p></td></tr>
-        <tr><td><p>Продавец : @ViewBag.Product.Author.Login</p></td></tr>
-        <tr><td><p>Категория : @ViewBag.Product.Category.Name</p></td></tr>
+        @foreach (var image in Model.Images)
+        {
+            <tr>
+                <td>
+                    @Html.RenderImage(image, "img - thumbnail", new { width = "75", height = "75" })
+                </td>
+            </tr>
+        }
+        <tr><td><p>Название : </p></td><td>@Model.Name</td></tr>
+        <tr><td><p>Описание : </p></td><td>@Model.Description</td></tr>
+        <tr>
+            <td>
+                Продавец :
+            </td>
+            <td>
+                <form action="~/User/ShowUser">
+                    <input type="hidden" value="@Model.Author.Login" name="login" />
+                    <button style="border:none" type="submit">@Model.Author.Login</button>
+                </form>
+            </td>
+        </tr>
+        <tr><td><p>Категория : </p></td><td>@Model.Category.Name</td></tr>
+        <tr><td><p>Состояние : </p></td><td>@Model.State.Name</td></tr>
     </table>
 
 
 
 
-    <div style="width:400px;">
-        @if (Session["User"] != null)
-        {
-        <div style="float: left; width: 130px">
-            <form action="~/Product/BuyProduct">
-                <button>Купить</button>
-                <input type="hidden" value="@ViewBag.Product.Id" name="id" />
-            </form>
-        </div>
-        }
-        <div style="float: right; width: 225px">
-            <input type="button" onclick="history.back();" value="Назад" />
-        </div>
-    </div>
+
+
+    @if (Request.IsAuthenticated)
+    {
+        <table width="300" height="150">
+            <tr>
+                <td>
+                    <form action="~/Product/BuyProduct">
+                        <button style="width: 150px" class="btn waves-effect waves-light">Купить</button>
+                        <input type="hidden" value="@Model.Id" name="id" />
+                    </form>
+                </td>
+                @if (user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
+                {
+                    <td>
+                        <form action="~/Admin/EditProduct">
+                            <button style="width: 150px" class="btn waves-effect waves-light">Редактировать</button>
+                            <input type="hidden" value="@Model.Id" name="id" />
+                        </form>
+                    </td>
+                }
+                else if (Model.Author.Id == user.UserId)
+                {
+                    <td>
+                        <form action="~/Product/EditProduct">
+                            <button style="width: 150px" class="btn waves-effect waves-light">Редактировать</button>
+                            <input type="hidden" value="@Model.Id" name="id" />
+                        </form>
+                    </td>
+                }
+            </tr>
+            <tr>
+                @if (user.UserId == Model.Author.Id || user.IsInRole(RoleType.Administrator.ToString()) || user.IsInRole(RoleType.Moderator.ToString()))
+                {
+                    <td>
+                        <form action="~/Account/Confirm" style="color:crimson">
+                            <input type="hidden" value="~/Product/Delete" name="Url" />
+                            <input type="hidden" value="@Model.Id" name="Value" />
+                            <input type="hidden" value="Вы уверены, что хотите удалить товар @Model.Name ?" name="Message" />
+                            <button style="width: 150px" class="btn waves-effect waves-light" type="submit">Удалить*</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+
+            
+        </table>
+    }
+    else
+    {
+        <input style="width: 150px" class="btn waves-effect waves-light" type="button" onclick="history.back();" value="Назад" />
+    }
 </body>
 </html>

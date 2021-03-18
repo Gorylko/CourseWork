@@ -1,0 +1,36 @@
+﻿@using Shop.Web.Models;
+@using Shop.Shared.Entities.Authorize;
+@{
+    ViewBag.Title = "Пользователи";
+    var currentUser = User as UserPrinciple;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h3>Поиск пользователя</h3>
+
+    @using (Ajax.BeginForm("ShowSearchUsers", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <table>
+            <tr>
+                <td>
+                    <input type="text" name="query" class="form-control" />
+                </td>
+                <td>
+                    <input class="btn" type="submit" value="Найти" />
+                </td>
+            </tr>
+        </table>
+    }
+    <div id="results">
+        @Html.Action("ShowSearchUsers", new { query = ""})
+    </div>
+    <br />
+
+
+</body>
+</html>
